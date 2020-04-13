@@ -3,6 +3,7 @@ package update
 import (
 	"errors"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 	"log"
 	"wgcf/cloudflare/api"
 	"wgcf/cloudflare/structs/resp"
@@ -17,7 +18,7 @@ var shortMsg = "Updates the current Cloudflare Warp account, preparing it for co
 var Cmd = &cobra.Command{
 	Use:   "update",
 	Short: shortMsg,
-	Long: FormatMessage(shortMsg,`
+	Long: FormatMessage(shortMsg, `
 If a new/different license key is provided, the current device will be bound to the new key and its parent account. 
 Please note that there is a maximum limit of 5 active devices linked to the same account at a given time.
 Will change various account settings to ensure WireGuard connection will succeed.`),

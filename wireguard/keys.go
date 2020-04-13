@@ -52,7 +52,7 @@ func NewPrivateKey() (*Key, error) {
 	return k, nil
 }
 
-func NewKey(base64Key string)  (*Key, error) {
+func NewKey(base64Key string) (*Key, error) {
 	k, err := base64.StdEncoding.DecodeString(base64Key)
 	if err != nil {
 		return nil, err

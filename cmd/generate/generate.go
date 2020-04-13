@@ -70,5 +70,3 @@ func generateProfile() error {
 	log.Println("Successfully generated WireGuard profile:", profileFile)
 	return nil
 }
-
-
