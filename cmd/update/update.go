@@ -69,6 +69,10 @@ func ensureLicenseKeyUpdated(ctx *config.Context, deviceData *resp.DeviceData, d
 		if _, err := SetDeviceName(ctx, deviceName); err != nil {
 			return err
 		}
+		// make sure new license key is synced with config file if it came from other stream (e.g. env variable)
+		if err := viper.WriteConfig(); err != nil {
+			return err
+		}
 
 		newDeviceData, err := api.GetDeviceData(ctx)
 		if err != nil {
