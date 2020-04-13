@@ -1,0 +1,45 @@
+kind: pipeline
+name: build
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+  - name: fetch
+    image: docker:git
+    commands:
+      - git fetch --tags
+
+  - name: test
+    image: golang
+    volumes:
+      - name: deps
+        path: /go
+    commands:
+      - go test -race -v ./... -cover
+
+  - name: version
+    image: node:13
+    commands:
+      - npx semantic-release
+    environment:
+      GITHUB_TOKEN:
+        from_secret: github_token
+
+  - name: release
+    image: golang
+    environment:
+      GITHUB_TOKEN:
+        from_secret: github_token
+    volumes:
+      - name: deps
+        path: /go
+    commands:
+      - curl -sL https://git.io/goreleaser | bash
+    when:
+      event: tag
+
+volumes:
+  - name: deps
+    temp: {}
