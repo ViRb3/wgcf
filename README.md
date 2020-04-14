@@ -40,7 +40,7 @@ First, get your Warp+ account license key. To see the license key on Android:
 2. Click on the hamburger menu button on the top-right corner
 3. Navigate to: `Account` > `Key`
 
-[Register an account](#register-new-account) if you haven't already. Next, edit `wgcf-account.toml` directly with the new license key and run the `update` command:
+[Register an account](#register-new-account) if you haven't already. Finally, edit `wgcf-account.toml` directly with the new license key and run the `update` command:
 ```bash
 wgcf update
 ```
