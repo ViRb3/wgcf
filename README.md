@@ -4,8 +4,8 @@
 
 ![](https://img.shields.io/drone/build/ViRb3/wgcf)
 ![](https://img.shields.io/github/issues/ViRb3/wgcf)
-![](https://img.shields.io/github/downloads/virb3/wgcf/total)
-![](https://img.shields.io/github/languages/code-size/virb3/wgcf)
+![](https://img.shields.io/github/downloads/ViRb3/wgcf/total)
+![](https://img.shields.io/github/languages/code-size/ViRb3/wgcf)
 
 ## Features
 - Register new Cloudflare Warp device and account
