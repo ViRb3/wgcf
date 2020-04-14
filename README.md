@@ -2,6 +2,11 @@
 > wgcf is a utility for Cloudflare Warp that allows you to create and 
 > manage accounts, assign license keys, and generate WireGuard profiles. 
 
+![](https://img.shields.io/drone/build/ViRb3/wgcf)
+![](https://img.shields.io/github/issues/ViRb3/wgcf)
+![](https://img.shields.io/github/downloads/virb3/wgcf/total)
+![](https://img.shields.io/github/languages/code-size/virb3/wgcf)
+
 ## Features
 - Register new Cloudflare Warp device and account
 - Update account to allow connection via WireGuard
