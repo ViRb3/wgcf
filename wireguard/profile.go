@@ -8,9 +8,9 @@ import (
 
 var profileTemplate = `[Interface]
 PrivateKey = {{ .PrivateKey }}
+Address = {{ .Address1 }}/32
+Address = {{ .Address2 }}/128
 DNS = 1.1.1.1
-Address = {{ .Address1 }}
-Address = {{ .Address2 }}
 [Peer]
 PublicKey = {{ .PublicKey }}
 AllowedIPs = 0.0.0.0/0

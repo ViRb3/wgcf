@@ -5,9 +5,9 @@ import "testing"
 func TestGenerateProfile(t *testing.T) {
 	var expectedResult = `[Interface]
 PrivateKey = 1
+Address = 2/32
+Address = 3/128
 DNS = 1.1.1.1
-Address = 2
-Address = 3
 [Peer]
 PublicKey = 4
 AllowedIPs = 0.0.0.0/0
