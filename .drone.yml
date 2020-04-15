@@ -6,11 +6,6 @@ platform:
   arch: amd64
 
 steps:
-  - name: fetch
-    image: docker:git
-    commands:
-      - git fetch --tags
-
   - name: test
     image: golang
     volumes:
