@@ -15,6 +15,9 @@
 - Check Cloudflare device status
 - Print trace information to debug Warp/Warp+ status
 
+## Download
+You can find pre-compiled binaries on the [releases page](https://github.com/ViRb3/wgcf/releases).
+
 ## Usage
 Run `wgcf` in a terminal without any arguments to display the help screen, all commands and parameters are documented.
 
