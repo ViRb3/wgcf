@@ -1,5 +1,6 @@
 /*.toml
 /*.conf
+/*.pcapng
 /wgcf
 
 # Created by https://www.gitignore.io/api/go,intellij+all,visualstudiocode
