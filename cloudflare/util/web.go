@@ -7,9 +7,10 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
+	"wgcf/cloudflare/url"
 )
 
-var defaultHeaders = map[string]string{"User-Agent": "okhttp/3.12.1"}
+var defaultHeaders = map[string]string{"User-Agent": "1.1.1.1/" + url.ApiVersion + ".1"}
 
 func applyDefaultHeaders(request *http.Request) {
 	for key, value := range defaultHeaders {
