@@ -5,6 +5,11 @@ import (
 	"wgcf/cloudflare/structs/request"
 )
 
+type DeviceResponse struct {
+	Data DeviceData `json:"result"`
+	Success bool    `json:"success"`
+}
+
 type DeviceData struct {
 	request.RegistrationData
 	request.DeviceWarpData

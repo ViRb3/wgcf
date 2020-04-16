@@ -2,6 +2,11 @@ package resp
 
 import "time"
 
+type UpdateLicenseResponse struct {
+	Data UpdateLicenseData `json:"result"`
+	Success bool           `json:"success"`
+}
+
 type UpdateLicenseData struct {
 	ID                       string    `json:"id"`
 	AccountType              string    `json:"account_type"`

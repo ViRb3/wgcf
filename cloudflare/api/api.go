@@ -31,9 +31,9 @@ func Register(encodedPrivateKey string, deviceModel string) (*resp.RegistrationD
 		return nil, err
 	}
 
-	var result resp.RegistrationData
+	var result resp.RegistrationResponse
 	if err := util.NewUnauthenticatedRequest("POST", url.RegUrl, bytes.NewBuffer(dataBytes), &result); err != nil {
 		return nil, err
 	}
-	return &result, nil
+	return &(result.Data), nil
 }

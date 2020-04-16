@@ -11,11 +11,11 @@ import (
 )
 
 func GetDeviceData(ctx *config.Context) (*resp.DeviceData, error) {
-	var result resp.DeviceData
+	var result resp.DeviceResponse
 	if err := util.NewAuthenticatedRequest("GET", url.GetDeviceUrl(ctx.DeviceId), nil, ctx.AccessToken, &result); err != nil {
 		return nil, err
 	}
-	return &result, nil
+	return &(result.Data), nil
 }
 
 func EnableWarp(ctx *config.Context) (bool, error) {
@@ -24,10 +24,10 @@ func EnableWarp(ctx *config.Context) (bool, error) {
 	if err != nil {
 		return false, err
 	}
-	var result resp.DeviceData
+	var result resp.DeviceResponse
 	if err := util.NewAuthenticatedRequest("PATCH", url.GetDeviceUrl(ctx.DeviceId),
 		bytes.NewBuffer(dataBytes), ctx.AccessToken, &result); err != nil {
 		return false, err
 	}
-	return result.WarpEnabled, nil
+	return result.Data.WarpEnabled, nil
 }

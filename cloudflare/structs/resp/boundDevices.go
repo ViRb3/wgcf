@@ -5,6 +5,11 @@ import (
 	"wgcf/cloudflare/structs/request"
 )
 
+type BoundDevicesResponse struct {
+	Data BoundDevicesData `json:"result"`
+	Success bool          `json:"success"`
+}
+
 type BoundDevicesData []BoundDevice
 
 type BoundDevice struct {

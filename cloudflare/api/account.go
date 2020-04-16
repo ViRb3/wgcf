@@ -16,22 +16,22 @@ func UpdateLicenseKey(ctx *config.Context) (*resp.UpdateLicenseData, error) {
 	if err != nil {
 		return nil, err
 	}
-	var result resp.UpdateLicenseData
+	var result resp.UpdateLicenseResponse
 	if err := util.NewAuthenticatedRequest("PUT", url.GetAccountUrl(ctx.DeviceId),
 		bytes.NewBuffer(dataBytes), ctx.AccessToken, &result); err != nil {
 		return nil, err
 	}
-	return &result, nil
+	return &(result.Data), nil
 }
 
 // returns the BoundDevice entry for a device, used to check additional settings such as name and active status
 func GetBoundDevice(ctx *config.Context) (*resp.BoundDevice, error) {
-	var result resp.BoundDevicesData
+	var result resp.BoundDevicesResponse
 	if err := util.NewAuthenticatedRequest("GET", url.GetBoundDevicesUrl(ctx.DeviceId), nil,
 		ctx.AccessToken, &result); err != nil {
 		return nil, err
 	}
-	return util.FindDevice(&result, ctx.DeviceId)
+	return util.FindDevice(&(result.Data), ctx.DeviceId)
 }
 
 // only 5 linked devices can be active at a given time
@@ -48,12 +48,12 @@ func setBoundDeviceData(ctx *config.Context, data interface{}) (*resp.BoundDevic
 	if err != nil {
 		return nil, err
 	}
-	var result resp.BoundDevicesData
+	var result resp.BoundDevicesResponse
 	if err := util.NewAuthenticatedRequest("PATCH", url.GetBoundDeviceUrl(ctx.DeviceId, ctx.DeviceId),
 		bytes.NewBuffer(dataBytes), ctx.AccessToken, &result); err != nil {
 		return nil, err
 	}
-	device, err := util.FindDevice(&result, ctx.DeviceId)
+	device, err := util.FindDevice(&(result.Data), ctx.DeviceId)
 	if err != nil {
 		return nil, err
 	}

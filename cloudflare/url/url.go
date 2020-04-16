@@ -2,8 +2,8 @@ package url
 
 import . "wgcf/util"
 
-var apiVersion = "v0a884"
-var apiEndpoint = JoinUrls("https://api.cloudflareclient.com", apiVersion)
+var ApiVersion = "2004040000"
+var apiEndpoint = JoinUrls("https://api.cloudflareclient.com", "v0i" + ApiVersion)
 
 var RegUrl = JoinUrls(apiEndpoint, "reg")
 var ClientConfigUrl = JoinUrls(apiEndpoint, "client_config")
