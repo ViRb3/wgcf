@@ -1,6 +1,7 @@
 package util
 
 import (
+	"crypto/tls"
 	"encoding/json"
 	"fmt"
 	"github.com/pkg/errors"
@@ -17,12 +18,12 @@ func applyDefaultHeaders(request *http.Request) {
 	}
 }
 
-var client = http.Client{}
-
-func init() {
-	//proxyUrl, _ := url.Parse("http://127.0.0.1:8888")
-	//client.Transport = &http.Transport{Proxy: http.ProxyURL(proxyUrl)}
-}
+var client = http.Client{
+	Transport: &http.Transport{
+		TLSClientConfig: &tls.Config{
+			// Match app's TLS config or API will reject us with code 403 error 1020
+			MinVersion: tls.VersionTLS10,
+			MaxVersion: tls.VersionTLS12}}}
 
 func NewAuthenticatedRequest(method string, url string, body io.Reader, accessToken string, result interface{}) error {
 	request, err := newRequest(method, url, body, accessToken)
