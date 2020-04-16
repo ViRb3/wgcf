@@ -10,7 +10,7 @@
 ## Features
 - Register new Cloudflare Warp device and account
 - Update account to allow connection via WireGuard
-- Update account with new license key, sharing Warp+ status with up to 4 other devices
+- Update account with new license key, sharing Warp+ status with up to 5 devices
 - Generate WireGuard profile
 - Check Cloudflare device status
 - Print trace information to debug Warp/Warp+ status
