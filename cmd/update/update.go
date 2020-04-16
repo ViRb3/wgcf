@@ -1,7 +1,7 @@
 package update
 
 import (
-	"errors"
+	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"log"
@@ -9,6 +9,7 @@ import (
 	"wgcf/cloudflare/structs/resp"
 	. "wgcf/cmd/util"
 	"wgcf/config"
+	"wgcf/util"
 )
 
 var deviceName string
@@ -24,7 +25,7 @@ Please note that there is a maximum limit of 5 active devices linked to the same
 Will change various account settings to ensure WireGuard connection will succeed.`),
 	Run: func(cmd *cobra.Command, args []string) {
 		if err := updateAccount(); err != nil {
-			log.Fatal(err)
+			log.Fatal(util.GetErrorMessage(err))
 		}
 	},
 }

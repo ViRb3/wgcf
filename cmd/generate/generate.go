@@ -1,13 +1,14 @@
 package generate
 
 import (
-	"errors"
+	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"log"
 	"wgcf/cloudflare/api"
 	. "wgcf/cmd/util"
 	"wgcf/config"
+	"wgcf/util"
 	"wgcf/wireguard"
 )
 
@@ -21,7 +22,7 @@ var Cmd = &cobra.Command{
 Will change various account settings to ensure WireGuard connection will succeed.`),
 	Run: func(cmd *cobra.Command, args []string) {
 		if err := generateProfile(); err != nil {
-			log.Fatal(err)
+			log.Fatal(util.GetErrorMessage(err))
 		}
 	},
 }

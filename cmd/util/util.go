@@ -1,7 +1,7 @@
 package util
 
 import (
-	"errors"
+	"github.com/pkg/errors"
 	"github.com/spf13/viper"
 	"log"
 	"strings"

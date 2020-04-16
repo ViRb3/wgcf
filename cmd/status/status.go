@@ -1,11 +1,12 @@
 package status
 
 import (
-	"errors"
+	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 	"log"
 	"wgcf/cloudflare/api"
 	. "wgcf/cmd/util"
+	"wgcf/util"
 )
 
 var shortMsg = "Prints the status of the current Cloudflare Warp device"
@@ -16,7 +17,7 @@ var Cmd = &cobra.Command{
 	Long:  FormatMessage(shortMsg, ""),
 	Run: func(cmd *cobra.Command, args []string) {
 		if err := status(); err != nil {
-			log.Fatal(err)
+			log.Fatal(util.GetErrorMessage(err))
 		}
 	},
 }
