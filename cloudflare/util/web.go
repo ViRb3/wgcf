@@ -45,10 +45,11 @@ func doRequest(request *http.Request, result interface{}) error {
 	if err != nil {
 		return err
 	}
-	if response.StatusCode != 200 {
-		return errors.New(fmt.Sprintf("non-200 status code: %d", response.StatusCode))
-	}
 	bodyBytes, err := ioutil.ReadAll(response.Body)
+	if response.StatusCode != 200 {
+		return errors.WithMessage(errors.New("non-200 status code"),
+			fmt.Sprintf("code: %d, body: %s", response.StatusCode, string(bodyBytes)))
+	}
 	return json.Unmarshal(bodyBytes, result)
 }
 
