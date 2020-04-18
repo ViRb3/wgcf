@@ -1,8 +1,7 @@
 package cmd
 
 import (
-	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
+	"errors"
 	"log"
 	"wgcf/cmd/generate"
 	"wgcf/cmd/register"
@@ -12,6 +11,9 @@ import (
 	. "wgcf/cmd/util"
 	"wgcf/config"
 	"wgcf/util"
+
+	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 var cfgFile string
@@ -44,12 +46,16 @@ func init() {
 	RootCmd.AddCommand(trace.Cmd)
 }
 
+var unsupportedConfigError viper.UnsupportedConfigError
+
 func initConfig() {
 	initConfigDefaults()
 	viper.SetConfigFile(cfgFile)
 	viper.SetEnvPrefix("WGCF")
 	viper.AutomaticEnv()
-	if err := viper.ReadInConfig(); err == nil {
+	if err := viper.ReadInConfig(); errors.As(err, &unsupportedConfigError) {
+		log.Fatal(err)
+	} else {
 		log.Println("Using config file:", viper.ConfigFileUsed())
 	}
 }
