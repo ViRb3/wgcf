@@ -15,7 +15,7 @@ type DeviceData struct {
 	WaitlistEnabled bool        `json:"waitlist_enabled"`
 	Created         time.Time   `json:"created"`
 	Updated         time.Time   `json:"updated"`
-	Place           int         `json:"place"`
+	Place           int64       `json:"place"`
 	Enabled         bool        `json:"enabled"`
 }
 type Endpoint struct {

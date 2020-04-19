@@ -1,8 +1,8 @@
 package resp
 
 type ConfigData struct {
-	PremiumDataBytes    int        `json:"premium_data_bytes"`
-	ReferralRewardBytes int        `json:"referral_reward_bytes"`
+	PremiumDataBytes    int64      `json:"premium_data_bytes"`
+	ReferralRewardBytes int64      `json:"referral_reward_bytes"`
 	Denylist            []Denylist `json:"denylist"`
 }
 type V4 struct {

@@ -8,5 +8,5 @@ type RegistrationData struct {
 
 type RegistrationAccount struct {
 	AccountData
-	Usage int `json:"usage"`
+	Usage int64 `json:"usage"`
 }
