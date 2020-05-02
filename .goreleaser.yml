@@ -15,9 +15,13 @@ builds:
       - amd64
       - arm
       - arm64
+      - mips
+      - mipsle
     goarm:
       - 6
       - 7
+    gomips:
+      - softfloat
 archives:
   - format: binary
 checksum:
