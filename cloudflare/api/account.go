@@ -3,11 +3,12 @@ package api
 import (
 	"bytes"
 	"encoding/json"
-	"wgcf/cloudflare/structs/request"
-	"wgcf/cloudflare/structs/resp"
-	"wgcf/cloudflare/url"
-	"wgcf/cloudflare/util"
-	"wgcf/config"
+
+	"github.com/ViRb3/wgcf/cloudflare/structs/request"
+	"github.com/ViRb3/wgcf/cloudflare/structs/resp"
+	"github.com/ViRb3/wgcf/cloudflare/url"
+	"github.com/ViRb3/wgcf/cloudflare/util"
+	"github.com/ViRb3/wgcf/config"
 )
 
 func UpdateLicenseKey(ctx *config.Context) (*resp.UpdateLicenseData, error) {

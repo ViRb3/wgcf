@@ -1,7 +1,7 @@
 package resp
 
 import (
-	"wgcf/cloudflare/structs/request"
+	"github.com/ViRb3/wgcf/cloudflare/structs/request"
 )
 
 type AccountData struct {

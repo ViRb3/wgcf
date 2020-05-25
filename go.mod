@@ -1,4 +1,4 @@
-module wgcf
+module github.com/ViRb3/wgcf
 
 go 1.13
 

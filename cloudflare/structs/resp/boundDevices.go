@@ -2,7 +2,8 @@ package resp
 
 import (
 	"time"
-	"wgcf/cloudflare/structs/request"
+
+	"github.com/ViRb3/wgcf/cloudflare/structs/request"
 )
 
 type BoundDevicesData []BoundDevice

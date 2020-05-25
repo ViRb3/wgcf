@@ -5,11 +5,12 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"log"
-	"wgcf/cloudflare/api"
-	"wgcf/cloudflare/structs/resp"
-	. "wgcf/cmd/util"
-	"wgcf/config"
-	"wgcf/util"
+
+	"github.com/ViRb3/wgcf/cloudflare/api"
+	"github.com/ViRb3/wgcf/cloudflare/structs/resp"
+	. "github.com/ViRb3/wgcf/cmd/util"
+	"github.com/ViRb3/wgcf/config"
+	"github.com/ViRb3/wgcf/util"
 )
 
 var deviceName string
