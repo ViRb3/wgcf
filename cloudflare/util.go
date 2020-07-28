@@ -1,9 +1,8 @@
-package util
+package cloudflare
 
 import (
 	"github.com/pkg/errors"
 	"time"
-	"wgcf/cloudflare/structs/resp"
 )
 
 func GetTimestamp() string {
@@ -15,8 +14,8 @@ func getTimestamp(t time.Time) string {
 	return timestamp
 }
 
-func FindDevice(result *resp.BoundDevicesData, deviceId string) (*resp.BoundDevice, error) {
-	for _, device := range *result {
+func FindDevice(devices []Device, deviceId string) (*Device, error) {
+	for _, device := range devices {
 		if device.ID == deviceId {
 			return &device, nil
 		}

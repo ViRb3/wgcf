@@ -51,7 +51,7 @@ or use an environment variable:
 ```bash
 WGCF_LICENSE_KEY="123412341234" wgcf update
 ```
-Your account will be updated remotely, and no further changes are necessary.
+The license will be applied remotely, and a new private key will be created for the updated account. Re-generate your WireGuard profile to use the updated account.
 
 ### Check device status
 Run the following command in a terminal:

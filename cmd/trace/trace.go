@@ -7,7 +7,7 @@ import (
 	"log"
 	"net/http"
 	"strings"
-	. "wgcf/cmd/util"
+	. "wgcf/cmd/shared"
 	"wgcf/util"
 )
 

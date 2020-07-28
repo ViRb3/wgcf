@@ -5,10 +5,10 @@ import (
 	"log"
 	"wgcf/cmd/generate"
 	"wgcf/cmd/register"
+	. "wgcf/cmd/shared"
 	"wgcf/cmd/status"
 	"wgcf/cmd/trace"
 	"wgcf/cmd/update"
-	. "wgcf/cmd/util"
 	"wgcf/config"
 	"wgcf/util"
 
