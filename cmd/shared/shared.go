@@ -47,7 +47,7 @@ func PrintDeviceData(thisDevice *cloudflare.Device, boundDevice *cloudflare.Devi
 	log.Println("Device model:", thisDevice.Model)
 	log.Println("Device active:", *boundDevice.Active)
 	log.Println("Account type:", thisDevice.Account.AccountType)
-	log.Println("Warp+ enabled:", thisDevice.Account.WarpPlus)
+	log.Println("Role:", thisDevice.Account.Role)
 	log.Println("Premium data:", thisDevice.Account.PremiumData)
 	log.Println("Quota:", thisDevice.Account.Quota)
 	log.Println("=======================================")
