@@ -43,13 +43,13 @@ func CreateContext() *config.Context {
 
 func PrintDeviceData(thisDevice *cloudflare.Device, boundDevice *cloudflare.Device) {
 	log.Println("=======================================")
-	log.Println("Device name:", *boundDevice.Name)
-	log.Println("Device model:", thisDevice.Model)
-	log.Println("Device active:", *boundDevice.Active)
-	log.Println("Account type:", thisDevice.Account.AccountType)
-	log.Println("Role:", thisDevice.Account.Role)
-	log.Println("Premium data:", thisDevice.Account.PremiumData)
-	log.Println("Quota:", thisDevice.Account.Quota)
+	log.Printf("%-13s : %s\n", "Device name", *boundDevice.Name)
+	log.Printf("%-13s : %s\n", "Device model", thisDevice.Model)
+	log.Printf("%-13s : %t\n", "Device active", *boundDevice.Active)
+	log.Printf("%-13s : %s\n", "Account type", thisDevice.Account.AccountType)
+	log.Printf("%-13s : %s\n", "Role", thisDevice.Account.Role)
+	log.Printf("%-13s : %d\n", "Premium data", thisDevice.Account.PremiumData)
+	log.Printf("%-13s : %d\n", "Quota", thisDevice.Account.Quota)
 	log.Println("=======================================")
 }
 
