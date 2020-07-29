@@ -21,6 +21,10 @@ steps:
     environment:
       GITHUB_TOKEN:
         from_secret: github_token
+    when:
+      event:
+        exclude:
+          - tag
 
   - name: release
     image: golang
