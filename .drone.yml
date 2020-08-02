@@ -26,6 +26,13 @@ steps:
         exclude:
           - tag
 
+  - name: fetch
+    image: alpine/git
+    commands:
+      - git fetch --tags
+    when:
+      event: tag
+
   - name: release
     image: golang
     environment:
