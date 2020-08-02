@@ -62,11 +62,11 @@ func registerAccount() error {
 	}
 
 	ctx := CreateContext()
-	thisDevice, err := SetDeviceName(ctx, deviceName)
+	_, err = SetDeviceName(ctx, deviceName)
 	if err != nil {
 		return err
 	}
-	thisDevice, err = cloudflare.GetThisDevice(ctx)
+	thisDevice, err := cloudflare.GetThisDevice(ctx)
 	if err != nil {
 		return err
 	}
