@@ -13,6 +13,10 @@ steps:
         path: /go
     commands:
       - go test -race -v ./... -cover
+    when:
+      event:
+        exclude:
+          - tag
 
   - name: version
     image: node:13
