@@ -43,14 +43,23 @@ func updateAccount() error {
 	if err != nil {
 		return err
 	}
-	boundDevice, err := cloudflare.GetThisBoundDevice(ctx)
+	_, thisDevice, err = ensureLicenseKeyUpToDate(ctx, thisDevice)
 	if err != nil {
 		return err
 	}
 
-	_, thisDevice, err = ensureLicenseKeyUpToDate(ctx, thisDevice)
+	boundDevice, err := cloudflare.GetThisBoundDevice(ctx)
 	if err != nil {
 		return err
+	}
+	if boundDevice.Name == nil {
+		return errors.New("no name in bound device")
+	}
+	if *boundDevice.Name != deviceName {
+		log.Println("Setting device name")
+		if _, err := SetDeviceName(ctx, deviceName); err != nil {
+			return err
+		}
 	}
 
 	boundDevice, err = cloudflare.SetThisBoundDeviceActive(ctx, cloudflare.SetBoundDeviceActiveRequest{Active: true})
@@ -113,8 +122,5 @@ func updateLicenseKey(ctx *config.Context) (*cloudflare.Account, *cloudflare.Dev
 		return nil, nil, errors.New("failed to update public key")
 	}
 
-	if _, err := SetDeviceName(ctx, deviceName); err != nil {
-		return nil, nil, err
-	}
 	return account, device, nil
 }
