@@ -55,7 +55,7 @@ func updateAccount() error {
 	if boundDevice.Name == nil {
 		return errors.New("no name in bound device")
 	}
-	if *boundDevice.Name != deviceName {
+	if deviceName != "" && deviceName != *boundDevice.Name {
 		log.Println("Setting device name")
 		if _, err := SetDeviceName(ctx, deviceName); err != nil {
 			return err
