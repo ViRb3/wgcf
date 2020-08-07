@@ -1,3 +1,5 @@
+/.optic/captures/
+/.optic/generated/
 /*.toml
 /*.conf
 /*.pcapng
