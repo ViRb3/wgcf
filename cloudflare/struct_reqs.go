@@ -10,10 +10,6 @@ type RegRequest struct {
 	Locale    string `json:"locale"`
 }
 
-type DeviceRequest struct {
-	LicenseKey string `json:"key"`
-}
-
 type UpdateLicenseKeyRequest struct {
 	LicenseKey string `json:"license"`
 }
