@@ -4,6 +4,7 @@ import (
 	"crypto/rand"
 	"fmt"
 	"github.com/pkg/errors"
+	"time"
 )
 
 var (
@@ -25,4 +26,13 @@ func RandomHexString(count int) string {
 		panic(err)
 	}
 	return fmt.Sprintf("%X", b)
+}
+
+func GetTimestamp() string {
+	return getTimestamp(time.Now())
+}
+
+func getTimestamp(t time.Time) string {
+	timestamp := t.Format(time.RFC3339Nano)
+	return timestamp
 }

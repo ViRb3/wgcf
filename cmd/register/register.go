@@ -54,9 +54,9 @@ func registerAccount() error {
 	}
 
 	viper.Set(config.PrivateKey, privateKey.String())
-	viper.Set(config.DeviceId, device.ID)
-	viper.Set(config.AccessToken, *device.AccessToken)
-	viper.Set(config.LicenseKey, *device.Account.LicenseKey)
+	viper.Set(config.DeviceId, device.Id)
+	viper.Set(config.AccessToken, device.Token)
+	viper.Set(config.LicenseKey, device.Account.License)
 	if err := viper.WriteConfig(); err != nil {
 		return err
 	}
@@ -66,16 +66,16 @@ func registerAccount() error {
 	if err != nil {
 		return err
 	}
-	thisDevice, err := cloudflare.GetThisDevice(ctx)
+	thisDevice, err := cloudflare.GetSourceDevice(ctx)
 	if err != nil {
 		return err
 	}
 
-	boundDevice, err := cloudflare.SetThisBoundDeviceActive(ctx, cloudflare.SetBoundDeviceActiveRequest{Active: true})
+	boundDevice, err := cloudflare.UpdateSourceBoundDeviceActive(ctx, true)
 	if err != nil {
 		return err
 	}
-	if boundDevice.Active == nil || !*boundDevice.Active {
+	if !boundDevice.Active {
 		return errors.New("failed to activate device")
 	}
 
@@ -87,7 +87,7 @@ func registerAccount() error {
 func checkTOS() (bool, error) {
 	if !acceptedTOS {
 		fmt.Println("This project is in no way affiliated with Cloudflare")
-		fmt.Println("Cloudflare's Terms of Service:", cloudflare.TermsUrl)
+		fmt.Println("Cloudflare's Terms of Service: https://www.cloudflare.com/application/terms/")
 		prompt := promptui.Select{
 			Label: "Do you agree?",
 			Items: []string{"Yes", "No"},

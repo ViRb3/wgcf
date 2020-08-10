@@ -41,28 +41,28 @@ func CreateContext() *config.Context {
 	return &ctx
 }
 
-func PrintDeviceData(thisDevice *cloudflare.Device, boundDevice *cloudflare.Device) {
+func PrintDeviceData(thisDevice *cloudflare.Device, boundDevice *cloudflare.BoundDevice) {
 	log.Println("=======================================")
-	log.Printf("%-13s : %s\n", "Device name", *boundDevice.Name)
+	log.Printf("%-13s : %s\n", "Device name", boundDevice.Name)
 	log.Printf("%-13s : %s\n", "Device model", thisDevice.Model)
-	log.Printf("%-13s : %t\n", "Device active", *boundDevice.Active)
+	log.Printf("%-13s : %t\n", "Device active", boundDevice.Active)
 	log.Printf("%-13s : %s\n", "Account type", thisDevice.Account.AccountType)
 	log.Printf("%-13s : %s\n", "Role", thisDevice.Account.Role)
-	log.Printf("%-13s : %d\n", "Premium data", thisDevice.Account.PremiumData)
-	log.Printf("%-13s : %d\n", "Quota", thisDevice.Account.Quota)
+	log.Printf("%-13s : %f\n", "Premium data", thisDevice.Account.PremiumData)
+	log.Printf("%-13s : %f\n", "Quota", thisDevice.Account.Quota)
 	log.Println("=======================================")
 }
 
 // changing the bound account (e.g. changing license key) will reset the device name
-func SetDeviceName(ctx *config.Context, deviceName string) (*cloudflare.Device, error) {
+func SetDeviceName(ctx *config.Context, deviceName string) (*cloudflare.BoundDevice, error) {
 	if deviceName == "" {
 		deviceName += util.RandomHexString(3)
 	}
-	device, err := cloudflare.SetThisBoundDeviceName(ctx, cloudflare.SetBoundDeviceNameRequest{Name: deviceName})
+	device, err := cloudflare.UpdateSourceBoundDeviceName(ctx, deviceName)
 	if err != nil {
 		return nil, err
 	}
-	if device.Name == nil || *device.Name != deviceName {
+	if device.Name != deviceName {
 		return nil, errors.New("could not update device name")
 	}
 	return device, nil

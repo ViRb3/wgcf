@@ -39,7 +39,7 @@ func updateAccount() error {
 	}
 
 	ctx := CreateContext()
-	thisDevice, err := cloudflare.GetThisDevice(ctx)
+	thisDevice, err := cloudflare.GetSourceDevice(ctx)
 	if err != nil {
 		return err
 	}
@@ -48,22 +48,22 @@ func updateAccount() error {
 		return err
 	}
 
-	boundDevice, err := cloudflare.GetThisBoundDevice(ctx)
+	boundDevice, err := cloudflare.GetSourceBoundDevice(ctx)
 	if err != nil {
 		return err
 	}
-	if boundDevice.Name == nil || (deviceName != "" && deviceName != *boundDevice.Name) {
+	if boundDevice.Name == "" || (deviceName != "" && deviceName != boundDevice.Name) {
 		log.Println("Setting device name")
 		if _, err := SetDeviceName(ctx, deviceName); err != nil {
 			return err
 		}
 	}
 
-	boundDevice, err = cloudflare.SetThisBoundDeviceActive(ctx, cloudflare.SetBoundDeviceActiveRequest{Active: true})
+	boundDevice, err = cloudflare.UpdateSourceBoundDeviceActive(ctx, true)
 	if err != nil {
 		return err
 	}
-	if boundDevice.Active == nil || !*boundDevice.Active {
+	if !boundDevice.Active {
 		return errors.New("failed activating device")
 	}
 
@@ -73,13 +73,7 @@ func updateAccount() error {
 }
 
 func ensureLicenseKeyUpToDate(ctx *config.Context, thisDevice *cloudflare.Device) (*cloudflare.Account, *cloudflare.Device, error) {
-	if thisDevice.PublicKey == nil {
-		return nil, nil, errors.New("no public key in device")
-	}
-	if thisDevice.Account.LicenseKey == nil {
-		return nil, nil, errors.New("no license key in account")
-	}
-	if *thisDevice.Account.LicenseKey != ctx.LicenseKey {
+	if thisDevice.Account.License != ctx.LicenseKey {
 		log.Println("Updated license key detected, re-binding device to new account")
 		return updateLicenseKey(ctx)
 	}
@@ -92,8 +86,7 @@ func updateLicenseKey(ctx *config.Context) (*cloudflare.Account, *cloudflare.Dev
 		return nil, nil, err
 	}
 	newPublicKey := newPrivateKey.Public()
-	_, device, err := cloudflare.UpdateLicenseKey(ctx, cloudflare.UpdateLicenseKeyRequest2{PublicKey: newPublicKey.String()})
-	if err != nil {
+	if _, _, err := cloudflare.UpdateLicenseKey(ctx, newPublicKey.String()); err != nil {
 		return nil, nil, err
 	}
 
@@ -106,18 +99,17 @@ func updateLicenseKey(ctx *config.Context) (*cloudflare.Account, *cloudflare.Dev
 	if err != nil {
 		return nil, nil, err
 	}
-	if account.LicenseKey == nil {
-		return nil, nil, errors.New("got no license key")
+	thisDevice, err := cloudflare.GetSourceDevice(ctx)
+	if err != nil {
+		return nil, nil, err
 	}
-	if *account.LicenseKey != ctx.LicenseKey {
+
+	if account.License != ctx.LicenseKey {
 		return nil, nil, errors.New("failed to update license key")
 	}
-	if device.PublicKey == nil {
-		return nil, nil, errors.New("got no public key")
-	}
-	if *device.PublicKey != newPublicKey.String() {
+	if thisDevice.Key != newPublicKey.String() {
 		return nil, nil, errors.New("failed to update public key")
 	}
 
-	return account, device, nil
+	return account, thisDevice, nil
 }

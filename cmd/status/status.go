@@ -31,11 +31,11 @@ func status() error {
 	}
 
 	ctx := CreateContext()
-	thisDevice, err := cloudflare.GetThisDevice(ctx)
+	thisDevice, err := cloudflare.GetSourceDevice(ctx)
 	if err != nil {
 		return err
 	}
-	boundDevice, err := cloudflare.GetThisBoundDevice(ctx)
+	boundDevice, err := cloudflare.GetSourceBoundDevice(ctx)
 	if err != nil {
 		return err
 	}
