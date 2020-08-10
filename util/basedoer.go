@@ -25,7 +25,7 @@ func (b *BaseDoer) Do(req *http.Request) (*http.Response, error) {
 }
 
 func newBaseClient() *http.Client {
-	return &http.Client{Timeout: time.Duration(5000) * time.Second}
+	return &http.Client{Timeout: 30 * time.Second}
 }
 
 func NewBaseDoer() (sling.Doer, *http.Client) {

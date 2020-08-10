@@ -16,7 +16,7 @@ var apiClientAuth *openapi.APIClient
 
 func MakeApiClient(authToken *string) *openapi.APIClient {
 	httpClient := http.Client{
-		Timeout: 5 * time.Second,
+		Timeout: 30 * time.Second,
 		Transport: &http.Transport{
 			TLSClientConfig: &tls.Config{
 				// Match app's TLS config or API will reject us with code 403 error 1020
