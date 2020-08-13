@@ -72,7 +72,7 @@ func extractSchemas(allContent openapi3.Content, schemaName string, swagger *ope
 			return err
 		}
 		if len(allContent) > 1 {
-			schemaName += string(i)
+			schemaName += fmt.Sprint(i)
 			i++
 		}
 		schema := openapi3.Schema{}
