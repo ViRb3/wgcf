@@ -11,10 +11,9 @@ else
     OPENAPI_GENERATOR="openapi-generator"
     GO="go"
 fi
-OAS_FILE="openapi-spec.json"
 
 $API generate:oas --json
-mv .optic/generated/openapi.json $OAS_FILE
-$GO run spec_format/main.go
-rm -rf openapi
-$OPENAPI_GENERATOR generate -i $OAS_FILE -g go -o openapi
+mv ".optic/generated/openapi.json" "openapi-spec.json"
+$GO run "spec_format/main.go"
+rm -rf "openapi"
+$OPENAPI_GENERATOR generate -i "openapi-spec.json" -g go -o "openapi"
