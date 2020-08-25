@@ -21,7 +21,9 @@ steps:
   - name: version
     image: node:14.8
     commands:
-      - npx semantic-release
+      - yarn global add semantic-release@17.1
+      - semantic-release
+
     environment:
       GITHUB_TOKEN:
         from_secret: github_token
