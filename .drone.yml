@@ -19,7 +19,7 @@ steps:
           - tag
 
   - name: version
-    image: node:13
+    image: node:14.8
     commands:
       - npx semantic-release
     environment:
