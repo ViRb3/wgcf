@@ -8,6 +8,7 @@ PrivateKey = 1
 Address = 2/32
 Address = 3/128
 DNS = 1.1.1.1
+MTU = 1280
 [Peer]
 PublicKey = 4
 AllowedIPs = 0.0.0.0/0
