@@ -1,13 +1,16 @@
 package shared
 
 import (
-	"github.com/pkg/errors"
-	"github.com/spf13/viper"
+	"fmt"
 	"log"
+	"math"
 	"strings"
 	"wgcf/cloudflare"
 	"wgcf/config"
 	"wgcf/util"
+
+	"github.com/pkg/errors"
+	"github.com/spf13/viper"
 )
 
 func FormatMessage(shortMessage string, longMessage string) string {
@@ -41,6 +44,16 @@ func CreateContext() *config.Context {
 	return &ctx
 }
 
+func F32ToHumanReadable(number float32) string {
+	for i := 8; i >= 0; i-- {
+		humanReadable := number / float32(math.Pow(1024, float64(i)))
+		if humanReadable >= 1 && humanReadable < 1024 {
+			return fmt.Sprintf("%.2f %ciB", humanReadable, "KMGTPEZY"[i-1])
+		}
+	}
+	return fmt.Sprintf("%.2f B", number)
+}
+
 func PrintDeviceData(thisDevice *cloudflare.Device, boundDevice *cloudflare.BoundDevice) {
 	log.Println("=======================================")
 	log.Printf("%-13s : %s\n", "Device name", boundDevice.Name)
@@ -48,8 +61,8 @@ func PrintDeviceData(thisDevice *cloudflare.Device, boundDevice *cloudflare.Boun
 	log.Printf("%-13s : %t\n", "Device active", boundDevice.Active)
 	log.Printf("%-13s : %s\n", "Account type", thisDevice.Account.AccountType)
 	log.Printf("%-13s : %s\n", "Role", thisDevice.Account.Role)
-	log.Printf("%-13s : %f\n", "Premium data", thisDevice.Account.PremiumData)
-	log.Printf("%-13s : %f\n", "Quota", thisDevice.Account.Quota)
+	log.Printf("%-13s : %s\n", "Premium data", F32ToHumanReadable(thisDevice.Account.PremiumData))
+	log.Printf("%-13s : %s\n", "Quota", F32ToHumanReadable(thisDevice.Account.Quota))
 	log.Println("=======================================")
 }
 
