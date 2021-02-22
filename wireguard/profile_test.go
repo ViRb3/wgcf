@@ -13,7 +13,8 @@ MTU = 1280
 PublicKey = 4
 AllowedIPs = 0.0.0.0/0
 AllowedIPs = ::/0
-Endpoint = 5`
+Endpoint = 5
+`
 
 	result, err := generateProfile(&ProfileData{
 		PrivateKey: "1",

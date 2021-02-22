@@ -18,6 +18,7 @@ builds:
       - mips
       - mipsle
     goarm:
+      - 5
       - 6
       - 7
     gomips:
