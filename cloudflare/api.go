@@ -4,10 +4,11 @@ import (
 	"crypto/tls"
 	"net/http"
 	"time"
-	"wgcf/config"
-	"wgcf/openapi"
-	"wgcf/util"
-	"wgcf/wireguard"
+
+	"github.com/ViRb3/wgcf/config"
+	"github.com/ViRb3/wgcf/openapi"
+	"github.com/ViRb3/wgcf/util"
+	"github.com/ViRb3/wgcf/wireguard"
 )
 
 const (

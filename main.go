@@ -2,8 +2,9 @@ package main
 
 import (
 	"log"
-	"wgcf/cmd"
-	"wgcf/util"
+
+	"github.com/ViRb3/wgcf/cmd"
+	"github.com/ViRb3/wgcf/util"
 )
 
 func main() {

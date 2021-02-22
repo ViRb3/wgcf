@@ -2,13 +2,14 @@ package trace
 
 import (
 	"fmt"
-	"github.com/spf13/cobra"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"strings"
-	. "wgcf/cmd/shared"
-	"wgcf/util"
+
+	. "github.com/ViRb3/wgcf/cmd/shared"
+	"github.com/ViRb3/wgcf/util"
+	"github.com/spf13/cobra"
 )
 
 var shortMsg = "Prints trace information about the current internet connection"

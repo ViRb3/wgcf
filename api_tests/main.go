@@ -3,15 +3,16 @@ package main
 import (
 	"errors"
 	"fmt"
-	"github.com/ViRb3/optic-go"
-	"github.com/ViRb3/sling/v2"
 	"log"
 	"net/http"
 	"path"
 	"time"
-	"wgcf/cloudflare"
-	"wgcf/util"
-	"wgcf/wireguard"
+
+	opticgo "github.com/ViRb3/optic-go"
+	"github.com/ViRb3/sling/v2"
+	"github.com/ViRb3/wgcf/cloudflare"
+	"github.com/ViRb3/wgcf/util"
+	"github.com/ViRb3/wgcf/wireguard"
 )
 
 var defaultHeaders = map[string]string{}
