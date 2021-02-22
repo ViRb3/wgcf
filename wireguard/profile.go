@@ -16,7 +16,8 @@ MTU = 1280
 PublicKey = {{ .PublicKey }}
 AllowedIPs = 0.0.0.0/0
 AllowedIPs = ::/0
-Endpoint = {{ .Endpoint }}`
+Endpoint = {{ .Endpoint }}
+`
 
 type Profile struct {
 	profileString string
