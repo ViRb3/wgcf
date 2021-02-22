@@ -2,15 +2,12 @@ module wgcf
 
 go 1.13
 
-replace (
-	github.com/dghubble/sling v1.3.0 => github.com/ViRb3/sling v1.3.0-new
-	wgcf/openapi => ./openapi
-)
+replace wgcf/openapi => ./openapi
 
 require (
+	github.com/ViRb3/optic-go v0.0.0-20210222034258-dd1353e31eb5
+	github.com/ViRb3/sling/v2 v2.0.2
 	github.com/antihax/optional v1.0.0
-	github.com/dghubble/sling v1.3.0
-	github.com/getkin/kin-openapi v0.19.0
 	github.com/manifoldco/promptui v0.7.0
 	github.com/pelletier/go-toml v1.7.0 // indirect
 	github.com/pkg/errors v0.8.0

@@ -4,97 +4,49 @@ import (
 	"crypto/tls"
 	"errors"
 	"fmt"
-	"github.com/dghubble/sling"
+	"github.com/ViRb3/optic-go"
+	"github.com/ViRb3/sling/v2"
 	"log"
 	"net/http"
-	"net/http/httputil"
-	"net/url"
-	"os"
-	"sync"
 	"time"
 	"wgcf/util"
 	"wgcf/wireguard"
 )
 
-var globalClient *sling.Sling
 var defaultHeaders = map[string]string{"User-Agent": "okhttp/3.12.1"}
-var customTransport = &CustomTransport{}
-var parsedApiEndpoint *url.URL
-var wg sync.WaitGroup
-
-const (
-	apiEndpoint = "https://api.cloudflareclient.com/"
-	OpticPort   = "8888"
-	DebugPrint  = false
-)
 
 var fixedTransport = &http.Transport{
+	// Match app's TLS config or API will reject us with code 403 error 1020
 	TLSClientConfig: &tls.Config{
-		// Match app's TLS config or API will reject us with code 403 error 1020
 		MinVersion: tls.VersionTLS10,
 		MaxVersion: tls.VersionTLS12},
+	ForceAttemptHTTP2: false,
+	// From http.DefaultTransport
+	MaxIdleConns:          100,
+	IdleConnTimeout:       90 * time.Second,
+	TLSHandshakeTimeout:   10 * time.Second,
+	ExpectContinueTimeout: 1 * time.Second,
 }
 
 type CustomTransport struct{}
 
 func (CustomTransport) RoundTrip(r *http.Request) (*http.Response, error) {
-	log.Println("Requesting: ", r.URL.String())
-	r.Header.Del("X-Forwarded-For") // inserted by httputil.NewSingleHostReverseProxy
-	if DebugPrint {
-		b, err := httputil.DumpRequestOut(r, false)
-		if err != nil {
-			return nil, err
-		}
-		fmt.Println(string(b))
+	for key, val := range defaultHeaders {
+		r.Header.Set(key, val)
 	}
-	return fixedTransport.RoundTrip(r)
-}
-
-func init() {
-	parsed, err := url.Parse(apiEndpoint)
+	response, err := fixedTransport.RoundTrip(r)
 	if err != nil {
-		log.Fatal(err)
-		return
+		return nil, err
 	}
-	parsedApiEndpoint = parsed
-	doer, _ := util.NewBaseDoer()
-	globalClient = sling.New().Doer(doer).SetMany(defaultHeaders).Path("http://localhost:" + OpticPort)
-}
-
-func serve() error {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		proxy := httputil.NewSingleHostReverseProxy(parsedApiEndpoint)
-		proxy.Director = func(r *http.Request) {
-			r.Host = parsedApiEndpoint.Host
-			r.URL = parsedApiEndpoint.ResolveReference(r.URL)
-		}
-		proxy.Transport = customTransport
-		proxy.ServeHTTP(w, r)
-		log.Println("Returned: ", r.URL.String())
-		wg.Done()
-	})
-	return http.ListenAndServe(":"+os.Getenv("OPTIC_API_PORT"), nil)
+	if response.StatusCode != 200 {
+		return nil, errors.New(fmt.Sprintf("bad code: %d", response.StatusCode))
+	}
+	return response, nil
 }
 
 func main() {
-	waitInternetAccess()
-	go func() { log.Fatal(serve()) }()
 	if err := testAPI(); err != nil {
-		log.Println(err)
-	}
-	wg.Wait()
-	// wait for last request to be returned to Optic
-	time.Sleep(1 * time.Second)
-}
-
-// e.g. get firewall permission
-func waitInternetAccess() {
-	for {
-		_, err := http.Get("https://google.com/")
-		if err == nil {
-			break
-		}
-		time.Sleep(1 * time.Second)
+		log.Fatalln(err)
 	}
 }
 
@@ -106,39 +58,33 @@ func generateKeyPair() (*wireguard.Key, *wireguard.Key) {
 	return privateKey, privateKey.Public()
 }
 
-type TestConfig struct {
-	name       string
-	data       interface{}
-	requestUrl string
-	method     string
-}
-
-func runTest(config *TestConfig) error {
-	log.Println("Running test: ", config.requestUrl)
-	request := globalClient.New()
-	switch config.method {
-	case "GET":
-		request.Get(config.requestUrl)
-	case "POST":
-		request.Post(config.requestUrl)
-	case "PUT":
-		request.Put(config.requestUrl)
-	case "PATCH":
-		request.Patch(config.requestUrl)
-	default:
-		return errors.New("unknown request method")
+func testAPI() error {
+	testConfig := opticgo.Config{
+		ApiUrl:          opticgo.MustUrl("https://api.cloudflareclient.com/"),
+		OpticUrl:        opticgo.MustUrl("http://localhost:8889"),
+		ProxyListenAddr: "localhost",
+		DebugPrint:      true,
+		TripFunc: func(tripper http.RoundTripper) http.RoundTripper {
+			return CustomTransport{}
+		},
+		InternetCheckTimeout: 10 * time.Second,
 	}
-	if config.data != nil {
-		request.BodyJSON(config.data)
-	}
-	wg.Add(1)
-	if _, err := request.ReceiveSuccess(nil); err != nil {
+	tester, err := opticgo.NewTester(testConfig)
+	if err != nil {
 		return err
 	}
-	return nil
-}
+	proxyErrChan, err := tester.StartProxy()
+	if err != nil {
+		return err
+	}
+	go func() {
+		for err := range proxyErrChan {
+			log.Fatalln(err)
+		}
+	}()
 
-func testAPI() error {
+	client := sling.New().Client(&http.Client{Transport: CustomTransport{}}).Path(testConfig.OpticUrl.String())
+
 	_, publicKey := generateKeyPair()
 	_, publicKey2 := generateKeyPair()
 	regData := struct {
@@ -159,8 +105,7 @@ func testAPI() error {
 		"en_US",
 	}
 	var regResp map[string]interface{}
-	wg.Add(1)
-	if _, err := globalClient.New().Post("/v0a977/reg").BodyJSON(regData).ReceiveSuccess(&regResp); err != nil {
+	if _, err := client.New().Post("/v0a977/reg").BodyJSON(regData).ReceiveSuccess(&regResp); err != nil {
 		return err
 	}
 
@@ -168,9 +113,9 @@ func testAPI() error {
 	accessToken := regResp["token"].(string)
 	initialLicenseKey := regResp["account"].(map[string]interface{})["license"].(string)
 
-	globalClient.Set("Authorization", fmt.Sprintf("Bearer %s", accessToken))
+	defaultHeaders["Authorization"] = fmt.Sprintf("Bearer %s", accessToken)
 
-	var tests = []TestConfig{
+	var tests = []opticgo.TestDefinition{
 		{
 			"get device",
 			nil,
@@ -249,10 +194,16 @@ func testAPI() error {
 		},
 	}
 
-	for _, test := range tests {
-		if err := runTest(&test); err != nil {
-			return err
-		}
+	errChan, _, err := tester.StartAll(tests)
+	if err != nil {
+		return err
+	}
+	errText := ""
+	for err := range errChan {
+		errText += err.Error() + "\n"
+	}
+	if errText != "" {
+		return errors.New(errText)
 	}
 	return nil
 }

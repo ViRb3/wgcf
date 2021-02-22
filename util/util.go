@@ -3,18 +3,8 @@ package util
 import (
 	"crypto/rand"
 	"fmt"
-	"github.com/pkg/errors"
 	"time"
 )
-
-var (
-	ErrNon200StatusCode = errors.New("non-200 status code")
-)
-
-func CreateNon200Error(code int, body []byte) error {
-	return errors.WithMessage(errors.WithStack(ErrNon200StatusCode),
-		fmt.Sprintf("code: %d, body: %s", code, string(body)))
-}
 
 func GetErrorMessage(err error) string {
 	return fmt.Sprintf("%+v", err)

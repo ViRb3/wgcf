@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # is running under WSL?
-if [ "$(uname -r | grep "Microsoft")" ]
+if [ "$(uname -r | grep -i "microsoft")" ]
 then
     API="cmd.exe /c api"
     OPENAPI_GENERATOR="cmd.exe /c openapi-generator"
