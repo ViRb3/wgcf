@@ -56,7 +56,7 @@ func F32ToHumanReadable(number float32) string {
 
 func PrintDeviceData(thisDevice *cloudflare.Device, boundDevice *cloudflare.BoundDevice) {
 	log.Println("=======================================")
-	log.Printf("%-13s : %s\n", "Device name", boundDevice.Name)
+	log.Printf("%-13s : %s\n", "Device name", *boundDevice.Name)
 	log.Printf("%-13s : %s\n", "Device model", thisDevice.Model)
 	log.Printf("%-13s : %t\n", "Device active", boundDevice.Active)
 	log.Printf("%-13s : %s\n", "Account type", thisDevice.Account.AccountType)
@@ -75,7 +75,7 @@ func SetDeviceName(ctx *config.Context, deviceName string) (*cloudflare.BoundDev
 	if err != nil {
 		return nil, err
 	}
-	if device.Name != deviceName {
+	if device.Name == nil || *device.Name != deviceName {
 		return nil, errors.New("could not update device name")
 	}
 	return device, nil

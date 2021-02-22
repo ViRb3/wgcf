@@ -1,31 +1,26 @@
 package main
 
 import (
-	"crypto/tls"
 	"errors"
 	"fmt"
 	"github.com/ViRb3/optic-go"
 	"github.com/ViRb3/sling/v2"
 	"log"
 	"net/http"
+	"path"
 	"time"
+	"wgcf/cloudflare"
 	"wgcf/util"
 	"wgcf/wireguard"
 )
 
-var defaultHeaders = map[string]string{"User-Agent": "okhttp/3.12.1"}
+var defaultHeaders = map[string]string{}
+var defaultTransport = cloudflare.DefaultTransport
 
-var fixedTransport = &http.Transport{
-	// Match app's TLS config or API will reject us with code 403 error 1020
-	TLSClientConfig: &tls.Config{
-		MinVersion: tls.VersionTLS10,
-		MaxVersion: tls.VersionTLS12},
-	ForceAttemptHTTP2: false,
-	// From http.DefaultTransport
-	MaxIdleConns:          100,
-	IdleConnTimeout:       90 * time.Second,
-	TLSHandshakeTimeout:   10 * time.Second,
-	ExpectContinueTimeout: 1 * time.Second,
+func init() {
+	for key, val := range cloudflare.DefaultHeaders {
+		defaultHeaders[key] = val
+	}
 }
 
 type CustomTransport struct{}
@@ -34,7 +29,7 @@ func (CustomTransport) RoundTrip(r *http.Request) (*http.Response, error) {
 	for key, val := range defaultHeaders {
 		r.Header.Set(key, val)
 	}
-	response, err := fixedTransport.RoundTrip(r)
+	response, err := defaultTransport.RoundTrip(r)
 	if err != nil {
 		return nil, err
 	}
@@ -60,12 +55,12 @@ func generateKeyPair() (*wireguard.Key, *wireguard.Key) {
 
 func testAPI() error {
 	testConfig := opticgo.Config{
-		ApiUrl:          opticgo.MustUrl("https://api.cloudflareclient.com/"),
+		ApiUrl:          opticgo.MustUrl(cloudflare.ApiUrl).ResolveReference(opticgo.MustUrl(cloudflare.ApiVersion)),
 		OpticUrl:        opticgo.MustUrl("http://localhost:8889"),
 		ProxyListenAddr: "localhost",
 		DebugPrint:      true,
 		TripFunc: func(tripper http.RoundTripper) http.RoundTripper {
-			return CustomTransport{}
+			return &CustomTransport{}
 		},
 		InternetCheckTimeout: 10 * time.Second,
 	}
@@ -105,7 +100,8 @@ func testAPI() error {
 		"en_US",
 	}
 	var regResp map[string]interface{}
-	if _, err := client.New().Post("/v0a977/reg").BodyJSON(regData).ReceiveSuccess(&regResp); err != nil {
+	regPath := path.Join(testConfig.ApiUrl.Path, "reg")
+	if _, err := client.New().Post(regPath).BodyJSON(regData).ReceiveSuccess(&regResp); err != nil {
 		return err
 	}
 
@@ -119,19 +115,19 @@ func testAPI() error {
 		{
 			"get device",
 			nil,
-			fmt.Sprintf("/v0a977/reg/%s", deviceId),
+			fmt.Sprintf("reg/%s", deviceId),
 			"GET",
 		},
 		{
 			"get account",
 			nil,
-			fmt.Sprintf("/v0a977/reg/%s/account", deviceId),
+			fmt.Sprintf("reg/%s/account", deviceId),
 			"GET",
 		},
 		{
 			"get account devices",
 			nil,
-			fmt.Sprintf("/v0a977/reg/%s/account/devices", deviceId),
+			fmt.Sprintf("reg/%s/account/devices", deviceId),
 			"GET",
 		},
 		{
@@ -141,7 +137,7 @@ func testAPI() error {
 			}{
 				true,
 			},
-			fmt.Sprintf("/v0a977/reg/%s/account/reg/%s", deviceId, deviceId),
+			fmt.Sprintf("reg/%s/account/reg/%s", deviceId, deviceId),
 			"PATCH",
 		},
 		{
@@ -151,19 +147,19 @@ func testAPI() error {
 			}{
 				"TEST",
 			},
-			fmt.Sprintf("/v0a977/reg/%s/account/reg/%s", deviceId, deviceId),
+			fmt.Sprintf("reg/%s/account/reg/%s", deviceId, deviceId),
 			"PATCH",
 		},
 		{
 			"get account devices, this time with the name set",
 			nil,
-			fmt.Sprintf("/v0a977/reg/%s/account/devices", deviceId),
+			fmt.Sprintf("reg/%s/account/devices", deviceId),
 			"GET",
 		},
 		{
 			"get client config",
 			nil,
-			fmt.Sprintf("/v0a977/client_config"),
+			fmt.Sprintf("client_config"),
 			"GET",
 		},
 		{
@@ -173,7 +169,7 @@ func testAPI() error {
 			}{
 				initialLicenseKey, // TODO: don't use same key
 			},
-			fmt.Sprintf("/v0a977/reg/%s/account", deviceId),
+			fmt.Sprintf("reg/%s/account", deviceId),
 			"PUT",
 		},
 		{
@@ -183,13 +179,13 @@ func testAPI() error {
 			}{
 				publicKey2.String(),
 			},
-			fmt.Sprintf("/v0a977/reg/%s", deviceId),
+			fmt.Sprintf("reg/%s", deviceId),
 			"PATCH",
 		},
 		{
 			"recreate license key",
 			nil,
-			fmt.Sprintf("/v0a977/reg/%s/account/license", deviceId),
+			fmt.Sprintf("reg/%s/account/license", deviceId),
 			"POST",
 		},
 	}

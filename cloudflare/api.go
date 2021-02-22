@@ -2,7 +2,6 @@ package cloudflare
 
 import (
 	"crypto/tls"
-	"github.com/antihax/optional"
 	"net/http"
 	"time"
 	"wgcf/config"
@@ -11,25 +10,44 @@ import (
 	"wgcf/wireguard"
 )
 
+const (
+	ApiUrl     = "https://api.cloudflareclient.com"
+	ApiVersion = "v0a1922"
+)
+
+var (
+	DefaultHeaders = map[string]string{
+		"User-Agent":        "okhttp/3.12.1",
+		"CF-Client-Version": "a-6.3-1922",
+	}
+	DefaultTransport = &http.Transport{
+		// Match app's TLS config or API will reject us with code 403 error 1020
+		TLSClientConfig: &tls.Config{
+			MinVersion: tls.VersionTLS12,
+			MaxVersion: tls.VersionTLS12},
+		ForceAttemptHTTP2: false,
+		// From http.DefaultTransport
+		Proxy:                 http.ProxyFromEnvironment,
+		MaxIdleConns:          100,
+		IdleConnTimeout:       90 * time.Second,
+		TLSHandshakeTimeout:   10 * time.Second,
+		ExpectContinueTimeout: 1 * time.Second,
+	}
+)
+
 var apiClient = MakeApiClient(nil)
 var apiClientAuth *openapi.APIClient
 
 func MakeApiClient(authToken *string) *openapi.APIClient {
-	httpClient := http.Client{
-		Timeout: 30 * time.Second,
-		Transport: &http.Transport{
-			TLSClientConfig: &tls.Config{
-				// Match app's TLS config or API will reject us with code 403 error 1020
-				MinVersion: tls.VersionTLS10,
-				MaxVersion: tls.VersionTLS12},
-		}}
+	httpClient := http.Client{Transport: DefaultTransport}
 	apiClient := openapi.NewAPIClient(&openapi.Configuration{
-		BasePath:      "https://api.cloudflareclient.com",
-		DefaultHeader: map[string]string{},
-		UserAgent:     "okhttp/3.12.1",
+		DefaultHeader: DefaultHeaders,
+		UserAgent:     DefaultHeaders["User-Agent"],
 		Debug:         false,
-		Servers:       nil,
-		HTTPClient:    &httpClient,
+		Servers: []openapi.ServerConfiguration{
+			{URL: ApiUrl},
+		},
+		HTTPClient: &httpClient,
 	})
 	if authToken != nil {
 		apiClient.GetConfig().DefaultHeader["Authorization"] = "Bearer " + *authToken
@@ -37,26 +55,32 @@ func MakeApiClient(authToken *string) *openapi.APIClient {
 	return apiClient
 }
 
-func Register(publicKey *wireguard.Key, deviceModel string) (*openapi.Register200Response, error) {
+func Register(publicKey *wireguard.Key, deviceModel string) (openapi.Register200Response, error) {
 	timestamp := util.GetTimestamp()
-	result, _, err := apiClient.DefaultApi.Register(nil,
-		&openapi.RegisterOpts{optional.NewInterface(openapi.RegisterRequest{
-			Key:       publicKey.String(),
-			InstallId: "", // not empty on actual client
+	result, _, err := apiClient.DefaultApi.
+		Register(nil, ApiVersion).
+		RegisterRequest(openapi.RegisterRequest{
 			FcmToken:  "", // not empty on actual client
-			Tos:       timestamp,
-			Model:     deviceModel,
-			Type:      "Android",
+			InstallId: "", // not empty on actual client
+			Key:       publicKey.String(),
 			Locale:    "en_US",
-		})})
-	return &result, err
+			Model:     deviceModel,
+			Tos:       timestamp,
+			Type:      "Android",
+		}).Execute()
+	return result, err
 }
 
-type Device openapi.GetSourceDevice200Response
+type Device openapi.UpdateSourceDevice200Response
 
 func GetSourceDevice(ctx *config.Context) (*Device, error) {
-	result, _, err := globalClientAuth(ctx.AccessToken).DefaultApi.GetSourceDevice(nil, ctx.DeviceId)
-	castResult := Device(result)
+	result, _, err := globalClientAuth(ctx.AccessToken).DefaultApi.
+		GetSourceDevice(nil, ApiVersion, ctx.DeviceId).
+		Execute()
+	castResult := Device{}
+	if err := util.Restructure(&result, &castResult); err != nil {
+		return nil, err
+	}
 	return &castResult, err
 }
 
@@ -70,20 +94,26 @@ func globalClientAuth(authToken string) *openapi.APIClient {
 type Account openapi.GetAccount200Response
 
 func GetAccount(ctx *config.Context) (*Account, error) {
-	result, _, err := globalClientAuth(ctx.AccessToken).DefaultApi.GetAccount(nil, ctx.DeviceId)
+	result, _, err := globalClientAuth(ctx.AccessToken).DefaultApi.
+		GetAccount(nil, ctx.DeviceId, ApiVersion).
+		Execute()
 	castResult := Account(result)
 	return &castResult, err
 }
 
 func UpdateLicenseKey(ctx *config.Context, newPublicKey string) (*openapi.UpdateAccount200Response, *Device, error) {
-	result, _, err := globalClientAuth(ctx.AccessToken).DefaultApi.UpdateAccount(nil, ctx.DeviceId,
-		&openapi.UpdateAccountOpts{optional.NewInterface(openapi.UpdateAccountRequest{License: ctx.LicenseKey})})
+	result, _, err := globalClientAuth(ctx.AccessToken).DefaultApi.
+		UpdateAccount(nil, ctx.DeviceId, ApiVersion).
+		UpdateAccountRequest(openapi.UpdateAccountRequest{License: ctx.LicenseKey}).
+		Execute()
 	if err != nil {
 		return nil, nil, err
 	}
 	// change public key as per official client
-	result2, _, err := globalClientAuth(ctx.AccessToken).DefaultApi.UpdateSourceDevice(nil, ctx.DeviceId,
-		&openapi.UpdateSourceDeviceOpts{optional.NewInterface(openapi.UpdateSourceDeviceRequest{Key: newPublicKey})})
+	result2, _, err := globalClientAuth(ctx.AccessToken).DefaultApi.
+		UpdateSourceDevice(nil, ApiVersion, ctx.DeviceId).
+		UpdateSourceDeviceRequest(openapi.UpdateSourceDeviceRequest{Key: newPublicKey}).
+		Execute()
 	castResult := Device(result2)
 	if err != nil {
 		return nil, nil, err
@@ -94,7 +124,9 @@ func UpdateLicenseKey(ctx *config.Context, newPublicKey string) (*openapi.Update
 type BoundDevice openapi.GetBoundDevices200Response
 
 func GetBoundDevices(ctx *config.Context) ([]BoundDevice, error) {
-	result, _, err := globalClientAuth(ctx.AccessToken).DefaultApi.GetBoundDevices(nil, ctx.DeviceId)
+	result, _, err := globalClientAuth(ctx.AccessToken).DefaultApi.
+		GetBoundDevices(nil, ctx.DeviceId, ApiVersion).
+		Execute()
 	if err != nil {
 		return nil, err
 	}
@@ -114,21 +146,22 @@ func GetSourceBoundDevice(ctx *config.Context) (*BoundDevice, error) {
 }
 
 func UpdateSourceBoundDeviceName(ctx *config.Context, newName string) (*BoundDevice, error) {
-	return UpdateSourceBoundDevice(ctx,
-		&openapi.UpdateBoundDeviceOpts{optional.NewInterface(openapi.UpdateBoundDeviceRequest{
-			Name: newName,
-		})})
+	return UpdateSourceBoundDevice(ctx, openapi.UpdateBoundDeviceRequest{
+		Name: &newName,
+	})
 }
 
 func UpdateSourceBoundDeviceActive(ctx *config.Context, active bool) (*BoundDevice, error) {
-	return UpdateSourceBoundDevice(ctx,
-		&openapi.UpdateBoundDeviceOpts{optional.NewInterface(openapi.UpdateBoundDeviceRequest{
-			Active: active,
-		})})
+	return UpdateSourceBoundDevice(ctx, openapi.UpdateBoundDeviceRequest{
+		Active: &active,
+	})
 }
 
-func UpdateSourceBoundDevice(ctx *config.Context, data *openapi.UpdateBoundDeviceOpts) (*BoundDevice, error) {
-	result, _, err := globalClientAuth(ctx.AccessToken).DefaultApi.UpdateBoundDevice(nil, ctx.DeviceId, ctx.DeviceId, data)
+func UpdateSourceBoundDevice(ctx *config.Context, data openapi.UpdateBoundDeviceRequest) (*BoundDevice, error) {
+	result, _, err := globalClientAuth(ctx.AccessToken).DefaultApi.
+		UpdateBoundDevice(nil, ctx.DeviceId, ApiVersion, ctx.DeviceId).
+		UpdateBoundDeviceRequest(data).
+		Execute()
 	if err != nil {
 		return nil, err
 	}
