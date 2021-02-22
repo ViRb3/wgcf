@@ -14,8 +14,8 @@ import (
 	"encoding/json"
 )
 
-// GetAccount200Response struct for GetAccount200Response
-type GetAccount200Response struct {
+// UpdateSourceDevice200ResponseAccount struct for UpdateSourceDevice200ResponseAccount
+type UpdateSourceDevice200ResponseAccount struct {
 	AccountType string `json:"account_type"`
 	Created string `json:"created"`
 	Id string `json:"id"`
@@ -29,12 +29,12 @@ type GetAccount200Response struct {
 	WarpPlus bool `json:"warp_plus"`
 }
 
-// NewGetAccount200Response instantiates a new GetAccount200Response object
+// NewUpdateSourceDevice200ResponseAccount instantiates a new UpdateSourceDevice200ResponseAccount object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetAccount200Response(accountType string, created string, id string, license string, premiumData float32, quota float32, referralCount float32, referralRenewalCountdown float32, role string, updated string, warpPlus bool, ) *GetAccount200Response {
-	this := GetAccount200Response{}
+func NewUpdateSourceDevice200ResponseAccount(accountType string, created string, id string, license string, premiumData float32, quota float32, referralCount float32, referralRenewalCountdown float32, role string, updated string, warpPlus bool, ) *UpdateSourceDevice200ResponseAccount {
+	this := UpdateSourceDevice200ResponseAccount{}
 	this.AccountType = accountType
 	this.Created = created
 	this.Id = id
@@ -49,16 +49,16 @@ func NewGetAccount200Response(accountType string, created string, id string, lic
 	return &this
 }
 
-// NewGetAccount200ResponseWithDefaults instantiates a new GetAccount200Response object
+// NewUpdateSourceDevice200ResponseAccountWithDefaults instantiates a new UpdateSourceDevice200ResponseAccount object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewGetAccount200ResponseWithDefaults() *GetAccount200Response {
-	this := GetAccount200Response{}
+func NewUpdateSourceDevice200ResponseAccountWithDefaults() *UpdateSourceDevice200ResponseAccount {
+	this := UpdateSourceDevice200ResponseAccount{}
 	return &this
 }
 
 // GetAccountType returns the AccountType field value
-func (o *GetAccount200Response) GetAccountType() string {
+func (o *UpdateSourceDevice200ResponseAccount) GetAccountType() string {
 	if o == nil  {
 		var ret string
 		return ret
@@ -69,7 +69,7 @@ func (o *GetAccount200Response) GetAccountType() string {
 
 // GetAccountTypeOk returns a tuple with the AccountType field value
 // and a boolean to check if the value has been set.
-func (o *GetAccount200Response) GetAccountTypeOk() (*string, bool) {
+func (o *UpdateSourceDevice200ResponseAccount) GetAccountTypeOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -77,12 +77,12 @@ func (o *GetAccount200Response) GetAccountTypeOk() (*string, bool) {
 }
 
 // SetAccountType sets field value
-func (o *GetAccount200Response) SetAccountType(v string) {
+func (o *UpdateSourceDevice200ResponseAccount) SetAccountType(v string) {
 	o.AccountType = v
 }
 
 // GetCreated returns the Created field value
-func (o *GetAccount200Response) GetCreated() string {
+func (o *UpdateSourceDevice200ResponseAccount) GetCreated() string {
 	if o == nil  {
 		var ret string
 		return ret
@@ -93,7 +93,7 @@ func (o *GetAccount200Response) GetCreated() string {
 
 // GetCreatedOk returns a tuple with the Created field value
 // and a boolean to check if the value has been set.
-func (o *GetAccount200Response) GetCreatedOk() (*string, bool) {
+func (o *UpdateSourceDevice200ResponseAccount) GetCreatedOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -101,12 +101,12 @@ func (o *GetAccount200Response) GetCreatedOk() (*string, bool) {
 }
 
 // SetCreated sets field value
-func (o *GetAccount200Response) SetCreated(v string) {
+func (o *UpdateSourceDevice200ResponseAccount) SetCreated(v string) {
 	o.Created = v
 }
 
 // GetId returns the Id field value
-func (o *GetAccount200Response) GetId() string {
+func (o *UpdateSourceDevice200ResponseAccount) GetId() string {
 	if o == nil  {
 		var ret string
 		return ret
@@ -117,7 +117,7 @@ func (o *GetAccount200Response) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *GetAccount200Response) GetIdOk() (*string, bool) {
+func (o *UpdateSourceDevice200ResponseAccount) GetIdOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -125,12 +125,12 @@ func (o *GetAccount200Response) GetIdOk() (*string, bool) {
 }
 
 // SetId sets field value
-func (o *GetAccount200Response) SetId(v string) {
+func (o *UpdateSourceDevice200ResponseAccount) SetId(v string) {
 	o.Id = v
 }
 
 // GetLicense returns the License field value
-func (o *GetAccount200Response) GetLicense() string {
+func (o *UpdateSourceDevice200ResponseAccount) GetLicense() string {
 	if o == nil  {
 		var ret string
 		return ret
@@ -141,7 +141,7 @@ func (o *GetAccount200Response) GetLicense() string {
 
 // GetLicenseOk returns a tuple with the License field value
 // and a boolean to check if the value has been set.
-func (o *GetAccount200Response) GetLicenseOk() (*string, bool) {
+func (o *UpdateSourceDevice200ResponseAccount) GetLicenseOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -149,12 +149,12 @@ func (o *GetAccount200Response) GetLicenseOk() (*string, bool) {
 }
 
 // SetLicense sets field value
-func (o *GetAccount200Response) SetLicense(v string) {
+func (o *UpdateSourceDevice200ResponseAccount) SetLicense(v string) {
 	o.License = v
 }
 
 // GetPremiumData returns the PremiumData field value
-func (o *GetAccount200Response) GetPremiumData() float32 {
+func (o *UpdateSourceDevice200ResponseAccount) GetPremiumData() float32 {
 	if o == nil  {
 		var ret float32
 		return ret
@@ -165,7 +165,7 @@ func (o *GetAccount200Response) GetPremiumData() float32 {
 
 // GetPremiumDataOk returns a tuple with the PremiumData field value
 // and a boolean to check if the value has been set.
-func (o *GetAccount200Response) GetPremiumDataOk() (*float32, bool) {
+func (o *UpdateSourceDevice200ResponseAccount) GetPremiumDataOk() (*float32, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -173,12 +173,12 @@ func (o *GetAccount200Response) GetPremiumDataOk() (*float32, bool) {
 }
 
 // SetPremiumData sets field value
-func (o *GetAccount200Response) SetPremiumData(v float32) {
+func (o *UpdateSourceDevice200ResponseAccount) SetPremiumData(v float32) {
 	o.PremiumData = v
 }
 
 // GetQuota returns the Quota field value
-func (o *GetAccount200Response) GetQuota() float32 {
+func (o *UpdateSourceDevice200ResponseAccount) GetQuota() float32 {
 	if o == nil  {
 		var ret float32
 		return ret
@@ -189,7 +189,7 @@ func (o *GetAccount200Response) GetQuota() float32 {
 
 // GetQuotaOk returns a tuple with the Quota field value
 // and a boolean to check if the value has been set.
-func (o *GetAccount200Response) GetQuotaOk() (*float32, bool) {
+func (o *UpdateSourceDevice200ResponseAccount) GetQuotaOk() (*float32, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -197,12 +197,12 @@ func (o *GetAccount200Response) GetQuotaOk() (*float32, bool) {
 }
 
 // SetQuota sets field value
-func (o *GetAccount200Response) SetQuota(v float32) {
+func (o *UpdateSourceDevice200ResponseAccount) SetQuota(v float32) {
 	o.Quota = v
 }
 
 // GetReferralCount returns the ReferralCount field value
-func (o *GetAccount200Response) GetReferralCount() float32 {
+func (o *UpdateSourceDevice200ResponseAccount) GetReferralCount() float32 {
 	if o == nil  {
 		var ret float32
 		return ret
@@ -213,7 +213,7 @@ func (o *GetAccount200Response) GetReferralCount() float32 {
 
 // GetReferralCountOk returns a tuple with the ReferralCount field value
 // and a boolean to check if the value has been set.
-func (o *GetAccount200Response) GetReferralCountOk() (*float32, bool) {
+func (o *UpdateSourceDevice200ResponseAccount) GetReferralCountOk() (*float32, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -221,12 +221,12 @@ func (o *GetAccount200Response) GetReferralCountOk() (*float32, bool) {
 }
 
 // SetReferralCount sets field value
-func (o *GetAccount200Response) SetReferralCount(v float32) {
+func (o *UpdateSourceDevice200ResponseAccount) SetReferralCount(v float32) {
 	o.ReferralCount = v
 }
 
 // GetReferralRenewalCountdown returns the ReferralRenewalCountdown field value
-func (o *GetAccount200Response) GetReferralRenewalCountdown() float32 {
+func (o *UpdateSourceDevice200ResponseAccount) GetReferralRenewalCountdown() float32 {
 	if o == nil  {
 		var ret float32
 		return ret
@@ -237,7 +237,7 @@ func (o *GetAccount200Response) GetReferralRenewalCountdown() float32 {
 
 // GetReferralRenewalCountdownOk returns a tuple with the ReferralRenewalCountdown field value
 // and a boolean to check if the value has been set.
-func (o *GetAccount200Response) GetReferralRenewalCountdownOk() (*float32, bool) {
+func (o *UpdateSourceDevice200ResponseAccount) GetReferralRenewalCountdownOk() (*float32, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -245,12 +245,12 @@ func (o *GetAccount200Response) GetReferralRenewalCountdownOk() (*float32, bool)
 }
 
 // SetReferralRenewalCountdown sets field value
-func (o *GetAccount200Response) SetReferralRenewalCountdown(v float32) {
+func (o *UpdateSourceDevice200ResponseAccount) SetReferralRenewalCountdown(v float32) {
 	o.ReferralRenewalCountdown = v
 }
 
 // GetRole returns the Role field value
-func (o *GetAccount200Response) GetRole() string {
+func (o *UpdateSourceDevice200ResponseAccount) GetRole() string {
 	if o == nil  {
 		var ret string
 		return ret
@@ -261,7 +261,7 @@ func (o *GetAccount200Response) GetRole() string {
 
 // GetRoleOk returns a tuple with the Role field value
 // and a boolean to check if the value has been set.
-func (o *GetAccount200Response) GetRoleOk() (*string, bool) {
+func (o *UpdateSourceDevice200ResponseAccount) GetRoleOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -269,12 +269,12 @@ func (o *GetAccount200Response) GetRoleOk() (*string, bool) {
 }
 
 // SetRole sets field value
-func (o *GetAccount200Response) SetRole(v string) {
+func (o *UpdateSourceDevice200ResponseAccount) SetRole(v string) {
 	o.Role = v
 }
 
 // GetUpdated returns the Updated field value
-func (o *GetAccount200Response) GetUpdated() string {
+func (o *UpdateSourceDevice200ResponseAccount) GetUpdated() string {
 	if o == nil  {
 		var ret string
 		return ret
@@ -285,7 +285,7 @@ func (o *GetAccount200Response) GetUpdated() string {
 
 // GetUpdatedOk returns a tuple with the Updated field value
 // and a boolean to check if the value has been set.
-func (o *GetAccount200Response) GetUpdatedOk() (*string, bool) {
+func (o *UpdateSourceDevice200ResponseAccount) GetUpdatedOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -293,12 +293,12 @@ func (o *GetAccount200Response) GetUpdatedOk() (*string, bool) {
 }
 
 // SetUpdated sets field value
-func (o *GetAccount200Response) SetUpdated(v string) {
+func (o *UpdateSourceDevice200ResponseAccount) SetUpdated(v string) {
 	o.Updated = v
 }
 
 // GetWarpPlus returns the WarpPlus field value
-func (o *GetAccount200Response) GetWarpPlus() bool {
+func (o *UpdateSourceDevice200ResponseAccount) GetWarpPlus() bool {
 	if o == nil  {
 		var ret bool
 		return ret
@@ -309,7 +309,7 @@ func (o *GetAccount200Response) GetWarpPlus() bool {
 
 // GetWarpPlusOk returns a tuple with the WarpPlus field value
 // and a boolean to check if the value has been set.
-func (o *GetAccount200Response) GetWarpPlusOk() (*bool, bool) {
+func (o *UpdateSourceDevice200ResponseAccount) GetWarpPlusOk() (*bool, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -317,11 +317,11 @@ func (o *GetAccount200Response) GetWarpPlusOk() (*bool, bool) {
 }
 
 // SetWarpPlus sets field value
-func (o *GetAccount200Response) SetWarpPlus(v bool) {
+func (o *UpdateSourceDevice200ResponseAccount) SetWarpPlus(v bool) {
 	o.WarpPlus = v
 }
 
-func (o GetAccount200Response) MarshalJSON() ([]byte, error) {
+func (o UpdateSourceDevice200ResponseAccount) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["account_type"] = o.AccountType
@@ -359,38 +359,38 @@ func (o GetAccount200Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableGetAccount200Response struct {
-	value *GetAccount200Response
+type NullableUpdateSourceDevice200ResponseAccount struct {
+	value *UpdateSourceDevice200ResponseAccount
 	isSet bool
 }
 
-func (v NullableGetAccount200Response) Get() *GetAccount200Response {
+func (v NullableUpdateSourceDevice200ResponseAccount) Get() *UpdateSourceDevice200ResponseAccount {
 	return v.value
 }
 
-func (v *NullableGetAccount200Response) Set(val *GetAccount200Response) {
+func (v *NullableUpdateSourceDevice200ResponseAccount) Set(val *UpdateSourceDevice200ResponseAccount) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableGetAccount200Response) IsSet() bool {
+func (v NullableUpdateSourceDevice200ResponseAccount) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableGetAccount200Response) Unset() {
+func (v *NullableUpdateSourceDevice200ResponseAccount) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableGetAccount200Response(val *GetAccount200Response) *NullableGetAccount200Response {
-	return &NullableGetAccount200Response{value: val, isSet: true}
+func NewNullableUpdateSourceDevice200ResponseAccount(val *UpdateSourceDevice200ResponseAccount) *NullableUpdateSourceDevice200ResponseAccount {
+	return &NullableUpdateSourceDevice200ResponseAccount{value: val, isSet: true}
 }
 
-func (v NullableGetAccount200Response) MarshalJSON() ([]byte, error) {
+func (v NullableUpdateSourceDevice200ResponseAccount) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableGetAccount200Response) UnmarshalJSON(src []byte) error {
+func (v *NullableUpdateSourceDevice200ResponseAccount) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

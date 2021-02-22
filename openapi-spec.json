@@ -92,6 +92,35 @@
       },
       "GetClientConfig_200_Response": {
         "properties": {
+          "captive_portal": {
+            "items": {
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "networks": {
+                  "items": {
+                    "properties": {
+                      "address": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "address"
+                    ],
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              },
+              "required": [
+                "name",
+                "networks"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
           "denylist": {
             "items": {
               "properties": {
@@ -169,6 +198,7 @@
           }
         },
         "required": [
+          "captive_portal",
           "denylist",
           "premium_data_bytes",
           "referral_reward_bytes"
@@ -209,6 +239,9 @@
               "updated": {
                 "type": "string"
               },
+              "usage": {
+                "type": "number"
+              },
               "warp_plus": {
                 "type": "boolean"
               }
@@ -224,6 +257,7 @@
               "referral_renewal_countdown",
               "role",
               "updated",
+              "usage",
               "warp_plus"
             ],
             "type": "object"
@@ -953,11 +987,11 @@
   },
   "info": {
     "title": "untitled API",
-    "version": "513"
+    "version": "536"
   },
   "openapi": "3.0.1",
   "paths": {
-    "/v0a977/client_config": {
+    "/{apiVersion}/client_config": {
       "get": {
         "operationId": "GetClientConfig",
         "responses": {
@@ -973,9 +1007,29 @@
           }
         },
         "summary": "GetClientConfig"
-      }
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "apiVersion",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
     },
-    "/v0a977/reg": {
+    "/{apiVersion}/reg": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "apiVersion",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
       "post": {
         "operationId": "Register",
         "requestBody": {
@@ -1002,7 +1056,7 @@
         "summary": "Register"
       }
     },
-    "/v0a977/reg/{sourceDeviceId}": {
+    "/{apiVersion}/reg/{sourceDeviceId}": {
       "get": {
         "operationId": "GetSourceDevice",
         "responses": {
@@ -1020,6 +1074,14 @@
         "summary": "GetSourceDevice"
       },
       "parameters": [
+        {
+          "in": "path",
+          "name": "apiVersion",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
         {
           "in": "path",
           "name": "sourceDeviceId",
@@ -1055,7 +1117,7 @@
         "summary": "UpdateSourceDevice"
       }
     },
-    "/v0a977/reg/{sourceDeviceId}/account": {
+    "/{apiVersion}/reg/{sourceDeviceId}/account": {
       "get": {
         "operationId": "GetAccount",
         "responses": {
@@ -1076,6 +1138,14 @@
         {
           "in": "path",
           "name": "sourceDeviceId",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "in": "path",
+          "name": "apiVersion",
           "required": true,
           "schema": {
             "type": "string"
@@ -1108,7 +1178,7 @@
         "summary": "UpdateAccount"
       }
     },
-    "/v0a977/reg/{sourceDeviceId}/account/devices": {
+    "/{apiVersion}/reg/{sourceDeviceId}/account/devices": {
       "get": {
         "operationId": "GetBoundDevices",
         "responses": {
@@ -1136,14 +1206,30 @@
           "schema": {
             "type": "string"
           }
+        },
+        {
+          "in": "path",
+          "name": "apiVersion",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
         }
       ]
     },
-    "/v0a977/reg/{sourceDeviceId}/account/license": {
+    "/{apiVersion}/reg/{sourceDeviceId}/account/license": {
       "parameters": [
         {
           "in": "path",
           "name": "sourceDeviceId",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "in": "path",
+          "name": "apiVersion",
           "required": true,
           "schema": {
             "type": "string"
@@ -1167,11 +1253,19 @@
         "summary": "ResetAccountLicense"
       }
     },
-    "/v0a977/reg/{sourceDeviceId}/account/reg/{boundDeviceId}": {
+    "/{apiVersion}/reg/{sourceDeviceId}/account/reg/{boundDeviceId}": {
       "parameters": [
         {
           "in": "path",
           "name": "sourceDeviceId",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "in": "path",
+          "name": "apiVersion",
           "required": true,
           "schema": {
             "type": "string"
