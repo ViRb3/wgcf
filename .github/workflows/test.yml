@@ -1,0 +1,38 @@
+name: Test
+
+on:
+  push:
+    branches: [master, develop]
+  pull_request:
+    branches: [master, develop]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout with token
+        if: github.event_name != 'pull_request'
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.API_GITHUB_TOKEN }}
+
+      - name: Checkout without token
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@v2
+
+      - name: Setup Go environment
+        uses: actions/setup-go@v2.1.3
+        with:
+          go-version: "1.16"
+
+      - name: Program Test
+        run: go test ./...
+
+      - name: Version
+        if: github.event_name != 'pull_request'
+        uses: cycjimmy/semantic-release-action@v2.5.3
+        with:
+          semantic_version: 17.4
+        env:
+          GITHUB_TOKEN: ${{ secrets.API_GITHUB_TOKEN }}
