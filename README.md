@@ -15,6 +15,7 @@
 
 ## Download
 You can find pre-compiled binaries on the [releases page](https://github.com/ViRb3/wgcf/releases).
+> Based on [this post](https://www.reddit.com/r/CloudFlare/comments/hyt703/no_more_warp_for_wgcf/), some people are unable to get the **warp=plus** working and only get the **warp=on** even after they've changed the license key. This issue was confirmed recently on Wed, 14 Apr 2021 as unsolved. However, you can use [this config](https://galpt.xyz/vpn/galpt.conf) as a work-around to get the **warp=plus** back. We removed the IPv6 from **AllowedIPs** to avoid **Unusual traffic from your computer network** reCAPTCHA.
 
 ## Usage
 Run `wgcf` in a terminal without any arguments to display the help screen. All commands and parameters are documented.
