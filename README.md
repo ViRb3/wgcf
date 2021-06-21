@@ -16,6 +16,12 @@
 ## Download
 You can find pre-compiled binaries on the [releases page](https://github.com/ViRb3/wgcf/releases).
 
+Or you can also use script to install automatically:
+
+```bash
+curl -Ls https://github.com/ViRb3/wgcf/raw/master/install.sh | bash
+```
+
 ## Usage
 Run `wgcf` in a terminal without any arguments to display the help screen. All commands and parameters are documented.
 
