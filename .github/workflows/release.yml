@@ -21,7 +21,7 @@ jobs:
           go-version: "1.16"
 
       - name: Binaries Release
-        uses: goreleaser/goreleaser-action@v2.5.0
+        uses: goreleaser/goreleaser-action@v2.6.1
         with:
           version: ~> 0.159
           args: release --rm-dist
