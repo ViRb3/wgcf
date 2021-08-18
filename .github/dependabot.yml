@@ -8,6 +8,14 @@ updates:
       prefix: "fix"
       include: "scope"
 
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    commit-message:
+      prefix: "fix"
+      include: "scope"
+
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
