@@ -21,10 +21,16 @@ jobs:
         if: github.event_name == 'pull_request'
         uses: actions/checkout@v2.3.4
 
+      - name: Fetch Go version
+        run: |
+          GO_VERSION=$(perl -ne 'print "$1\n" if /FROM golang:([0-9.]+)/' Dockerfile | head -n1)
+          [ -n "$GO_VERSION" ] || exit 1
+          echo "go_version=$GO_VERSION" >> $GITHUB_ENV
+
       - name: Setup Go environment
         uses: actions/setup-go@v2.1.3
         with:
-          go-version: "1.16"
+          go-version: "${{ env.go_version }}"
 
       - name: Program Test
         run: go test ./...
