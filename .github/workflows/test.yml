@@ -13,13 +13,13 @@ jobs:
     steps:
       - name: Checkout with token
         if: github.event_name != 'pull_request'
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v2.3.5
         with:
           token: ${{ secrets.API_GITHUB_TOKEN }}
 
       - name: Checkout without token
         if: github.event_name == 'pull_request'
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v2.3.5
 
       - name: Fetch Go version
         run: |
