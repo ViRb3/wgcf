@@ -68,7 +68,7 @@ jobs:
       - name: Binaries Release
         uses: goreleaser/goreleaser-action@v2.9.1
         with:
-          version: ~> 0.175
+          version: ~> 1.5.0
           args: release --rm-dist
         env:
           GITHUB_TOKEN: ${{ secrets.API_GITHUB_TOKEN }}

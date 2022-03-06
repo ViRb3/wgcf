@@ -45,6 +45,6 @@ jobs:
         if: github.event_name != 'pull_request'
         uses: cycjimmy/semantic-release-action@v2.7.0
         with:
-          semantic_version: 17.4
+          semantic_version: 19.0.2
         env:
           GITHUB_TOKEN: ${{ secrets.API_GITHUB_TOKEN }}
