@@ -1,6 +1,6 @@
 module github.com/ViRb3/wgcf
 
-go 1.17
+go 1.18
 
 replace github.com/ViRb3/wgcf/openapi => ./openapi
 
