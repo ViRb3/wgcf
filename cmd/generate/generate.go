@@ -28,7 +28,7 @@ var Cmd = &cobra.Command{
 }
 
 func init() {
-	Cmd.PersistentFlags().StringVarP(&profileFile, "profile", "p", "wgcf-profile.conf", "WireGuard profile file")
+	Cmd.PersistentFlags().StringVarP(&profileFile, "profile", "p", "wgcf.conf", "WireGuard profile file")
 }
 
 func generateProfile() error {

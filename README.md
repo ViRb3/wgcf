@@ -31,7 +31,7 @@ Run the following command in a terminal:
 ```bash
 wgcf generate
 ```
-The WireGuard profile will be saved under `wgcf-profile.conf`. For more information on how to use it, please check the official [WireGuard Quick Start](https://www.wireguard.com/quickstart/).
+The WireGuard profile will be saved under `wgcf.conf`. For more information on how to use it, please check the official [WireGuard Quick Start](https://www.wireguard.com/quickstart/).
 
 #### Maximum transmission unit (MTU)
 To ensure maximum compatibility, the generated profile will have a MTU of 1280, just like the official Android app. If you are experiencing performance issues, you may be able to improve your speed by increasing this value. For more information, please check [#40](https://github.com/ViRb3/wgcf/issues/40).
