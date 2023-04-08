@@ -4,6 +4,8 @@ builds:
       - CGO_ENABLED=0
     ldflags:
       - -s -w
+    flags:
+      - -trimpath
     goos:
       - linux
       - windows
