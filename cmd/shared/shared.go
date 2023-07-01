@@ -64,6 +64,7 @@ func PrintDeviceData(thisDevice *cloudflare.Device, boundDevice *cloudflare.Boun
 	log.Printf("%-13s : %s\n", "Role", thisDevice.Account.Role)
 	log.Printf("%-13s : %s\n", "Premium data", F32ToHumanReadable(thisDevice.Account.PremiumData))
 	log.Printf("%-13s : %s\n", "Quota", F32ToHumanReadable(thisDevice.Account.Quota))
+	log.Printf("%-13s : %s\n", "Client ID", thisDevice.Config.ClientId)
 	log.Println("=======================================")
 }
 
