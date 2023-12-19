@@ -7,10 +7,8 @@ import (
 	. "github.com/ViRb3/wgcf/cmd/shared"
 	"github.com/ViRb3/wgcf/config"
 	"github.com/ViRb3/wgcf/util"
-	"github.com/ViRb3/wgcf/wireguard"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
 )
 
 var deviceName string
@@ -82,17 +80,8 @@ func ensureLicenseKeyUpToDate(ctx *config.Context, thisDevice *cloudflare.Device
 }
 
 func updateLicenseKey(ctx *config.Context) (*cloudflare.Account, *cloudflare.Device, error) {
-	newPrivateKey, err := wireguard.NewPrivateKey()
-	if err != nil {
-		return nil, nil, err
-	}
-	newPublicKey := newPrivateKey.Public()
-	if _, _, err := cloudflare.UpdateLicenseKey(ctx, newPublicKey.String()); err != nil {
-		return nil, nil, err
-	}
 
-	viper.Set(config.PrivateKey, newPrivateKey.String())
-	if err := viper.WriteConfig(); err != nil {
+	if _, err := cloudflare.UpdateLicenseKey(ctx); err != nil {
 		return nil, nil, err
 	}
 
@@ -107,9 +96,6 @@ func updateLicenseKey(ctx *config.Context) (*cloudflare.Account, *cloudflare.Dev
 
 	if account.License != ctx.LicenseKey {
 		return nil, nil, errors.New("failed to update license key")
-	}
-	if thisDevice.Key != newPublicKey.String() {
-		return nil, nil, errors.New("failed to update public key")
 	}
 
 	return account, thisDevice, nil
