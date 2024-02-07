@@ -1,4 +1,4 @@
-FROM golang:1.21.6-alpine AS builder
+FROM golang:1.22.0-alpine AS builder
 
 WORKDIR /src
 COPY . .
