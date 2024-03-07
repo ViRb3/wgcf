@@ -35,7 +35,7 @@ var Cmd = &cobra.Command{
 func init() {
 	Cmd.PersistentFlags().StringVarP(&deviceName, "name", "n", "", "Device name displayed under the 1.1.1.1 app (defaults to random)")
 	Cmd.PersistentFlags().StringVarP(&deviceModel, "model", "m", "PC", "Device model displayed under the 1.1.1.1 app")
-	Cmd.PersistentFlags().StringVarP(&existingKey, "key", "k", "", "Private existing WireGuard key used within the 1.1.1.1 app (defaults to random)")
+	Cmd.PersistentFlags().StringVarP(&existingKey, "key", "k", "", "Base64 private key used to authenticate your device over WireGuard (defaults to random)")
 	Cmd.PersistentFlags().BoolVar(&acceptedTOS, "accept-tos", false, "Accept Cloudflare's Terms of Service non-interactively")
 }
 
