@@ -1,5 +1,5 @@
-github.com/ViRb3/optic-go v0.0.0-20220306155148-a12b96393ec7 h1:QNR1vFcAXeyQ3K7xT3NRkgY0Of+fCE3pvwGMbXhj+MM=
-github.com/ViRb3/optic-go v0.0.0-20220306155148-a12b96393ec7/go.mod h1:TFc6O2mCUoxu3Ml4zmb5pBsuEUAgFfxU4TJ0uO5jj1Q=
+github.com/ViRb3/optic-go v0.0.0-20240309111653-486347a8369d h1:ZgDImGcvIHtYJUjMuuw20foRhUSj/DIFSONiqY+m2gM=
+github.com/ViRb3/optic-go v0.0.0-20240309111653-486347a8369d/go.mod h1:+0bUHJTeh0mn1qFIWZobQBrmkn/LpiL0az3ek7XIhHA=
 github.com/ViRb3/sling/v2 v2.0.2 h1:XPadHD6pQHIuGSI0UYrkgmP7HH/ZLvt9/FM7saboVWs=
 github.com/ViRb3/sling/v2 v2.0.2/go.mod h1:TsPjWWaGty4CDiezzN6f03mHzBRxBNI7o3ikMJ4pTuY=
 github.com/chzyer/logex v1.1.10/go.mod h1:+Ywpsq7O8HXn0nuIou7OrIPyXbp3wmkHB+jjWRnGsAI=

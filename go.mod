@@ -5,7 +5,7 @@ go 1.18
 replace github.com/ViRb3/wgcf/openapi => ./openapi
 
 require (
-	github.com/ViRb3/optic-go v0.0.0-20220306155148-a12b96393ec7
+	github.com/ViRb3/optic-go v0.0.0-20240309111653-486347a8369d
 	github.com/ViRb3/sling/v2 v2.0.2
 	github.com/ViRb3/wgcf/openapi v0.0.0-20240309103509-71e9ce8d36bc
 	github.com/manifoldco/promptui v0.9.0
