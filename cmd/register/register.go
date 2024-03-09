@@ -17,6 +17,7 @@ import (
 
 var deviceName string
 var deviceModel string
+var existingKey string
 var acceptedTOS = false
 var shortMsg = "Registers a new Cloudflare Warp device and creates a new account, preparing it for connection"
 
@@ -34,6 +35,7 @@ var Cmd = &cobra.Command{
 func init() {
 	Cmd.PersistentFlags().StringVarP(&deviceName, "name", "n", "", "Device name displayed under the 1.1.1.1 app (defaults to random)")
 	Cmd.PersistentFlags().StringVarP(&deviceModel, "model", "m", "PC", "Device model displayed under the 1.1.1.1 app")
+	Cmd.PersistentFlags().StringVarP(&existingKey, "key", "k", "", "Base64 private key used to authenticate your device over WireGuard (defaults to random)")
 	Cmd.PersistentFlags().BoolVar(&acceptedTOS, "accept-tos", false, "Accept Cloudflare's Terms of Service non-interactively")
 }
 
@@ -45,10 +47,18 @@ func registerAccount() error {
 		return err
 	}
 
-	privateKey, err := wireguard.NewPrivateKey()
+	var privateKey *wireguard.Key
+	var err error
+
+	if existingKey != "" {
+		privateKey, err = wireguard.NewKey(existingKey)
+	} else {
+		privateKey, err = wireguard.NewPrivateKey()
+	}
 	if err != nil {
 		return err
 	}
+
 	device, err := cloudflare.Register(privateKey.Public(), deviceModel)
 	if err != nil {
 		return err
