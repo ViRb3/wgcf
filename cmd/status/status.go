@@ -3,9 +3,9 @@ package status
 import (
 	"log"
 
-	"github.com/ViRb3/wgcf/cloudflare"
-	. "github.com/ViRb3/wgcf/cmd/shared"
-	"github.com/ViRb3/wgcf/util"
+	"github.com/ViRb3/wgcf/v2/cloudflare"
+	. "github.com/ViRb3/wgcf/v2/cmd/shared"
+	"github.com/ViRb3/wgcf/v2/util"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 )

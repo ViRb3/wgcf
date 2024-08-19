@@ -5,10 +5,10 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/ViRb3/wgcf/config"
-	"github.com/ViRb3/wgcf/openapi"
-	"github.com/ViRb3/wgcf/util"
-	"github.com/ViRb3/wgcf/wireguard"
+	"github.com/ViRb3/wgcf/v2/config"
+	"github.com/ViRb3/wgcf/v2/openapi"
+	"github.com/ViRb3/wgcf/v2/util"
+	"github.com/ViRb3/wgcf/v2/wireguard"
 )
 
 const (

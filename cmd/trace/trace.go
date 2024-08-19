@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"strings"
 
-	. "github.com/ViRb3/wgcf/cmd/shared"
-	"github.com/ViRb3/wgcf/util"
+	. "github.com/ViRb3/wgcf/v2/cmd/shared"
+	"github.com/ViRb3/wgcf/v2/util"
 	"github.com/spf13/cobra"
 )
 

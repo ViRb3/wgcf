@@ -6,9 +6,9 @@ import (
 	"math"
 	"strings"
 
-	"github.com/ViRb3/wgcf/cloudflare"
-	"github.com/ViRb3/wgcf/config"
-	"github.com/ViRb3/wgcf/util"
+	"github.com/ViRb3/wgcf/v2/cloudflare"
+	"github.com/ViRb3/wgcf/v2/config"
+	"github.com/ViRb3/wgcf/v2/util"
 
 	"github.com/pkg/errors"
 	"github.com/spf13/viper"
