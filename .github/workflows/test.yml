@@ -36,14 +36,14 @@ jobs:
         run: go test ./...
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3.1.0
+        uses: docker/setup-buildx-action@v3.7.1
 
       - name: Docker Build Test
         run: docker buildx build --load --tag test:test --file ./Dockerfile ./
 
       - name: Version
         if: github.event_name != 'pull_request'
-        uses: cycjimmy/semantic-release-action@v4.0.0
+        uses: cycjimmy/semantic-release-action@v4.1.1
         with:
           semantic_version: 19.0.2
         env:
