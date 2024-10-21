@@ -3,11 +3,11 @@ package generate
 import (
 	"log"
 
-	"github.com/ViRb3/wgcf/cloudflare"
-	. "github.com/ViRb3/wgcf/cmd/shared"
-	"github.com/ViRb3/wgcf/config"
-	"github.com/ViRb3/wgcf/util"
-	"github.com/ViRb3/wgcf/wireguard"
+	"github.com/ViRb3/wgcf/v2/cloudflare"
+	. "github.com/ViRb3/wgcf/v2/cmd/shared"
+	"github.com/ViRb3/wgcf/v2/config"
+	"github.com/ViRb3/wgcf/v2/util"
+	"github.com/ViRb3/wgcf/v2/wireguard"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
