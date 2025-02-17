@@ -7,7 +7,7 @@ require (
 	github.com/ViRb3/sling/v2 v2.0.2
 	github.com/manifoldco/promptui v0.9.0
 	github.com/pkg/errors v0.9.1
-	github.com/spf13/cobra v1.9.0
+	github.com/spf13/cobra v1.9.1
 	github.com/spf13/viper v1.19.0
 	golang.org/x/crypto v0.33.0
 	golang.org/x/oauth2 v0.26.0
