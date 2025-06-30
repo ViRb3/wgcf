@@ -4,6 +4,7 @@
 /*.conf
 /*.pcapng
 /wgcf
+.DS_Store
 
 # Created by https://www.gitignore.io/api/go,intellij+all,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=go,intellij+all,visualstudiocode
