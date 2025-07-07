@@ -43,7 +43,7 @@ jobs:
 
       - name: Version
         if: github.event_name != 'pull_request'
-        uses: cycjimmy/semantic-release-action@v4.2.1
+        uses: cycjimmy/semantic-release-action@v4.2.2
         with:
           semantic_version: 24.2.3
         env:
