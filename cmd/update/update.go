@@ -53,12 +53,20 @@ func updateAccount() error {
 	}
 	if boundDevice.Name == nil || (deviceName != "" && deviceName != *boundDevice.Name) {
 		log.Println("Setting device name")
-		if _, err := SetDeviceName(ctx, deviceName); err != nil {
+		if _, err := SetDeviceName(ctx, deviceName); util.IsHttp500Error(err) {
+			// server-side issue, but the operation still works
+		} else if err != nil {
 			return err
 		}
 	}
 
-	boundDevice, err = cloudflare.UpdateSourceBoundDeviceActive(ctx, true)
+	if _, err = cloudflare.UpdateSourceBoundDeviceActive(ctx, true); util.IsHttp500Error(err) {
+		// server-side issue, but the operation still works
+	} else if err != nil {
+		return err
+	}
+
+	boundDevice, err = cloudflare.GetSourceBoundDevice(ctx)
 	if err != nil {
 		return err
 	}

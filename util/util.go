@@ -41,3 +41,7 @@ func Restructure(source interface{}, dest interface{}) error {
 	}
 	return nil
 }
+
+func IsHttp500Error(err error) bool {
+	return err.Error() == "500 Internal Server Error"
+}

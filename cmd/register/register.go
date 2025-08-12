@@ -73,8 +73,9 @@ func registerAccount() error {
 	}
 
 	ctx := CreateContext()
-	_, err = SetDeviceName(ctx, deviceName)
-	if err != nil {
+	if _, err := SetDeviceName(ctx, deviceName); util.IsHttp500Error(err) {
+		// server-side issue, but the operation still succeeds
+	} else if err != nil {
 		return err
 	}
 	thisDevice, err := cloudflare.GetSourceDevice(ctx)
@@ -82,7 +83,7 @@ func registerAccount() error {
 		return err
 	}
 
-	boundDevice, err := cloudflare.UpdateSourceBoundDeviceActive(ctx, true)
+	boundDevice, err := cloudflare.GetSourceBoundDevice(ctx)
 	if err != nil {
 		return err
 	}
