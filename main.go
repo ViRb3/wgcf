@@ -1,3 +1,5 @@
+//go:generate openapi-generator generate -i openapi-spec.yml -g go -o openapi --additional-properties=disallowAdditionalPropertiesIfNotPresent=false
+
 package main
 
 import (

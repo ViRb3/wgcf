@@ -25,7 +25,7 @@ var RootCmd = &cobra.Command{
 	Long: FormatMessage("", `
 wgcf is a utility for Cloudflare Warp that allows you to create and
 manage accounts, assign license keys, and generate WireGuard profiles.
-Made by Victor (@ViRb3). Project website: https://github.com/ViRb3/wgcf`),
+Project website: https://github.com/ViRb3/wgcf`),
 	Run: func(cmd *cobra.Command, args []string) {
 		if err := cmd.Help(); err != nil {
 			log.Fatal(util.GetErrorMessage(err))

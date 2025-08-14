@@ -1,5 +1,0 @@
-name: wgcf
-tasks:
-  start:
-    command: go run ./api_tests
-    baseUrl: http://localhost:8889

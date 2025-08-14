@@ -56,9 +56,9 @@ func MakeApiClient(authToken *string) *openapi.APIClient {
 	return apiClient
 }
 
-func Register(publicKey *wireguard.Key, deviceModel string) (openapi.Register200Response, error) {
+func Register(publicKey *wireguard.Key, deviceModel string) (*openapi.Register200Response, error) {
 	timestamp := util.GetTimestamp()
-	result, _, err := apiClient.DefaultApi.
+	result, _, err := apiClient.DefaultAPI.
 		Register(nil, ApiVersion).
 		RegisterRequest(openapi.RegisterRequest{
 			FcmToken:  "", // not empty on actual client
@@ -75,7 +75,7 @@ func Register(publicKey *wireguard.Key, deviceModel string) (openapi.Register200
 type Device openapi.UpdateSourceDevice200Response
 
 func GetSourceDevice(ctx *config.Context) (*Device, error) {
-	result, _, err := globalClientAuth(ctx.AccessToken).DefaultApi.
+	result, _, err := globalClientAuth(ctx.AccessToken).DefaultAPI.
 		GetSourceDevice(nil, ApiVersion, ctx.DeviceId).
 		Execute()
 	castResult := Device{}
@@ -95,15 +95,15 @@ func globalClientAuth(authToken string) *openapi.APIClient {
 type Account openapi.GetAccount200Response
 
 func GetAccount(ctx *config.Context) (*Account, error) {
-	result, _, err := globalClientAuth(ctx.AccessToken).DefaultApi.
+	result, _, err := globalClientAuth(ctx.AccessToken).DefaultAPI.
 		GetAccount(nil, ctx.DeviceId, ApiVersion).
 		Execute()
-	castResult := Account(result)
-	return &castResult, err
+	castResult := (*Account)(result)
+	return castResult, err
 }
 
 func UpdateLicenseKey(ctx *config.Context) (*openapi.UpdateAccount200Response, error) {
-	result, _, err := globalClientAuth(ctx.AccessToken).DefaultApi.
+	result, _, err := globalClientAuth(ctx.AccessToken).DefaultAPI.
 		UpdateAccount(nil, ctx.DeviceId, ApiVersion).
 		UpdateAccountRequest(openapi.UpdateAccountRequest{License: ctx.LicenseKey}).
 		Execute()
@@ -111,13 +111,13 @@ func UpdateLicenseKey(ctx *config.Context) (*openapi.UpdateAccount200Response, e
 		return nil, err
 	}
 
-	return &result, nil
+	return result, nil
 }
 
 type BoundDevice openapi.GetBoundDevices200Response
 
 func GetBoundDevices(ctx *config.Context) ([]BoundDevice, error) {
-	result, _, err := globalClientAuth(ctx.AccessToken).DefaultApi.
+	result, _, err := globalClientAuth(ctx.AccessToken).DefaultAPI.
 		GetBoundDevices(nil, ctx.DeviceId, ApiVersion).
 		Execute()
 	if err != nil {
@@ -151,7 +151,7 @@ func UpdateSourceBoundDeviceActive(ctx *config.Context, active bool) (*BoundDevi
 }
 
 func UpdateSourceBoundDevice(ctx *config.Context, data openapi.UpdateBoundDeviceRequest) (*BoundDevice, error) {
-	result, _, err := globalClientAuth(ctx.AccessToken).DefaultApi.
+	result, _, err := globalClientAuth(ctx.AccessToken).DefaultAPI.
 		UpdateBoundDevice(nil, ctx.DeviceId, ApiVersion, ctx.DeviceId).
 		UpdateBoundDeviceRequest(data).
 		Execute()
