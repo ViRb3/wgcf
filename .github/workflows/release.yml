@@ -11,13 +11,13 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5.0.0
         with:
           token: ${{ secrets.API_GITHUB_TOKEN }}
 
       - name: Docker meta
         id: docker_meta
-        uses: docker/metadata-action@v5.7.0
+        uses: docker/metadata-action@v5.8.0
         with:
           images: ${{ github.repository }}
           tags: |
@@ -32,7 +32,7 @@ jobs:
         uses: docker/setup-buildx-action@v3.11.1
 
       - name: Login to DockerHub
-        uses: docker/login-action@v3.4.0
+        uses: docker/login-action@v3.5.0
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
@@ -50,7 +50,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5.0.0
         with:
           token: ${{ secrets.API_GITHUB_TOKEN }}
 
@@ -61,7 +61,7 @@ jobs:
           echo "go_version=$GO_VERSION" >> $GITHUB_ENV
 
       - name: Setup Go environment
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v5.5.0
         with:
           go-version: "${{ env.go_version }}"
 

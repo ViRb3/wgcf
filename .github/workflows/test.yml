@@ -13,13 +13,13 @@ jobs:
     steps:
       - name: Checkout with token
         if: github.event_name != 'pull_request'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5.0.0
         with:
           token: ${{ secrets.API_GITHUB_TOKEN }}
 
       - name: Checkout without token
         if: github.event_name == 'pull_request'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5.0.0
 
       - name: Fetch Go version
         run: |
@@ -28,7 +28,7 @@ jobs:
           echo "go_version=$GO_VERSION" >> $GITHUB_ENV
 
       - name: Setup Go environment
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v5.5.0
         with:
           go-version: "${{ env.go_version }}"
 
@@ -43,7 +43,7 @@ jobs:
 
       - name: Version
         if: github.event_name != 'pull_request'
-        uses: cycjimmy/semantic-release-action@v4.2.1
+        uses: cycjimmy/semantic-release-action@v4.2.2
         with:
           semantic_version: 24.2.3
         env:
