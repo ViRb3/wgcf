@@ -1,18 +1,18 @@
-# \DefaultApi
+# \DefaultAPI
 
 All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetAccount**](DefaultApi.md#GetAccount) | **Get** /{apiVersion}/reg/{sourceDeviceId}/account | GetAccount
-[**GetBoundDevices**](DefaultApi.md#GetBoundDevices) | **Get** /{apiVersion}/reg/{sourceDeviceId}/account/devices | GetBoundDevices
-[**GetClientConfig**](DefaultApi.md#GetClientConfig) | **Get** /{apiVersion}/client_config | GetClientConfig
-[**GetSourceDevice**](DefaultApi.md#GetSourceDevice) | **Get** /{apiVersion}/reg/{sourceDeviceId} | GetSourceDevice
-[**Register**](DefaultApi.md#Register) | **Post** /{apiVersion}/reg | Register
-[**ResetAccountLicense**](DefaultApi.md#ResetAccountLicense) | **Post** /{apiVersion}/reg/{sourceDeviceId}/account/license | ResetAccountLicense
-[**UpdateAccount**](DefaultApi.md#UpdateAccount) | **Put** /{apiVersion}/reg/{sourceDeviceId}/account | UpdateAccount
-[**UpdateBoundDevice**](DefaultApi.md#UpdateBoundDevice) | **Patch** /{apiVersion}/reg/{sourceDeviceId}/account/reg/{boundDeviceId} | UpdateBoundDevice
-[**UpdateSourceDevice**](DefaultApi.md#UpdateSourceDevice) | **Patch** /{apiVersion}/reg/{sourceDeviceId} | UpdateSourceDevice
+[**GetAccount**](DefaultAPI.md#GetAccount) | **Get** /{apiVersion}/reg/{sourceDeviceId}/account | GetAccount
+[**GetBoundDevices**](DefaultAPI.md#GetBoundDevices) | **Get** /{apiVersion}/reg/{sourceDeviceId}/account/devices | GetBoundDevices
+[**GetClientConfig**](DefaultAPI.md#GetClientConfig) | **Get** /{apiVersion}/client_config | GetClientConfig
+[**GetSourceDevice**](DefaultAPI.md#GetSourceDevice) | **Get** /{apiVersion}/reg/{sourceDeviceId} | GetSourceDevice
+[**Register**](DefaultAPI.md#Register) | **Post** /{apiVersion}/reg | Register
+[**ResetAccountLicense**](DefaultAPI.md#ResetAccountLicense) | **Post** /{apiVersion}/reg/{sourceDeviceId}/account/license | ResetAccountLicense
+[**UpdateAccount**](DefaultAPI.md#UpdateAccount) | **Put** /{apiVersion}/reg/{sourceDeviceId}/account | UpdateAccount
+[**UpdateBoundDevice**](DefaultAPI.md#UpdateBoundDevice) | **Patch** /{apiVersion}/reg/{sourceDeviceId}/account/reg/{boundDeviceId} | UpdateBoundDevice
+[**UpdateSourceDevice**](DefaultAPI.md#UpdateSourceDevice) | **Patch** /{apiVersion}/reg/{sourceDeviceId} | UpdateSourceDevice
 
 
 
@@ -28,25 +28,25 @@ GetAccount
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    sourceDeviceId := "sourceDeviceId_example" // string | 
-    apiVersion := "apiVersion_example" // string | 
+	sourceDeviceId := "sourceDeviceId_example" // string | 
+	apiVersion := "apiVersion_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.GetAccount(context.Background(), sourceDeviceId, apiVersion).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.GetAccount``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetAccount`: GetAccount200Response
-    fmt.Fprintf(os.Stdout, "Response from `DefaultApi.GetAccount`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetAccount(context.Background(), sourceDeviceId, apiVersion).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetAccount``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAccount`: GetAccount200Response
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetAccount`: %v\n", resp)
 }
 ```
 
@@ -71,7 +71,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetAccount200Response**](GetAccount_200_Response.md)
+[**GetAccount200Response**](GetAccount200Response.md)
 
 ### Authorization
 
@@ -99,25 +99,25 @@ GetBoundDevices
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    sourceDeviceId := "sourceDeviceId_example" // string | 
-    apiVersion := "apiVersion_example" // string | 
+	sourceDeviceId := "sourceDeviceId_example" // string | 
+	apiVersion := "apiVersion_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.GetBoundDevices(context.Background(), sourceDeviceId, apiVersion).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.GetBoundDevices``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetBoundDevices`: []GetBoundDevices200Response
-    fmt.Fprintf(os.Stdout, "Response from `DefaultApi.GetBoundDevices`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetBoundDevices(context.Background(), sourceDeviceId, apiVersion).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetBoundDevices``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetBoundDevices`: []GetBoundDevices200Response
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetBoundDevices`: %v\n", resp)
 }
 ```
 
@@ -142,7 +142,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]GetBoundDevices200Response**](GetBoundDevices_200_Response.md)
+[**[]GetBoundDevices200Response**](GetBoundDevices200Response.md)
 
 ### Authorization
 
@@ -170,24 +170,24 @@ GetClientConfig
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    apiVersion := "apiVersion_example" // string | 
+	apiVersion := "apiVersion_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.GetClientConfig(context.Background(), apiVersion).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.GetClientConfig``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetClientConfig`: GetClientConfig200Response
-    fmt.Fprintf(os.Stdout, "Response from `DefaultApi.GetClientConfig`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetClientConfig(context.Background(), apiVersion).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetClientConfig``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetClientConfig`: GetClientConfig200Response
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetClientConfig`: %v\n", resp)
 }
 ```
 
@@ -210,7 +210,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetClientConfig200Response**](GetClientConfig_200_Response.md)
+[**GetClientConfig200Response**](GetClientConfig200Response.md)
 
 ### Authorization
 
@@ -238,25 +238,25 @@ GetSourceDevice
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    apiVersion := "apiVersion_example" // string | 
-    sourceDeviceId := "sourceDeviceId_example" // string | 
+	apiVersion := "apiVersion_example" // string | 
+	sourceDeviceId := "sourceDeviceId_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.GetSourceDevice(context.Background(), apiVersion, sourceDeviceId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.GetSourceDevice``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetSourceDevice`: GetSourceDevice200Response
-    fmt.Fprintf(os.Stdout, "Response from `DefaultApi.GetSourceDevice`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetSourceDevice(context.Background(), apiVersion, sourceDeviceId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetSourceDevice``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetSourceDevice`: GetSourceDevice200Response
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetSourceDevice`: %v\n", resp)
 }
 ```
 
@@ -281,7 +281,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetSourceDevice200Response**](GetSourceDevice_200_Response.md)
+[**GetSourceDevice200Response**](GetSourceDevice200Response.md)
 
 ### Authorization
 
@@ -309,25 +309,25 @@ Register
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    apiVersion := "apiVersion_example" // string | 
-    registerRequest := *openapiclient.NewRegisterRequest("FcmToken_example", "InstallId_example", "Key_example", "Locale_example", "Model_example", "Tos_example", "Type_example") // RegisterRequest |  (optional)
+	apiVersion := "apiVersion_example" // string | 
+	registerRequest := *openapiclient.NewRegisterRequest("FcmToken_example", "InstallId_example", "Key_example", "Locale_example", "Model_example", "Tos_example", "Type_example") // RegisterRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.Register(context.Background(), apiVersion).RegisterRequest(registerRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.Register``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `Register`: Register200Response
-    fmt.Fprintf(os.Stdout, "Response from `DefaultApi.Register`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.Register(context.Background(), apiVersion).RegisterRequest(registerRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.Register``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `Register`: Register200Response
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.Register`: %v\n", resp)
 }
 ```
 
@@ -351,7 +351,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Register200Response**](Register_200_Response.md)
+[**Register200Response**](Register200Response.md)
 
 ### Authorization
 
@@ -379,25 +379,25 @@ ResetAccountLicense
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    sourceDeviceId := "sourceDeviceId_example" // string | 
-    apiVersion := "apiVersion_example" // string | 
+	sourceDeviceId := "sourceDeviceId_example" // string | 
+	apiVersion := "apiVersion_example" // string | 
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.ResetAccountLicense(context.Background(), sourceDeviceId, apiVersion).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.ResetAccountLicense``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ResetAccountLicense`: ResetAccountLicense200Response
-    fmt.Fprintf(os.Stdout, "Response from `DefaultApi.ResetAccountLicense`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.ResetAccountLicense(context.Background(), sourceDeviceId, apiVersion).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.ResetAccountLicense``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ResetAccountLicense`: ResetAccountLicense200Response
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.ResetAccountLicense`: %v\n", resp)
 }
 ```
 
@@ -422,7 +422,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ResetAccountLicense200Response**](ResetAccountLicense_200_Response.md)
+[**ResetAccountLicense200Response**](ResetAccountLicense200Response.md)
 
 ### Authorization
 
@@ -450,26 +450,26 @@ UpdateAccount
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    sourceDeviceId := "sourceDeviceId_example" // string | 
-    apiVersion := "apiVersion_example" // string | 
-    updateAccountRequest := *openapiclient.NewUpdateAccountRequest("License_example") // UpdateAccountRequest |  (optional)
+	sourceDeviceId := "sourceDeviceId_example" // string | 
+	apiVersion := "apiVersion_example" // string | 
+	updateAccountRequest := *openapiclient.NewUpdateAccountRequest("License_example") // UpdateAccountRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.UpdateAccount(context.Background(), sourceDeviceId, apiVersion).UpdateAccountRequest(updateAccountRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.UpdateAccount``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UpdateAccount`: UpdateAccount200Response
-    fmt.Fprintf(os.Stdout, "Response from `DefaultApi.UpdateAccount`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.UpdateAccount(context.Background(), sourceDeviceId, apiVersion).UpdateAccountRequest(updateAccountRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.UpdateAccount``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateAccount`: UpdateAccount200Response
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.UpdateAccount`: %v\n", resp)
 }
 ```
 
@@ -495,7 +495,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UpdateAccount200Response**](UpdateAccount_200_Response.md)
+[**UpdateAccount200Response**](UpdateAccount200Response.md)
 
 ### Authorization
 
@@ -523,27 +523,27 @@ UpdateBoundDevice
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    sourceDeviceId := "sourceDeviceId_example" // string | 
-    apiVersion := "apiVersion_example" // string | 
-    boundDeviceId := "boundDeviceId_example" // string | 
-    updateBoundDeviceRequest := *openapiclient.NewUpdateBoundDeviceRequest() // UpdateBoundDeviceRequest |  (optional)
+	sourceDeviceId := "sourceDeviceId_example" // string | 
+	apiVersion := "apiVersion_example" // string | 
+	boundDeviceId := "boundDeviceId_example" // string | 
+	updateBoundDeviceRequest := *openapiclient.NewUpdateBoundDeviceRequest() // UpdateBoundDeviceRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.UpdateBoundDevice(context.Background(), sourceDeviceId, apiVersion, boundDeviceId).UpdateBoundDeviceRequest(updateBoundDeviceRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.UpdateBoundDevice``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UpdateBoundDevice`: []UpdateBoundDevice200Response
-    fmt.Fprintf(os.Stdout, "Response from `DefaultApi.UpdateBoundDevice`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.UpdateBoundDevice(context.Background(), sourceDeviceId, apiVersion, boundDeviceId).UpdateBoundDeviceRequest(updateBoundDeviceRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.UpdateBoundDevice``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateBoundDevice`: []UpdateBoundDevice200Response
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.UpdateBoundDevice`: %v\n", resp)
 }
 ```
 
@@ -571,7 +571,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]UpdateBoundDevice200Response**](UpdateBoundDevice_200_Response.md)
+[**[]UpdateBoundDevice200Response**](UpdateBoundDevice200Response.md)
 
 ### Authorization
 
@@ -599,26 +599,26 @@ UpdateSourceDevice
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func main() {
-    apiVersion := "apiVersion_example" // string | 
-    sourceDeviceId := "sourceDeviceId_example" // string | 
-    updateSourceDeviceRequest := *openapiclient.NewUpdateSourceDeviceRequest("Key_example") // UpdateSourceDeviceRequest |  (optional)
+	apiVersion := "apiVersion_example" // string | 
+	sourceDeviceId := "sourceDeviceId_example" // string | 
+	updateSourceDeviceRequest := *openapiclient.NewUpdateSourceDeviceRequest("Key_example") // UpdateSourceDeviceRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.UpdateSourceDevice(context.Background(), apiVersion, sourceDeviceId).UpdateSourceDeviceRequest(updateSourceDeviceRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.UpdateSourceDevice``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UpdateSourceDevice`: UpdateSourceDevice200Response
-    fmt.Fprintf(os.Stdout, "Response from `DefaultApi.UpdateSourceDevice`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.UpdateSourceDevice(context.Background(), apiVersion, sourceDeviceId).UpdateSourceDeviceRequest(updateSourceDeviceRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.UpdateSourceDevice``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateSourceDevice`: UpdateSourceDevice200Response
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.UpdateSourceDevice`: %v\n", resp)
 }
 ```
 
@@ -644,7 +644,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UpdateSourceDevice200Response**](UpdateSourceDevice_200_Response.md)
+[**UpdateSourceDevice200Response**](UpdateSourceDevice200Response.md)
 
 ### Authorization
 

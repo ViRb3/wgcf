@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Account** | [**UpdateSourceDevice200ResponseAccount**](UpdateSourceDevice_200_Response_account.md) |  | 
-**Config** | [**GetSourceDevice200ResponseConfig**](GetSourceDevice_200_Response_config.md) |  | 
+**Account** | [**UpdateSourceDevice200ResponseAccount**](UpdateSourceDevice200ResponseAccount.md) |  | 
+**Config** | [**GetSourceDevice200ResponseConfig**](GetSourceDevice200ResponseConfig.md) |  | 
 **Created** | **string** |  | 
 **Enabled** | **bool** |  | 
 **FcmToken** | **string** |  | 

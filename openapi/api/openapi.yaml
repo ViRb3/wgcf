@@ -21,7 +21,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetClientConfig_200_Response'
+                $ref: "#/components/schemas/GetClientConfig_200_Response"
+          description: ""
       summary: GetClientConfig
   /{apiVersion}/reg:
     post:
@@ -38,13 +39,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Register_Request'
+              $ref: "#/components/schemas/Register_Request"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Register_200_Response'
+                $ref: "#/components/schemas/Register_200_Response"
+          description: ""
       summary: Register
   /{apiVersion}/reg/{sourceDeviceId}:
     get:
@@ -69,7 +71,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetSourceDevice_200_Response'
+                $ref: "#/components/schemas/GetSourceDevice_200_Response"
+          description: ""
       summary: GetSourceDevice
     patch:
       operationId: UpdateSourceDevice
@@ -92,13 +95,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateSourceDevice_Request'
+              $ref: "#/components/schemas/UpdateSourceDevice_Request"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UpdateSourceDevice_200_Response'
+                $ref: "#/components/schemas/UpdateSourceDevice_200_Response"
+          description: ""
       summary: UpdateSourceDevice
   /{apiVersion}/reg/{sourceDeviceId}/account:
     get:
@@ -123,7 +127,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetAccount_200_Response'
+                $ref: "#/components/schemas/GetAccount_200_Response"
+          description: ""
       summary: GetAccount
     put:
       operationId: UpdateAccount
@@ -146,13 +151,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateAccount_Request'
+              $ref: "#/components/schemas/UpdateAccount_Request"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UpdateAccount_200_Response'
+                $ref: "#/components/schemas/UpdateAccount_200_Response"
+          description: ""
       summary: UpdateAccount
   /{apiVersion}/reg/{sourceDeviceId}/account/devices:
     get:
@@ -178,8 +184,9 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/GetBoundDevices_200_Response'
+                  $ref: "#/components/schemas/GetBoundDevices_200_Response"
                 type: array
+          description: ""
       summary: GetBoundDevices
   /{apiVersion}/reg/{sourceDeviceId}/account/license:
     post:
@@ -204,7 +211,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResetAccountLicense_200_Response'
+                $ref: "#/components/schemas/ResetAccountLicense_200_Response"
+          description: ""
       summary: ResetAccountLicense
   /{apiVersion}/reg/{sourceDeviceId}/account/reg/{boundDeviceId}:
     patch:
@@ -235,15 +243,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateBoundDevice_Request'
+              $ref: "#/components/schemas/UpdateBoundDevice_Request"
       responses:
         "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/UpdateBoundDevice_200_Response'
+                  $ref: "#/components/schemas/UpdateBoundDevice_200_Response"
                 type: array
+          description: ""
       summary: UpdateBoundDevice
 components:
   schemas:
@@ -381,11 +390,11 @@ components:
       properties:
         captive_portal:
           items:
-            $ref: '#/components/schemas/GetClientConfig_200_Response_captive_portal'
+            $ref: "#/components/schemas/GetClientConfig_200_Response_captive_portal_inner"
           type: array
         denylist:
           items:
-            $ref: '#/components/schemas/GetClientConfig_200_Response_denylist'
+            $ref: "#/components/schemas/GetClientConfig_200_Response_denylist_inner"
           type: array
         premium_data_bytes:
           type: number
@@ -448,9 +457,9 @@ components:
         key: key
       properties:
         account:
-          $ref: '#/components/schemas/GetSourceDevice_200_Response_account'
+          $ref: "#/components/schemas/GetSourceDevice_200_Response_account"
         config:
-          $ref: '#/components/schemas/GetSourceDevice_200_Response_config'
+          $ref: "#/components/schemas/GetSourceDevice_200_Response_config"
         created:
           type: string
         enabled:
@@ -552,9 +561,9 @@ components:
         key: key
       properties:
         account:
-          $ref: '#/components/schemas/GetSourceDevice_200_Response_account'
+          $ref: "#/components/schemas/GetSourceDevice_200_Response_account"
         config:
-          $ref: '#/components/schemas/GetSourceDevice_200_Response_config'
+          $ref: "#/components/schemas/GetSourceDevice_200_Response_config"
         created:
           type: string
         enabled:
@@ -782,9 +791,9 @@ components:
         key: key
       properties:
         account:
-          $ref: '#/components/schemas/UpdateSourceDevice_200_Response_account'
+          $ref: "#/components/schemas/UpdateSourceDevice_200_Response_account"
         config:
-          $ref: '#/components/schemas/GetSourceDevice_200_Response_config'
+          $ref: "#/components/schemas/GetSourceDevice_200_Response_config"
         created:
           type: string
         enabled:
@@ -841,7 +850,7 @@ components:
       required:
       - key
       type: object
-    GetClientConfig_200_Response_networks:
+    GetClientConfig_200_Response_captive_portal_inner_networks_inner:
       example:
         address: address
       properties:
@@ -850,7 +859,7 @@ components:
       required:
       - address
       type: object
-    GetClientConfig_200_Response_captive_portal:
+    GetClientConfig_200_Response_captive_portal_inner:
       example:
         name: name
         networks:
@@ -861,13 +870,13 @@ components:
           type: string
         networks:
           items:
-            $ref: '#/components/schemas/GetClientConfig_200_Response_networks'
+            $ref: "#/components/schemas/GetClientConfig_200_Response_captive_portal_inner_networks_inner"
           type: array
       required:
       - name
       - networks
       type: object
-    GetClientConfig_200_Response_networks_1_v4:
+    GetClientConfig_200_Response_denylist_inner_networks_v4_inner:
       example:
         address: address
         netmask: netmask
@@ -880,7 +889,7 @@ components:
       - address
       - netmask
       type: object
-    GetClientConfig_200_Response_networks_1_v6:
+    GetClientConfig_200_Response_denylist_inner_networks_v6_inner:
       example:
         address: address
         prefix: 0.8008281904610115
@@ -893,7 +902,7 @@ components:
       - address
       - prefix
       type: object
-    GetClientConfig_200_Response_networks_1:
+    GetClientConfig_200_Response_denylist_inner_networks:
       example:
         v6:
         - address: address
@@ -908,17 +917,17 @@ components:
       properties:
         v4:
           items:
-            $ref: '#/components/schemas/GetClientConfig_200_Response_networks_1_v4'
+            $ref: "#/components/schemas/GetClientConfig_200_Response_denylist_inner_networks_v4_inner"
           type: array
         v6:
           items:
-            $ref: '#/components/schemas/GetClientConfig_200_Response_networks_1_v6'
+            $ref: "#/components/schemas/GetClientConfig_200_Response_denylist_inner_networks_v6_inner"
           type: array
       required:
       - v4
       - v6
       type: object
-    GetClientConfig_200_Response_denylist:
+    GetClientConfig_200_Response_denylist_inner:
       example:
         visible: true
         name: name
@@ -944,7 +953,7 @@ components:
         name:
           type: string
         networks:
-          $ref: '#/components/schemas/GetClientConfig_200_Response_networks_1'
+          $ref: "#/components/schemas/GetClientConfig_200_Response_denylist_inner_networks"
         visible:
           type: boolean
       required:
@@ -1024,11 +1033,11 @@ components:
           v4: v4
       properties:
         addresses:
-          $ref: '#/components/schemas/GetSourceDevice_200_Response_config_interface_addresses'
+          $ref: "#/components/schemas/GetSourceDevice_200_Response_config_interface_addresses"
       required:
       - addresses
       type: object
-    GetSourceDevice_200_Response_config_endpoint:
+    GetSourceDevice_200_Response_config_peers_inner_endpoint:
       example:
         v6: v6
         host: host
@@ -1045,7 +1054,7 @@ components:
       - v4
       - v6
       type: object
-    GetSourceDevice_200_Response_config_peers:
+    GetSourceDevice_200_Response_config_peers_inner:
       example:
         public_key: public_key
         endpoint:
@@ -1054,7 +1063,7 @@ components:
           v4: v4
       properties:
         endpoint:
-          $ref: '#/components/schemas/GetSourceDevice_200_Response_config_endpoint'
+          $ref: "#/components/schemas/GetSourceDevice_200_Response_config_peers_inner_endpoint"
         public_key:
           type: string
       required:
@@ -1094,13 +1103,13 @@ components:
         client_id:
           type: string
         interface:
-          $ref: '#/components/schemas/GetSourceDevice_200_Response_config_interface'
+          $ref: "#/components/schemas/GetSourceDevice_200_Response_config_interface"
         peers:
           items:
-            $ref: '#/components/schemas/GetSourceDevice_200_Response_config_peers'
+            $ref: "#/components/schemas/GetSourceDevice_200_Response_config_peers_inner"
           type: array
         services:
-          $ref: '#/components/schemas/GetSourceDevice_200_Response_config_services'
+          $ref: "#/components/schemas/GetSourceDevice_200_Response_config_services"
       required:
       - client_id
       - interface

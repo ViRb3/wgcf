@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CaptivePortal** | [**[]GetClientConfig200ResponseCaptivePortal**](GetClientConfig200ResponseCaptivePortal.md) |  | 
-**Denylist** | [**[]GetClientConfig200ResponseDenylist**](GetClientConfig200ResponseDenylist.md) |  | 
+**CaptivePortal** | [**[]GetClientConfig200ResponseCaptivePortalInner**](GetClientConfig200ResponseCaptivePortalInner.md) |  | 
+**Denylist** | [**[]GetClientConfig200ResponseDenylistInner**](GetClientConfig200ResponseDenylistInner.md) |  | 
 **PremiumDataBytes** | **float32** |  | 
 **ReferralRewardBytes** | **float32** |  | 
 
@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 
 ### NewGetClientConfig200Response
 
-`func NewGetClientConfig200Response(captivePortal []GetClientConfig200ResponseCaptivePortal, denylist []GetClientConfig200ResponseDenylist, premiumDataBytes float32, referralRewardBytes float32, ) *GetClientConfig200Response`
+`func NewGetClientConfig200Response(captivePortal []GetClientConfig200ResponseCaptivePortalInner, denylist []GetClientConfig200ResponseDenylistInner, premiumDataBytes float32, referralRewardBytes float32, ) *GetClientConfig200Response`
 
 NewGetClientConfig200Response instantiates a new GetClientConfig200Response object
 This constructor will assign default values to properties that have it defined,
@@ -30,40 +30,40 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetCaptivePortal
 
-`func (o *GetClientConfig200Response) GetCaptivePortal() []GetClientConfig200ResponseCaptivePortal`
+`func (o *GetClientConfig200Response) GetCaptivePortal() []GetClientConfig200ResponseCaptivePortalInner`
 
 GetCaptivePortal returns the CaptivePortal field if non-nil, zero value otherwise.
 
 ### GetCaptivePortalOk
 
-`func (o *GetClientConfig200Response) GetCaptivePortalOk() (*[]GetClientConfig200ResponseCaptivePortal, bool)`
+`func (o *GetClientConfig200Response) GetCaptivePortalOk() (*[]GetClientConfig200ResponseCaptivePortalInner, bool)`
 
 GetCaptivePortalOk returns a tuple with the CaptivePortal field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCaptivePortal
 
-`func (o *GetClientConfig200Response) SetCaptivePortal(v []GetClientConfig200ResponseCaptivePortal)`
+`func (o *GetClientConfig200Response) SetCaptivePortal(v []GetClientConfig200ResponseCaptivePortalInner)`
 
 SetCaptivePortal sets CaptivePortal field to given value.
 
 
 ### GetDenylist
 
-`func (o *GetClientConfig200Response) GetDenylist() []GetClientConfig200ResponseDenylist`
+`func (o *GetClientConfig200Response) GetDenylist() []GetClientConfig200ResponseDenylistInner`
 
 GetDenylist returns the Denylist field if non-nil, zero value otherwise.
 
 ### GetDenylistOk
 
-`func (o *GetClientConfig200Response) GetDenylistOk() (*[]GetClientConfig200ResponseDenylist, bool)`
+`func (o *GetClientConfig200Response) GetDenylistOk() (*[]GetClientConfig200ResponseDenylistInner, bool)`
 
 GetDenylistOk returns a tuple with the Denylist field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDenylist
 
-`func (o *GetClientConfig200Response) SetDenylist(v []GetClientConfig200ResponseDenylist)`
+`func (o *GetClientConfig200Response) SetDenylist(v []GetClientConfig200ResponseDenylistInner)`
 
 SetDenylist sets Denylist field to given value.
 

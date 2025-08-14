@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Addresses** | [**GetSourceDevice200ResponseConfigInterfaceAddresses**](GetSourceDevice_200_Response_config_interface_addresses.md) |  | 
+**Addresses** | [**GetSourceDevice200ResponseConfigInterfaceAddresses**](GetSourceDevice200ResponseConfigInterfaceAddresses.md) |  | 
 
 ## Methods
 

@@ -5,15 +5,15 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClientId** | **string** |  | 
-**Interface** | [**GetSourceDevice200ResponseConfigInterface**](GetSourceDevice_200_Response_config_interface.md) |  | 
-**Peers** | [**[]GetSourceDevice200ResponseConfigPeers**](GetSourceDevice200ResponseConfigPeers.md) |  | 
-**Services** | [**GetSourceDevice200ResponseConfigServices**](GetSourceDevice_200_Response_config_services.md) |  | 
+**Interface** | [**GetSourceDevice200ResponseConfigInterface**](GetSourceDevice200ResponseConfigInterface.md) |  | 
+**Peers** | [**[]GetSourceDevice200ResponseConfigPeersInner**](GetSourceDevice200ResponseConfigPeersInner.md) |  | 
+**Services** | [**GetSourceDevice200ResponseConfigServices**](GetSourceDevice200ResponseConfigServices.md) |  | 
 
 ## Methods
 
 ### NewGetSourceDevice200ResponseConfig
 
-`func NewGetSourceDevice200ResponseConfig(clientId string, interface_ GetSourceDevice200ResponseConfigInterface, peers []GetSourceDevice200ResponseConfigPeers, services GetSourceDevice200ResponseConfigServices, ) *GetSourceDevice200ResponseConfig`
+`func NewGetSourceDevice200ResponseConfig(clientId string, interface_ GetSourceDevice200ResponseConfigInterface, peers []GetSourceDevice200ResponseConfigPeersInner, services GetSourceDevice200ResponseConfigServices, ) *GetSourceDevice200ResponseConfig`
 
 NewGetSourceDevice200ResponseConfig instantiates a new GetSourceDevice200ResponseConfig object
 This constructor will assign default values to properties that have it defined,
@@ -70,20 +70,20 @@ SetInterface sets Interface field to given value.
 
 ### GetPeers
 
-`func (o *GetSourceDevice200ResponseConfig) GetPeers() []GetSourceDevice200ResponseConfigPeers`
+`func (o *GetSourceDevice200ResponseConfig) GetPeers() []GetSourceDevice200ResponseConfigPeersInner`
 
 GetPeers returns the Peers field if non-nil, zero value otherwise.
 
 ### GetPeersOk
 
-`func (o *GetSourceDevice200ResponseConfig) GetPeersOk() (*[]GetSourceDevice200ResponseConfigPeers, bool)`
+`func (o *GetSourceDevice200ResponseConfig) GetPeersOk() (*[]GetSourceDevice200ResponseConfigPeersInner, bool)`
 
 GetPeersOk returns a tuple with the Peers field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPeers
 
-`func (o *GetSourceDevice200ResponseConfig) SetPeers(v []GetSourceDevice200ResponseConfigPeers)`
+`func (o *GetSourceDevice200ResponseConfig) SetPeers(v []GetSourceDevice200ResponseConfigPeersInner)`
 
 SetPeers sets Peers field to given value.
 
