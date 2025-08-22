@@ -73,17 +73,13 @@ func Register(publicKey *wireguard.Key, deviceModel string) (*openapi.Register20
 	return result, errors.WithStack(err)
 }
 
-type Device openapi.UpdateSourceDevice200Response
+type SourceDevice openapi.GetSourceDevice200Response
 
-func GetSourceDevice(ctx *config.Context) (*Device, error) {
+func GetSourceDevice(ctx *config.Context) (*SourceDevice, error) {
 	result, _, err := globalClientAuth(ctx.AccessToken).DefaultAPI.
 		GetSourceDevice(nil, ApiVersion, ctx.DeviceId).
 		Execute()
-	castResult := Device{}
-	if err := util.Restructure(&result, &castResult); err != nil {
-		return nil, errors.WithStack(err)
-	}
-	return &castResult, errors.WithStack(err)
+	return (*SourceDevice)(result), errors.WithStack(err)
 }
 
 func globalClientAuth(authToken string) *openapi.APIClient {
@@ -93,7 +89,7 @@ func globalClientAuth(authToken string) *openapi.APIClient {
 	return apiClientAuth
 }
 
-type Account openapi.GetAccount200Response
+type Account openapi.Account
 
 func GetAccount(ctx *config.Context) (*Account, error) {
 	result, _, err := globalClientAuth(ctx.AccessToken).DefaultAPI.
@@ -115,7 +111,7 @@ func UpdateLicenseKey(ctx *config.Context) (*openapi.UpdateAccount200Response, e
 	return result, nil
 }
 
-type BoundDevice openapi.GetBoundDevices200Response
+type BoundDevice openapi.BoundDevice
 
 func GetBoundDevices(ctx *config.Context) ([]BoundDevice, error) {
 	result, _, err := globalClientAuth(ctx.AccessToken).DefaultAPI.

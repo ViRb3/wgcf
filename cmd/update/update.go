@@ -79,7 +79,7 @@ func updateAccount() error {
 	return nil
 }
 
-func ensureLicenseKeyUpToDate(ctx *config.Context, thisDevice *cloudflare.Device) (*cloudflare.Account, *cloudflare.Device, error) {
+func ensureLicenseKeyUpToDate(ctx *config.Context, thisDevice *cloudflare.SourceDevice) (*cloudflare.Account, *cloudflare.SourceDevice, error) {
 	if thisDevice.Account.License != ctx.LicenseKey {
 		log.Println("Updated license key detected, re-binding device to new account")
 		return updateLicenseKey(ctx)
@@ -87,7 +87,7 @@ func ensureLicenseKeyUpToDate(ctx *config.Context, thisDevice *cloudflare.Device
 	return nil, thisDevice, nil
 }
 
-func updateLicenseKey(ctx *config.Context) (*cloudflare.Account, *cloudflare.Device, error) {
+func updateLicenseKey(ctx *config.Context) (*cloudflare.Account, *cloudflare.SourceDevice, error) {
 
 	if _, err := cloudflare.UpdateLicenseKey(ctx); err != nil {
 		return nil, nil, errors.WithStack(err)

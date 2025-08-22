@@ -55,7 +55,7 @@ func F32ToHumanReadable(number float32) string {
 	return fmt.Sprintf("%.2f B", number)
 }
 
-func PrintDeviceData(thisDevice *cloudflare.Device, boundDevice *cloudflare.BoundDevice) {
+func PrintDeviceData(thisDevice *cloudflare.SourceDevice, boundDevice *cloudflare.BoundDevice) {
 	log.Println("=======================================")
 	log.Printf("%-13s : %s\n", "Device name", *boundDevice.Name)
 	log.Printf("%-13s : %s\n", "Device model", thisDevice.Model)
