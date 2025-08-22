@@ -135,21 +135,21 @@ func GetSourceBoundDevice(ctx *config.Context) (*BoundDevice, error) {
 	return FindDevice(result, ctx.DeviceId)
 }
 
-func UpdateSourceBoundDeviceName(ctx *config.Context, newName string) (*BoundDevice, error) {
-	return UpdateSourceBoundDevice(ctx, openapi.UpdateBoundDeviceRequest{
+func UpdateSourceBoundDeviceName(ctx *config.Context, targetDeviceId string, newName string) (*BoundDevice, error) {
+	return updateSourceBoundDevice(ctx, targetDeviceId, openapi.UpdateBoundDeviceRequest{
 		Name: &newName,
 	})
 }
 
-func UpdateSourceBoundDeviceActive(ctx *config.Context, active bool) (*BoundDevice, error) {
-	return UpdateSourceBoundDevice(ctx, openapi.UpdateBoundDeviceRequest{
+func UpdateSourceBoundDeviceActive(ctx *config.Context, targetDeviceId string, active bool) (*BoundDevice, error) {
+	return updateSourceBoundDevice(ctx, targetDeviceId, openapi.UpdateBoundDeviceRequest{
 		Active: &active,
 	})
 }
 
-func UpdateSourceBoundDevice(ctx *config.Context, data openapi.UpdateBoundDeviceRequest) (*BoundDevice, error) {
+func updateSourceBoundDevice(ctx *config.Context, targetDeviceId string, data openapi.UpdateBoundDeviceRequest) (*BoundDevice, error) {
 	result, _, err := globalClientAuth(ctx.AccessToken).DefaultAPI.
-		UpdateBoundDevice(nil, ctx.DeviceId, ApiVersion, ctx.DeviceId).
+		UpdateBoundDevice(nil, ctx.DeviceId, ApiVersion, targetDeviceId).
 		UpdateBoundDeviceRequest(data).
 		Execute()
 	if err != nil {
@@ -160,4 +160,13 @@ func UpdateSourceBoundDevice(ctx *config.Context, data openapi.UpdateBoundDevice
 		castResult = append(castResult, BoundDevice(device))
 	}
 	return FindDevice(castResult, ctx.DeviceId)
+}
+
+func DeleteBoundDevice(ctx *config.Context, targetDeviceId string) error {
+	if _, err := globalClientAuth(ctx.AccessToken).DefaultAPI.
+		DeleteBoundDevice(nil, ctx.DeviceId, ApiVersion, targetDeviceId).
+		Execute(); err != nil {
+		return err
+	}
+	return nil
 }

@@ -606,3 +606,9 @@ paths:
                   $ref: "#/components/schemas/UpdateBoundDevice_200_Response"
           description: ""
       summary: "UpdateBoundDevice"
+    delete:
+      operationId: "DeleteBoundDevice"
+      responses:
+        204:
+          description: ""
+      summary: "DeleteBoundDevice"
