@@ -78,6 +78,7 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*DefaultAPI* | [**DeleteBoundDevice**](docs/DefaultAPI.md#deletebounddevice) | **Delete** /{apiVersion}/reg/{sourceDeviceId}/account/reg/{boundDeviceId} | DeleteBoundDevice
 *DefaultAPI* | [**GetAccount**](docs/DefaultAPI.md#getaccount) | **Get** /{apiVersion}/reg/{sourceDeviceId}/account | GetAccount
 *DefaultAPI* | [**GetBoundDevices**](docs/DefaultAPI.md#getbounddevices) | **Get** /{apiVersion}/reg/{sourceDeviceId}/account/devices | GetBoundDevices
 *DefaultAPI* | [**GetClientConfig**](docs/DefaultAPI.md#getclientconfig) | **Get** /{apiVersion}/client_config | GetClientConfig

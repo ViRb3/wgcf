@@ -215,6 +215,34 @@ paths:
           description: ""
       summary: ResetAccountLicense
   /{apiVersion}/reg/{sourceDeviceId}/account/reg/{boundDeviceId}:
+    delete:
+      operationId: DeleteBoundDevice
+      parameters:
+      - explode: false
+        in: path
+        name: sourceDeviceId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: apiVersion
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: boundDeviceId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: ""
+      summary: DeleteBoundDevice
     patch:
       operationId: UpdateBoundDevice
       parameters:

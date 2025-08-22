@@ -23,6 +23,104 @@ import (
 // DefaultAPIService DefaultAPI service
 type DefaultAPIService service
 
+type ApiDeleteBoundDeviceRequest struct {
+	ctx context.Context
+	ApiService *DefaultAPIService
+	sourceDeviceId string
+	apiVersion string
+	boundDeviceId string
+}
+
+func (r ApiDeleteBoundDeviceRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DeleteBoundDeviceExecute(r)
+}
+
+/*
+DeleteBoundDevice DeleteBoundDevice
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param sourceDeviceId
+ @param apiVersion
+ @param boundDeviceId
+ @return ApiDeleteBoundDeviceRequest
+*/
+func (a *DefaultAPIService) DeleteBoundDevice(ctx context.Context, sourceDeviceId string, apiVersion string, boundDeviceId string) ApiDeleteBoundDeviceRequest {
+	return ApiDeleteBoundDeviceRequest{
+		ApiService: a,
+		ctx: ctx,
+		sourceDeviceId: sourceDeviceId,
+		apiVersion: apiVersion,
+		boundDeviceId: boundDeviceId,
+	}
+}
+
+// Execute executes the request
+func (a *DefaultAPIService) DeleteBoundDeviceExecute(r ApiDeleteBoundDeviceRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.DeleteBoundDevice")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/{apiVersion}/reg/{sourceDeviceId}/account/reg/{boundDeviceId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"sourceDeviceId"+"}", url.PathEscape(parameterValueToString(r.sourceDeviceId, "sourceDeviceId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"apiVersion"+"}", url.PathEscape(parameterValueToString(r.apiVersion, "apiVersion")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"boundDeviceId"+"}", url.PathEscape(parameterValueToString(r.boundDeviceId, "boundDeviceId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
 type ApiGetAccountRequest struct {
 	ctx context.Context
 	ApiService *DefaultAPIService
