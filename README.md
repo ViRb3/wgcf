@@ -45,22 +45,23 @@ If you have an existing Warp+ subscription, for example on your phone, you can b
 
 First, get your Warp+ account license key. To view it on Android:
 1. Open the `1.1.1.1` app
-2. Click on the hamburger menu button on the top-right corner 
+2. Click on the hamburger menu button in the top-right corner 
 3. Navigate to: `Account` > `Key`
 
 Now, back to wgcf.
 
 > [!WARNING]
-> If you have an existing account, you will need to delete it and create a new one ([!355](https://github.com/ViRb3/wgcf/pull/355), [!425](https://github.com/ViRb3/wgcf/pull/425)). Otherwise, just run the same command to make your first account:
+> There's a bug on Cloudflare's side that prevents existing accounts from getting Warp+ even after you bind a correct license key. If you have ever connected to Warp VPN, then your account is affected. You will need to make a new account via:
 >
 > ```wgcf register
 > wgcf register
 > ```
+> Then immediately proceed with the steps below, without running any other commands. For more details, check [!85](https://github.com/ViRb3/wgcf/issues/85)
 
-Immediately, before running any other commands, add your key to `wgcf-account.toml`. Finally, run:
+Run the following commands:
 
 ```bash
-wgcf update
+wgcf update --license-key "YOUR_LICENSE_KEY_GOES_HERE"
 wgcf generate
 ```
 
@@ -78,8 +79,12 @@ wgcf trace
 ```
 If you look at the last line, it should say `warp=on` or `warp=plus`, depending on whether you have Warp or Warp+ respectively.
 
+> [!WARNING]
+> If you're seeing `warp=on` even after you bound a Warp+ license key, you are likely experiencing a known bug, please refer to the [Add a license key](#add-a-license-key) section.
+
 ## Development
-To regenerate the Go client API code, [install openapi-generator](https://openapi-generator.tech/docs/installation), then run:
+The API client code is auto-generated from the OpenAPI spec [openapi-spec.yml](openapi-spec.yml) and stored under the [openapi/](openapi/) package. Do not touch any code under that package, instead, change the spec file and regenerate the API client code. To do this, [install openapi-generator](https://openapi-generator.tech/docs/installation), then run:
+
 ```bash
 go generate
 ```
