@@ -10,6 +10,7 @@ import (
 	"github.com/ViRb3/wgcf/v2/cloudflare"
 	"github.com/ViRb3/wgcf/v2/config"
 	"github.com/ViRb3/wgcf/v2/util"
+	"github.com/dustin/go-humanize"
 
 	"github.com/cockroachdb/errors"
 	"github.com/spf13/viper"
@@ -77,16 +78,6 @@ func CreateContext() *config.Context {
 	return &ctx
 }
 
-func F32ToHumanReadable(number float32) string {
-	for i := 8; i >= 0; i-- {
-		humanReadable := number / float32(math.Pow(1024, float64(i)))
-		if humanReadable >= 1 && humanReadable < 1024 {
-			return fmt.Sprintf("%.2f %ciB", humanReadable, "KMGTPEZY"[i-1])
-		}
-	}
-	return fmt.Sprintf("%.2f B", number)
-}
-
 func PrintAccountDetails(account *cloudflare.Account, boundDevices []cloudflare.BoundDevice) {
 	log.Println("Printing account details:")
 	fmt.Println()
@@ -97,8 +88,8 @@ func PrintAccountDetails(account *cloudflare.Account, boundDevices []cloudflare.
 	fmt.Printf("%-12s : %s\n", "Account type", account.AccountType)
 	fmt.Printf("%-12s : %s\n", "Created", account.Created)
 	fmt.Printf("%-12s : %s\n", "Updated", account.Updated)
-	fmt.Printf("%-12s : %s\n", "Premium data", F32ToHumanReadable(account.PremiumData))
-	fmt.Printf("%-12s : %s\n", "Quota", F32ToHumanReadable(account.Quota))
+	fmt.Printf("%-12s : %s\n", "Premium data", humanize.Bytes(uint64(account.PremiumData)))
+	fmt.Printf("%-12s : %s\n", "Quota", humanize.Bytes(uint64(account.Quota)))
 	fmt.Printf("%-12s : %s\n", "Role", account.Role)
 	fmt.Println()
 	fmt.Println("================================================================")
