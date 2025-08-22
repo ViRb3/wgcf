@@ -5,8 +5,7 @@ import (
 
 	"github.com/ViRb3/wgcf/v2/cloudflare"
 	. "github.com/ViRb3/wgcf/v2/cmd/shared"
-	"github.com/ViRb3/wgcf/v2/util"
-	"github.com/pkg/errors"
+	"github.com/cockroachdb/errors"
 	"github.com/spf13/cobra"
 )
 
@@ -18,7 +17,7 @@ var Cmd = &cobra.Command{
 	Long:  FormatMessage(shortMsg, ``),
 	Run: func(cmd *cobra.Command, args []string) {
 		if err := status(); err != nil {
-			log.Fatal(util.GetErrorMessage(err))
+			log.Fatalf("%+v\n", err)
 		}
 	},
 }
@@ -34,11 +33,11 @@ func status() error {
 	ctx := CreateContext()
 	thisDevice, err := cloudflare.GetSourceDevice(ctx)
 	if err != nil {
-		return err
+		return errors.WithStack(err)
 	}
 	boundDevice, err := cloudflare.GetSourceBoundDevice(ctx)
 	if err != nil {
-		return err
+		return errors.WithStack(err)
 	}
 
 	PrintDeviceData(thisDevice, boundDevice)

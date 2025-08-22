@@ -9,6 +9,7 @@ import (
 	"github.com/ViRb3/wgcf/v2/openapi"
 	"github.com/ViRb3/wgcf/v2/util"
 	"github.com/ViRb3/wgcf/v2/wireguard"
+	"github.com/cockroachdb/errors"
 )
 
 const (
@@ -69,7 +70,7 @@ func Register(publicKey *wireguard.Key, deviceModel string) (*openapi.Register20
 			Tos:       timestamp,
 			Type:      "Android",
 		}).Execute()
-	return result, err
+	return result, errors.WithStack(err)
 }
 
 type Device openapi.UpdateSourceDevice200Response
@@ -80,9 +81,9 @@ func GetSourceDevice(ctx *config.Context) (*Device, error) {
 		Execute()
 	castResult := Device{}
 	if err := util.Restructure(&result, &castResult); err != nil {
-		return nil, err
+		return nil, errors.WithStack(err)
 	}
-	return &castResult, err
+	return &castResult, errors.WithStack(err)
 }
 
 func globalClientAuth(authToken string) *openapi.APIClient {
@@ -99,7 +100,7 @@ func GetAccount(ctx *config.Context) (*Account, error) {
 		GetAccount(nil, ctx.DeviceId, ApiVersion).
 		Execute()
 	castResult := (*Account)(result)
-	return castResult, err
+	return castResult, errors.WithStack(err)
 }
 
 func UpdateLicenseKey(ctx *config.Context) (*openapi.UpdateAccount200Response, error) {
@@ -108,7 +109,7 @@ func UpdateLicenseKey(ctx *config.Context) (*openapi.UpdateAccount200Response, e
 		UpdateAccountRequest(openapi.UpdateAccountRequest{License: ctx.LicenseKey}).
 		Execute()
 	if err != nil {
-		return nil, err
+		return nil, errors.WithStack(err)
 	}
 
 	return result, nil
@@ -121,7 +122,7 @@ func GetBoundDevices(ctx *config.Context) ([]BoundDevice, error) {
 		GetBoundDevices(nil, ctx.DeviceId, ApiVersion).
 		Execute()
 	if err != nil {
-		return nil, err
+		return nil, errors.WithStack(err)
 	}
 	var castResult []BoundDevice
 	for _, device := range result {
@@ -133,7 +134,7 @@ func GetBoundDevices(ctx *config.Context) ([]BoundDevice, error) {
 func GetSourceBoundDevice(ctx *config.Context) (*BoundDevice, error) {
 	result, err := GetBoundDevices(ctx)
 	if err != nil {
-		return nil, err
+		return nil, errors.WithStack(err)
 	}
 	return FindDevice(result, ctx.DeviceId)
 }
@@ -156,7 +157,7 @@ func UpdateSourceBoundDevice(ctx *config.Context, data openapi.UpdateBoundDevice
 		UpdateBoundDeviceRequest(data).
 		Execute()
 	if err != nil {
-		return nil, err
+		return nil, errors.WithStack(err)
 	}
 	var castResult []BoundDevice
 	for _, device := range result {

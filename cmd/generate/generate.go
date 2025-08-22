@@ -6,9 +6,8 @@ import (
 	"github.com/ViRb3/wgcf/v2/cloudflare"
 	. "github.com/ViRb3/wgcf/v2/cmd/shared"
 	"github.com/ViRb3/wgcf/v2/config"
-	"github.com/ViRb3/wgcf/v2/util"
 	"github.com/ViRb3/wgcf/v2/wireguard"
-	"github.com/pkg/errors"
+	"github.com/cockroachdb/errors"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -22,7 +21,7 @@ var Cmd = &cobra.Command{
 	Long:  FormatMessage(shortMsg, ``),
 	Run: func(cmd *cobra.Command, args []string) {
 		if err := generateProfile(); err != nil {
-			log.Fatal(util.GetErrorMessage(err))
+			log.Fatalf("%+v\n", err)
 		}
 	},
 }
@@ -39,11 +38,11 @@ func generateProfile() error {
 	ctx := CreateContext()
 	thisDevice, err := cloudflare.GetSourceDevice(ctx)
 	if err != nil {
-		return err
+		return errors.WithStack(err)
 	}
 	boundDevice, err := cloudflare.GetSourceBoundDevice(ctx)
 	if err != nil {
-		return err
+		return errors.WithStack(err)
 	}
 
 	profile, err := wireguard.NewProfile(&wireguard.ProfileData{
@@ -54,10 +53,10 @@ func generateProfile() error {
 		Endpoint:   thisDevice.Config.Peers[0].Endpoint.Host,
 	})
 	if err != nil {
-		return err
+		return errors.WithStack(err)
 	}
 	if err := profile.Save(profileFile); err != nil {
-		return err
+		return errors.WithStack(err)
 	}
 
 	PrintDeviceData(thisDevice, boundDevice)

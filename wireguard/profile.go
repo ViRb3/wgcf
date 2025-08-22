@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"io/ioutil"
 	"text/template"
+
+	"github.com/cockroachdb/errors"
 )
 
 var profileTemplate = `[Interface]
@@ -32,7 +34,7 @@ type ProfileData struct {
 func NewProfile(data *ProfileData) (*Profile, error) {
 	profileString, err := generateProfile(data)
 	if err != nil {
-		return nil, err
+		return nil, errors.WithStack(err)
 	}
 	return &Profile{profileString: profileString}, nil
 }
@@ -40,11 +42,11 @@ func NewProfile(data *ProfileData) (*Profile, error) {
 func generateProfile(data *ProfileData) (string, error) {
 	t, err := template.New("").Parse(profileTemplate)
 	if err != nil {
-		return "", err
+		return "", errors.WithStack(err)
 	}
 	var result bytes.Buffer
 	if err := t.Execute(&result, data); err != nil {
-		return "", err
+		return "", errors.WithStack(err)
 	}
 	return result.String(), nil
 }

@@ -11,8 +11,6 @@ import (
 	"github.com/ViRb3/wgcf/v2/cmd/trace"
 	"github.com/ViRb3/wgcf/v2/cmd/update"
 	"github.com/ViRb3/wgcf/v2/config"
-	"github.com/ViRb3/wgcf/v2/util"
-
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -28,7 +26,7 @@ manage accounts, assign license keys, and generate WireGuard profiles.
 Project website: https://github.com/ViRb3/wgcf`),
 	Run: func(cmd *cobra.Command, args []string) {
 		if err := cmd.Help(); err != nil {
-			log.Fatal(util.GetErrorMessage(err))
+			log.Fatalf("%+v\n", err)
 		}
 	},
 }

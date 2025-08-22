@@ -3,14 +3,11 @@ package util
 import (
 	"crypto/rand"
 	"fmt"
-	"github.com/pkg/errors"
-	"gopkg.in/yaml.v2"
 	"time"
-)
 
-func GetErrorMessage(err error) string {
-	return fmt.Sprintf("%+v", err)
-}
+	"github.com/cockroachdb/errors"
+	"gopkg.in/yaml.v2"
+)
 
 func RandomHexString(count int) string {
 	b := make([]byte, count)

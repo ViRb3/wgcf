@@ -9,8 +9,8 @@ import (
 	"github.com/ViRb3/wgcf/v2/config"
 	"github.com/ViRb3/wgcf/v2/util"
 	"github.com/ViRb3/wgcf/v2/wireguard"
+	"github.com/cockroachdb/errors"
 	"github.com/manifoldco/promptui"
-	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -27,7 +27,7 @@ var Cmd = &cobra.Command{
 	Long:  FormatMessage(shortMsg, ``),
 	Run: func(cmd *cobra.Command, args []string) {
 		if err := registerAccount(); err != nil {
-			log.Fatal(util.GetErrorMessage(err))
+			log.Fatalf("%+v\n", err)
 		}
 	},
 }
@@ -44,7 +44,7 @@ func registerAccount() error {
 		return errors.New("existing account detected")
 	}
 	if accepted, err := checkTOS(); err != nil || !accepted {
-		return err
+		return errors.WithStack(err)
 	}
 
 	var privateKey *wireguard.Key
@@ -56,12 +56,12 @@ func registerAccount() error {
 		privateKey, err = wireguard.NewPrivateKey()
 	}
 	if err != nil {
-		return err
+		return errors.WithStack(err)
 	}
 
 	device, err := cloudflare.Register(privateKey.Public(), deviceModel)
 	if err != nil {
-		return err
+		return errors.WithStack(err)
 	}
 
 	viper.Set(config.PrivateKey, privateKey.String())
@@ -69,23 +69,23 @@ func registerAccount() error {
 	viper.Set(config.AccessToken, device.Token)
 	viper.Set(config.LicenseKey, device.Account.License)
 	if err := viper.WriteConfig(); err != nil {
-		return err
+		return errors.WithStack(err)
 	}
 
 	ctx := CreateContext()
 	if _, err := SetDeviceName(ctx, deviceName); util.IsHttp500Error(err) {
 		// server-side issue, but the operation still succeeds
 	} else if err != nil {
-		return err
+		return errors.WithStack(err)
 	}
 	thisDevice, err := cloudflare.GetSourceDevice(ctx)
 	if err != nil {
-		return err
+		return errors.WithStack(err)
 	}
 
 	boundDevice, err := cloudflare.GetSourceBoundDevice(ctx)
 	if err != nil {
-		return err
+		return errors.WithStack(err)
 	}
 	if !boundDevice.Active {
 		return errors.New("failed to activate device")
@@ -105,7 +105,7 @@ func checkTOS() (bool, error) {
 			Items: []string{"Yes", "No"},
 		}
 		if _, result, err := prompt.Run(); err != nil || result != "Yes" {
-			return false, err
+			return false, errors.WithStack(err)
 		}
 	}
 	return true, nil

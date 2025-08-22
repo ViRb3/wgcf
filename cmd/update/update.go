@@ -7,7 +7,7 @@ import (
 	. "github.com/ViRb3/wgcf/v2/cmd/shared"
 	"github.com/ViRb3/wgcf/v2/config"
 	"github.com/ViRb3/wgcf/v2/util"
-	"github.com/pkg/errors"
+	"github.com/cockroachdb/errors"
 	"github.com/spf13/cobra"
 )
 
@@ -23,7 +23,7 @@ If a new/different license key is provided, the current device will be bound to 
 Please note that there is a maximum limit of 5 active devices linked to the same account at a given time.`),
 	Run: func(cmd *cobra.Command, args []string) {
 		if err := updateAccount(); err != nil {
-			log.Fatal(util.GetErrorMessage(err))
+			log.Fatalf("%+v\n", err)
 		}
 	},
 }
@@ -40,35 +40,35 @@ func updateAccount() error {
 	ctx := CreateContext()
 	thisDevice, err := cloudflare.GetSourceDevice(ctx)
 	if err != nil {
-		return err
+		return errors.WithStack(err)
 	}
 	_, thisDevice, err = ensureLicenseKeyUpToDate(ctx, thisDevice)
 	if err != nil {
-		return err
+		return errors.WithStack(err)
 	}
 
 	boundDevice, err := cloudflare.GetSourceBoundDevice(ctx)
 	if err != nil {
-		return err
+		return errors.WithStack(err)
 	}
 	if boundDevice.Name == nil || (deviceName != "" && deviceName != *boundDevice.Name) {
 		log.Println("Setting device name")
 		if _, err := SetDeviceName(ctx, deviceName); util.IsHttp500Error(err) {
 			// server-side issue, but the operation still works
 		} else if err != nil {
-			return err
+			return errors.WithStack(err)
 		}
 	}
 
 	if _, err = cloudflare.UpdateSourceBoundDeviceActive(ctx, true); util.IsHttp500Error(err) {
 		// server-side issue, but the operation still works
 	} else if err != nil {
-		return err
+		return errors.WithStack(err)
 	}
 
 	boundDevice, err = cloudflare.GetSourceBoundDevice(ctx)
 	if err != nil {
-		return err
+		return errors.WithStack(err)
 	}
 	if !boundDevice.Active {
 		return errors.New("failed activating device")
@@ -90,16 +90,16 @@ func ensureLicenseKeyUpToDate(ctx *config.Context, thisDevice *cloudflare.Device
 func updateLicenseKey(ctx *config.Context) (*cloudflare.Account, *cloudflare.Device, error) {
 
 	if _, err := cloudflare.UpdateLicenseKey(ctx); err != nil {
-		return nil, nil, err
+		return nil, nil, errors.WithStack(err)
 	}
 
 	account, err := cloudflare.GetAccount(ctx)
 	if err != nil {
-		return nil, nil, err
+		return nil, nil, errors.WithStack(err)
 	}
 	thisDevice, err := cloudflare.GetSourceDevice(ctx)
 	if err != nil {
-		return nil, nil, err
+		return nil, nil, errors.WithStack(err)
 	}
 
 	if account.License != ctx.LicenseKey {

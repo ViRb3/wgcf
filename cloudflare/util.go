@@ -1,7 +1,7 @@
 package cloudflare
 
 import (
-	"github.com/pkg/errors"
+	"github.com/cockroachdb/errors"
 )
 
 func FindDevice(devices []BoundDevice, deviceId string) (*BoundDevice, error) {

@@ -10,7 +10,7 @@ import (
 	"github.com/ViRb3/wgcf/v2/config"
 	"github.com/ViRb3/wgcf/v2/util"
 
-	"github.com/pkg/errors"
+	"github.com/cockroachdb/errors"
 	"github.com/spf13/viper"
 )
 
@@ -74,7 +74,7 @@ func SetDeviceName(ctx *config.Context, deviceName string) (*cloudflare.BoundDev
 	}
 	device, err := cloudflare.UpdateSourceBoundDeviceName(ctx, deviceName)
 	if err != nil {
-		return nil, err
+		return nil, errors.WithStack(err)
 	}
 	if device.Name == nil || *device.Name != deviceName {
 		return nil, errors.New("could not update device name")

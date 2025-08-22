@@ -11,6 +11,7 @@ import (
 	"crypto/subtle"
 	"encoding/base64"
 
+	"github.com/cockroachdb/errors"
 	"golang.org/x/crypto/curve25519"
 )
 
@@ -37,7 +38,7 @@ func NewPresharedKey() (*Key, error) {
 	var k [KeyLength]byte
 	_, err := rand.Read(k[:])
 	if err != nil {
-		return nil, err
+		return nil, errors.WithStack(err)
 	}
 	return (*Key)(&k), nil
 }
@@ -45,7 +46,7 @@ func NewPresharedKey() (*Key, error) {
 func NewPrivateKey() (*Key, error) {
 	k, err := NewPresharedKey()
 	if err != nil {
-		return nil, err
+		return nil, errors.WithStack(err)
 	}
 	k[0] &= 248
 	k[31] = (k[31] & 127) | 64
@@ -55,7 +56,7 @@ func NewPrivateKey() (*Key, error) {
 func NewKey(base64Key string) (*Key, error) {
 	k, err := base64.StdEncoding.DecodeString(base64Key)
 	if err != nil {
-		return nil, err
+		return nil, errors.WithStack(err)
 	}
 	var key Key
 	copy(key[:], k)
