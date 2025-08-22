@@ -13,6 +13,7 @@ import (
 )
 
 var deviceName string
+var licenseKey string
 var removeDevices []string
 var deactivateDevices []string
 var activateDevices []string
@@ -32,6 +33,7 @@ Please note that there is a maximum limit of 5 active devices linked to the same
 
 func init() {
 	Cmd.PersistentFlags().StringVarP(&deviceName, "name", "n", "", "Update this device's name")
+	Cmd.PersistentFlags().StringVarP(&licenseKey, "license-key", "l", "", "Update this device's license key")
 	Cmd.PersistentFlags().StringSliceVar(&removeDevices, "remove", []string{}, "Remove devices by their ID (can be used multiple times)")
 	Cmd.PersistentFlags().StringSliceVar(&deactivateDevices, "deactivate", []string{}, "Deactivate devices by their ID (can be used multiple times)")
 	Cmd.PersistentFlags().StringSliceVar(&activateDevices, "activate", []string{}, "Activate devices by their ID (can be used multiple times)")
@@ -43,6 +45,9 @@ func updateAccount() error {
 	}
 
 	ctx := CreateContext()
+	if licenseKey != "" {
+		ctx.LicenseKey = licenseKey
+	}
 
 	account, err := cloudflare.GetAccount(ctx)
 	if err != nil {
