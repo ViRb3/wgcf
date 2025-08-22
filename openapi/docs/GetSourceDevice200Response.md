@@ -4,8 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Account** | [**GetSourceDevice200ResponseAccount**](GetSourceDevice200ResponseAccount.md) |  | 
-**Config** | [**GetSourceDevice200ResponseConfig**](GetSourceDevice200ResponseConfig.md) |  | 
 **Created** | **string** |  | 
 **Enabled** | **bool** |  | 
 **FcmToken** | **string** |  | 
@@ -21,12 +19,14 @@ Name | Type | Description | Notes
 **Updated** | **string** |  | 
 **WaitlistEnabled** | **bool** |  | 
 **WarpEnabled** | **bool** |  | 
+**Account** | [**Account**](Account.md) |  | 
+**Config** | [**Config**](Config.md) |  | 
 
 ## Methods
 
 ### NewGetSourceDevice200Response
 
-`func NewGetSourceDevice200Response(account GetSourceDevice200ResponseAccount, config GetSourceDevice200ResponseConfig, created string, enabled bool, fcmToken string, id string, installId string, key string, locale string, model string, name string, place float32, tos string, type_ string, updated string, waitlistEnabled bool, warpEnabled bool, ) *GetSourceDevice200Response`
+`func NewGetSourceDevice200Response(created string, enabled bool, fcmToken string, id string, installId string, key string, locale string, model string, name string, place float32, tos string, type_ string, updated string, waitlistEnabled bool, warpEnabled bool, account Account, config Config, ) *GetSourceDevice200Response`
 
 NewGetSourceDevice200Response instantiates a new GetSourceDevice200Response object
 This constructor will assign default values to properties that have it defined,
@@ -40,46 +40,6 @@ will change when the set of required properties is changed
 NewGetSourceDevice200ResponseWithDefaults instantiates a new GetSourceDevice200Response object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetAccount
-
-`func (o *GetSourceDevice200Response) GetAccount() GetSourceDevice200ResponseAccount`
-
-GetAccount returns the Account field if non-nil, zero value otherwise.
-
-### GetAccountOk
-
-`func (o *GetSourceDevice200Response) GetAccountOk() (*GetSourceDevice200ResponseAccount, bool)`
-
-GetAccountOk returns a tuple with the Account field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAccount
-
-`func (o *GetSourceDevice200Response) SetAccount(v GetSourceDevice200ResponseAccount)`
-
-SetAccount sets Account field to given value.
-
-
-### GetConfig
-
-`func (o *GetSourceDevice200Response) GetConfig() GetSourceDevice200ResponseConfig`
-
-GetConfig returns the Config field if non-nil, zero value otherwise.
-
-### GetConfigOk
-
-`func (o *GetSourceDevice200Response) GetConfigOk() (*GetSourceDevice200ResponseConfig, bool)`
-
-GetConfigOk returns a tuple with the Config field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetConfig
-
-`func (o *GetSourceDevice200Response) SetConfig(v GetSourceDevice200ResponseConfig)`
-
-SetConfig sets Config field to given value.
-
 
 ### GetCreated
 
@@ -379,6 +339,46 @@ and a boolean to check if the value has been set.
 `func (o *GetSourceDevice200Response) SetWarpEnabled(v bool)`
 
 SetWarpEnabled sets WarpEnabled field to given value.
+
+
+### GetAccount
+
+`func (o *GetSourceDevice200Response) GetAccount() Account`
+
+GetAccount returns the Account field if non-nil, zero value otherwise.
+
+### GetAccountOk
+
+`func (o *GetSourceDevice200Response) GetAccountOk() (*Account, bool)`
+
+GetAccountOk returns a tuple with the Account field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccount
+
+`func (o *GetSourceDevice200Response) SetAccount(v Account)`
+
+SetAccount sets Account field to given value.
+
+
+### GetConfig
+
+`func (o *GetSourceDevice200Response) GetConfig() Config`
+
+GetConfig returns the Config field if non-nil, zero value otherwise.
+
+### GetConfigOk
+
+`func (o *GetSourceDevice200Response) GetConfigOk() (*Config, bool)`
+
+GetConfigOk returns a tuple with the Config field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfig
+
+`func (o *GetSourceDevice200Response) SetConfig(v Config)`
+
+SetConfig sets Config field to given value.
 
 
 

@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 ## GetAccount
 
-> GetAccount200Response GetAccount(ctx, sourceDeviceId, apiVersion).Execute()
+> Account GetAccount(ctx, sourceDeviceId, apiVersion).Execute()
 
 GetAccount
 
@@ -45,7 +45,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetAccount``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetAccount`: GetAccount200Response
+	// response from `GetAccount`: Account
 	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetAccount`: %v\n", resp)
 }
 ```
@@ -71,7 +71,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetAccount200Response**](GetAccount200Response.md)
+[**Account**](Account.md)
 
 ### Authorization
 
@@ -89,7 +89,7 @@ No authorization required
 
 ## GetBoundDevices
 
-> []GetBoundDevices200Response GetBoundDevices(ctx, sourceDeviceId, apiVersion).Execute()
+> []BoundDevice GetBoundDevices(ctx, sourceDeviceId, apiVersion).Execute()
 
 GetBoundDevices
 
@@ -116,7 +116,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetBoundDevices``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetBoundDevices`: []GetBoundDevices200Response
+	// response from `GetBoundDevices`: []BoundDevice
 	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetBoundDevices`: %v\n", resp)
 }
 ```
@@ -142,7 +142,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]GetBoundDevices200Response**](GetBoundDevices200Response.md)
+[**[]BoundDevice**](BoundDevice.md)
 
 ### Authorization
 
@@ -513,7 +513,7 @@ No authorization required
 
 ## UpdateBoundDevice
 
-> []UpdateBoundDevice200Response UpdateBoundDevice(ctx, sourceDeviceId, apiVersion, boundDeviceId).UpdateBoundDeviceRequest(updateBoundDeviceRequest).Execute()
+> []BoundDevice UpdateBoundDevice(ctx, sourceDeviceId, apiVersion, boundDeviceId).UpdateBoundDeviceRequest(updateBoundDeviceRequest).Execute()
 
 UpdateBoundDevice
 
@@ -542,7 +542,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.UpdateBoundDevice``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateBoundDevice`: []UpdateBoundDevice200Response
+	// response from `UpdateBoundDevice`: []BoundDevice
 	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.UpdateBoundDevice`: %v\n", resp)
 }
 ```
@@ -571,7 +571,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]UpdateBoundDevice200Response**](UpdateBoundDevice200Response.md)
+[**[]BoundDevice**](BoundDevice.md)
 
 ### Authorization
 

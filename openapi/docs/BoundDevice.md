@@ -1,4 +1,4 @@
-# GetBoundDevices200Response
+# BoundDevice
 
 ## Properties
 
@@ -15,184 +15,184 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewGetBoundDevices200Response
+### NewBoundDevice
 
-`func NewGetBoundDevices200Response(activated string, active bool, created string, id string, model string, role string, type_ string, ) *GetBoundDevices200Response`
+`func NewBoundDevice(activated string, active bool, created string, id string, model string, role string, type_ string, ) *BoundDevice`
 
-NewGetBoundDevices200Response instantiates a new GetBoundDevices200Response object
+NewBoundDevice instantiates a new BoundDevice object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewGetBoundDevices200ResponseWithDefaults
+### NewBoundDeviceWithDefaults
 
-`func NewGetBoundDevices200ResponseWithDefaults() *GetBoundDevices200Response`
+`func NewBoundDeviceWithDefaults() *BoundDevice`
 
-NewGetBoundDevices200ResponseWithDefaults instantiates a new GetBoundDevices200Response object
+NewBoundDeviceWithDefaults instantiates a new BoundDevice object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetActivated
 
-`func (o *GetBoundDevices200Response) GetActivated() string`
+`func (o *BoundDevice) GetActivated() string`
 
 GetActivated returns the Activated field if non-nil, zero value otherwise.
 
 ### GetActivatedOk
 
-`func (o *GetBoundDevices200Response) GetActivatedOk() (*string, bool)`
+`func (o *BoundDevice) GetActivatedOk() (*string, bool)`
 
 GetActivatedOk returns a tuple with the Activated field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetActivated
 
-`func (o *GetBoundDevices200Response) SetActivated(v string)`
+`func (o *BoundDevice) SetActivated(v string)`
 
 SetActivated sets Activated field to given value.
 
 
 ### GetActive
 
-`func (o *GetBoundDevices200Response) GetActive() bool`
+`func (o *BoundDevice) GetActive() bool`
 
 GetActive returns the Active field if non-nil, zero value otherwise.
 
 ### GetActiveOk
 
-`func (o *GetBoundDevices200Response) GetActiveOk() (*bool, bool)`
+`func (o *BoundDevice) GetActiveOk() (*bool, bool)`
 
 GetActiveOk returns a tuple with the Active field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetActive
 
-`func (o *GetBoundDevices200Response) SetActive(v bool)`
+`func (o *BoundDevice) SetActive(v bool)`
 
 SetActive sets Active field to given value.
 
 
 ### GetCreated
 
-`func (o *GetBoundDevices200Response) GetCreated() string`
+`func (o *BoundDevice) GetCreated() string`
 
 GetCreated returns the Created field if non-nil, zero value otherwise.
 
 ### GetCreatedOk
 
-`func (o *GetBoundDevices200Response) GetCreatedOk() (*string, bool)`
+`func (o *BoundDevice) GetCreatedOk() (*string, bool)`
 
 GetCreatedOk returns a tuple with the Created field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCreated
 
-`func (o *GetBoundDevices200Response) SetCreated(v string)`
+`func (o *BoundDevice) SetCreated(v string)`
 
 SetCreated sets Created field to given value.
 
 
 ### GetId
 
-`func (o *GetBoundDevices200Response) GetId() string`
+`func (o *BoundDevice) GetId() string`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *GetBoundDevices200Response) GetIdOk() (*string, bool)`
+`func (o *BoundDevice) GetIdOk() (*string, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *GetBoundDevices200Response) SetId(v string)`
+`func (o *BoundDevice) SetId(v string)`
 
 SetId sets Id field to given value.
 
 
 ### GetModel
 
-`func (o *GetBoundDevices200Response) GetModel() string`
+`func (o *BoundDevice) GetModel() string`
 
 GetModel returns the Model field if non-nil, zero value otherwise.
 
 ### GetModelOk
 
-`func (o *GetBoundDevices200Response) GetModelOk() (*string, bool)`
+`func (o *BoundDevice) GetModelOk() (*string, bool)`
 
 GetModelOk returns a tuple with the Model field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetModel
 
-`func (o *GetBoundDevices200Response) SetModel(v string)`
+`func (o *BoundDevice) SetModel(v string)`
 
 SetModel sets Model field to given value.
 
 
 ### GetName
 
-`func (o *GetBoundDevices200Response) GetName() string`
+`func (o *BoundDevice) GetName() string`
 
 GetName returns the Name field if non-nil, zero value otherwise.
 
 ### GetNameOk
 
-`func (o *GetBoundDevices200Response) GetNameOk() (*string, bool)`
+`func (o *BoundDevice) GetNameOk() (*string, bool)`
 
 GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetName
 
-`func (o *GetBoundDevices200Response) SetName(v string)`
+`func (o *BoundDevice) SetName(v string)`
 
 SetName sets Name field to given value.
 
 ### HasName
 
-`func (o *GetBoundDevices200Response) HasName() bool`
+`func (o *BoundDevice) HasName() bool`
 
 HasName returns a boolean if a field has been set.
 
 ### GetRole
 
-`func (o *GetBoundDevices200Response) GetRole() string`
+`func (o *BoundDevice) GetRole() string`
 
 GetRole returns the Role field if non-nil, zero value otherwise.
 
 ### GetRoleOk
 
-`func (o *GetBoundDevices200Response) GetRoleOk() (*string, bool)`
+`func (o *BoundDevice) GetRoleOk() (*string, bool)`
 
 GetRoleOk returns a tuple with the Role field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRole
 
-`func (o *GetBoundDevices200Response) SetRole(v string)`
+`func (o *BoundDevice) SetRole(v string)`
 
 SetRole sets Role field to given value.
 
 
 ### GetType
 
-`func (o *GetBoundDevices200Response) GetType() string`
+`func (o *BoundDevice) GetType() string`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *GetBoundDevices200Response) GetTypeOk() (*string, bool)`
+`func (o *BoundDevice) GetTypeOk() (*string, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *GetBoundDevices200Response) SetType(v string)`
+`func (o *BoundDevice) SetType(v string)`
 
 SetType sets Type field to given value.
 

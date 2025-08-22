@@ -15,60 +15,86 @@ import (
 	"fmt"
 )
 
-// checks if the UpdateAccountRequest type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &UpdateAccountRequest{}
+// checks if the Peer type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Peer{}
 
-// UpdateAccountRequest struct for UpdateAccountRequest
-type UpdateAccountRequest struct {
-	License string `json:"license"`
+// Peer struct for Peer
+type Peer struct {
+	Endpoint Endpoint `json:"endpoint"`
+	PublicKey string `json:"public_key"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _UpdateAccountRequest UpdateAccountRequest
+type _Peer Peer
 
-// NewUpdateAccountRequest instantiates a new UpdateAccountRequest object
+// NewPeer instantiates a new Peer object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateAccountRequest(license string) *UpdateAccountRequest {
-	this := UpdateAccountRequest{}
-	this.License = license
+func NewPeer(endpoint Endpoint, publicKey string) *Peer {
+	this := Peer{}
+	this.Endpoint = endpoint
+	this.PublicKey = publicKey
 	return &this
 }
 
-// NewUpdateAccountRequestWithDefaults instantiates a new UpdateAccountRequest object
+// NewPeerWithDefaults instantiates a new Peer object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewUpdateAccountRequestWithDefaults() *UpdateAccountRequest {
-	this := UpdateAccountRequest{}
+func NewPeerWithDefaults() *Peer {
+	this := Peer{}
 	return &this
 }
 
-// GetLicense returns the License field value
-func (o *UpdateAccountRequest) GetLicense() string {
+// GetEndpoint returns the Endpoint field value
+func (o *Peer) GetEndpoint() Endpoint {
+	if o == nil {
+		var ret Endpoint
+		return ret
+	}
+
+	return o.Endpoint
+}
+
+// GetEndpointOk returns a tuple with the Endpoint field value
+// and a boolean to check if the value has been set.
+func (o *Peer) GetEndpointOk() (*Endpoint, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Endpoint, true
+}
+
+// SetEndpoint sets field value
+func (o *Peer) SetEndpoint(v Endpoint) {
+	o.Endpoint = v
+}
+
+// GetPublicKey returns the PublicKey field value
+func (o *Peer) GetPublicKey() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.License
+	return o.PublicKey
 }
 
-// GetLicenseOk returns a tuple with the License field value
+// GetPublicKeyOk returns a tuple with the PublicKey field value
 // and a boolean to check if the value has been set.
-func (o *UpdateAccountRequest) GetLicenseOk() (*string, bool) {
+func (o *Peer) GetPublicKeyOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.License, true
+	return &o.PublicKey, true
 }
 
-// SetLicense sets field value
-func (o *UpdateAccountRequest) SetLicense(v string) {
-	o.License = v
+// SetPublicKey sets field value
+func (o *Peer) SetPublicKey(v string) {
+	o.PublicKey = v
 }
 
-func (o UpdateAccountRequest) MarshalJSON() ([]byte, error) {
+func (o Peer) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -76,9 +102,10 @@ func (o UpdateAccountRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UpdateAccountRequest) ToMap() (map[string]interface{}, error) {
+func (o Peer) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["license"] = o.License
+	toSerialize["endpoint"] = o.Endpoint
+	toSerialize["public_key"] = o.PublicKey
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -87,12 +114,13 @@ func (o UpdateAccountRequest) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *UpdateAccountRequest) UnmarshalJSON(data []byte) (err error) {
+func (o *Peer) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"license",
+		"endpoint",
+		"public_key",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -109,58 +137,59 @@ func (o *UpdateAccountRequest) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varUpdateAccountRequest := _UpdateAccountRequest{}
+	varPeer := _Peer{}
 
-	err = json.Unmarshal(data, &varUpdateAccountRequest)
+	err = json.Unmarshal(data, &varPeer)
 
 	if err != nil {
 		return err
 	}
 
-	*o = UpdateAccountRequest(varUpdateAccountRequest)
+	*o = Peer(varPeer)
 
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "license")
+		delete(additionalProperties, "endpoint")
+		delete(additionalProperties, "public_key")
 		o.AdditionalProperties = additionalProperties
 	}
 
 	return err
 }
 
-type NullableUpdateAccountRequest struct {
-	value *UpdateAccountRequest
+type NullablePeer struct {
+	value *Peer
 	isSet bool
 }
 
-func (v NullableUpdateAccountRequest) Get() *UpdateAccountRequest {
+func (v NullablePeer) Get() *Peer {
 	return v.value
 }
 
-func (v *NullableUpdateAccountRequest) Set(val *UpdateAccountRequest) {
+func (v *NullablePeer) Set(val *Peer) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableUpdateAccountRequest) IsSet() bool {
+func (v NullablePeer) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableUpdateAccountRequest) Unset() {
+func (v *NullablePeer) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableUpdateAccountRequest(val *UpdateAccountRequest) *NullableUpdateAccountRequest {
-	return &NullableUpdateAccountRequest{value: val, isSet: true}
+func NewNullablePeer(val *Peer) *NullablePeer {
+	return &NullablePeer{value: val, isSet: true}
 }
 
-func (v NullableUpdateAccountRequest) MarshalJSON() ([]byte, error) {
+func (v NullablePeer) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableUpdateAccountRequest) UnmarshalJSON(src []byte) error {
+func (v *NullablePeer) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

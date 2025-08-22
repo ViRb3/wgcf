@@ -1,4 +1,4 @@
-# GetClientConfig200ResponseDenylistInnerNetworksV6Inner
+# IPv6Network
 
 ## Properties
 
@@ -9,59 +9,59 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewGetClientConfig200ResponseDenylistInnerNetworksV6Inner
+### NewIPv6Network
 
-`func NewGetClientConfig200ResponseDenylistInnerNetworksV6Inner(address string, prefix float32, ) *GetClientConfig200ResponseDenylistInnerNetworksV6Inner`
+`func NewIPv6Network(address string, prefix float32, ) *IPv6Network`
 
-NewGetClientConfig200ResponseDenylistInnerNetworksV6Inner instantiates a new GetClientConfig200ResponseDenylistInnerNetworksV6Inner object
+NewIPv6Network instantiates a new IPv6Network object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewGetClientConfig200ResponseDenylistInnerNetworksV6InnerWithDefaults
+### NewIPv6NetworkWithDefaults
 
-`func NewGetClientConfig200ResponseDenylistInnerNetworksV6InnerWithDefaults() *GetClientConfig200ResponseDenylistInnerNetworksV6Inner`
+`func NewIPv6NetworkWithDefaults() *IPv6Network`
 
-NewGetClientConfig200ResponseDenylistInnerNetworksV6InnerWithDefaults instantiates a new GetClientConfig200ResponseDenylistInnerNetworksV6Inner object
+NewIPv6NetworkWithDefaults instantiates a new IPv6Network object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetAddress
 
-`func (o *GetClientConfig200ResponseDenylistInnerNetworksV6Inner) GetAddress() string`
+`func (o *IPv6Network) GetAddress() string`
 
 GetAddress returns the Address field if non-nil, zero value otherwise.
 
 ### GetAddressOk
 
-`func (o *GetClientConfig200ResponseDenylistInnerNetworksV6Inner) GetAddressOk() (*string, bool)`
+`func (o *IPv6Network) GetAddressOk() (*string, bool)`
 
 GetAddressOk returns a tuple with the Address field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAddress
 
-`func (o *GetClientConfig200ResponseDenylistInnerNetworksV6Inner) SetAddress(v string)`
+`func (o *IPv6Network) SetAddress(v string)`
 
 SetAddress sets Address field to given value.
 
 
 ### GetPrefix
 
-`func (o *GetClientConfig200ResponseDenylistInnerNetworksV6Inner) GetPrefix() float32`
+`func (o *IPv6Network) GetPrefix() float32`
 
 GetPrefix returns the Prefix field if non-nil, zero value otherwise.
 
 ### GetPrefixOk
 
-`func (o *GetClientConfig200ResponseDenylistInnerNetworksV6Inner) GetPrefixOk() (*float32, bool)`
+`func (o *IPv6Network) GetPrefixOk() (*float32, bool)`
 
 GetPrefixOk returns a tuple with the Prefix field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrefix
 
-`func (o *GetClientConfig200ResponseDenylistInnerNetworksV6Inner) SetPrefix(v float32)`
+`func (o *IPv6Network) SetPrefix(v float32)`
 
 SetPrefix sets Prefix field to given value.
 

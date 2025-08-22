@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: untitled API
+  title: Cloudflare WARP API
   version: "536"
 servers:
 - url: /
@@ -256,17 +256,18 @@ paths:
       summary: UpdateBoundDevice
 components:
   schemas:
-    GetAccount_200_Response:
+    Account:
       example:
         license: license
-        referral_count: 1.4658129805029452
+        referral_count: 5.962133916683182
         account_type: account_type
         role: role
-        referral_renewal_countdown: 5.962133916683182
+        referral_renewal_countdown: 5.637376656633329
         created: created
-        quota: 6.027456183070403
+        quota: 1.4658129805029452
         warp_plus: true
-        premium_data: 0.8008281904610115
+        usage: 2.3021358869347655
+        premium_data: 6.027456183070403
         id: id
         updated: updated
       properties:
@@ -292,6 +293,8 @@ components:
           type: string
         warp_plus:
           type: boolean
+        usage:
+          type: number
       required:
       - account_type
       - created
@@ -305,16 +308,7 @@ components:
       - updated
       - warp_plus
       type: object
-    GetBoundDevices_200_Response:
-      example:
-        role: role
-        created: created
-        name: name
-        active: true
-        model: model
-        id: id
-        type: type
-        activated: activated
+    BoundDevice:
       properties:
         activated:
           type: string
@@ -341,6 +335,168 @@ components:
       - role
       - type
       type: object
+    NetworkAddress:
+      example:
+        v6: v6
+        v4: v4
+      properties:
+        v4:
+          type: string
+        v6:
+          type: string
+      required:
+      - v4
+      - v6
+      type: object
+    Endpoint:
+      example:
+        v6: v6
+        host: host
+        v4: v4
+      properties:
+        host:
+          type: string
+        v4:
+          type: string
+        v6:
+          type: string
+      required:
+      - host
+      - v4
+      - v6
+      type: object
+    Peer:
+      example:
+        public_key: public_key
+        endpoint:
+          v6: v6
+          host: host
+          v4: v4
+      properties:
+        endpoint:
+          $ref: "#/components/schemas/Endpoint"
+        public_key:
+          type: string
+      required:
+      - endpoint
+      - public_key
+      type: object
+    Config:
+      example:
+        peers:
+        - public_key: public_key
+          endpoint:
+            v6: v6
+            host: host
+            v4: v4
+        - public_key: public_key
+          endpoint:
+            v6: v6
+            host: host
+            v4: v4
+        services:
+          http_proxy: http_proxy
+        interface:
+          addresses:
+            v6: v6
+            v4: v4
+        client_id: client_id
+      properties:
+        client_id:
+          type: string
+        interface:
+          $ref: "#/components/schemas/Config_interface"
+        peers:
+          items:
+            $ref: "#/components/schemas/Peer"
+          type: array
+        services:
+          $ref: "#/components/schemas/Config_services"
+      required:
+      - client_id
+      - interface
+      - peers
+      - services
+      type: object
+    SourceDevice:
+      properties:
+        created:
+          type: string
+        enabled:
+          type: boolean
+        fcm_token:
+          type: string
+        id:
+          type: string
+        install_id:
+          type: string
+        key:
+          type: string
+        locale:
+          type: string
+        model:
+          type: string
+        name:
+          type: string
+        place:
+          type: number
+        tos:
+          type: string
+        type:
+          type: string
+        updated:
+          type: string
+        waitlist_enabled:
+          type: boolean
+        warp_enabled:
+          type: boolean
+      required:
+      - created
+      - enabled
+      - fcm_token
+      - id
+      - install_id
+      - key
+      - locale
+      - model
+      - name
+      - place
+      - tos
+      - type
+      - updated
+      - waitlist_enabled
+      - warp_enabled
+      type: object
+    IPv4Network:
+      example:
+        address: address
+        netmask: netmask
+      properties:
+        address:
+          type: string
+        netmask:
+          type: string
+      required:
+      - address
+      - netmask
+      type: object
+    IPv6Network:
+      example:
+        address: address
+        prefix: 0.8008281904610115
+      properties:
+        address:
+          type: string
+        prefix:
+          type: number
+      required:
+      - address
+      - prefix
+      type: object
+    GetAccount_200_Response:
+      $ref: "#/components/schemas/Account"
+    GetBoundDevices_200_Response:
+      $ref: "#/components/schemas/BoundDevice"
     GetClientConfig_200_Response:
       example:
         captive_portal:
@@ -407,6 +563,17 @@ components:
       - referral_reward_bytes
       type: object
     GetSourceDevice_200_Response:
+      allOf:
+      - $ref: "#/components/schemas/SourceDevice"
+      - properties:
+          account:
+            $ref: "#/components/schemas/Account"
+          config:
+            $ref: "#/components/schemas/Config"
+        required:
+        - account
+        - config
+        type: object
       example:
         created: created
         locale: locale
@@ -421,6 +588,7 @@ components:
         model: model
         id: id
         place: 0.8008281904610115
+        updated: updated
         config:
           peers:
           - public_key: public_key
@@ -440,76 +608,35 @@ components:
               v6: v6
               v4: v4
           client_id: client_id
-        updated: updated
+        key: key
         account:
           license: license
-          referral_count: 1.4658129805029452
+          referral_count: 5.962133916683182
           account_type: account_type
           role: role
-          referral_renewal_countdown: 5.962133916683182
+          referral_renewal_countdown: 5.637376656633329
           created: created
-          quota: 6.027456183070403
-          usage: 5.637376656633329
+          quota: 1.4658129805029452
           warp_plus: true
-          premium_data: 0.8008281904610115
+          usage: 2.3021358869347655
+          premium_data: 6.027456183070403
           id: id
           updated: updated
-        key: key
-      properties:
-        account:
-          $ref: "#/components/schemas/GetSourceDevice_200_Response_account"
-        config:
-          $ref: "#/components/schemas/GetSourceDevice_200_Response_config"
-        created:
-          type: string
-        enabled:
-          type: boolean
-        fcm_token:
-          type: string
-        id:
-          type: string
-        install_id:
-          type: string
-        key:
-          type: string
-        locale:
-          type: string
-        model:
-          type: string
-        name:
-          type: string
-        place:
-          type: number
-        tos:
-          type: string
-        type:
-          type: string
-        updated:
-          type: string
-        waitlist_enabled:
-          type: boolean
-        warp_enabled:
-          type: boolean
-      required:
-      - account
-      - config
-      - created
-      - enabled
-      - fcm_token
-      - id
-      - install_id
-      - key
-      - locale
-      - model
-      - name
-      - place
-      - tos
-      - type
-      - updated
-      - waitlist_enabled
-      - warp_enabled
-      type: object
     Register_200_Response:
+      allOf:
+      - $ref: "#/components/schemas/SourceDevice"
+      - properties:
+          account:
+            $ref: "#/components/schemas/Account"
+          config:
+            $ref: "#/components/schemas/Config"
+          token:
+            type: string
+        required:
+        - account
+        - config
+        - token
+        type: object
       example:
         created: created
         locale: locale
@@ -524,7 +651,8 @@ components:
         tos: tos
         model: model
         id: id
-        place: 2.3021358869347655
+        place: 0.8008281904610115
+        updated: updated
         config:
           peers:
           - public_key: public_key
@@ -544,78 +672,20 @@ components:
               v6: v6
               v4: v4
           client_id: client_id
-        updated: updated
+        key: key
         account:
           license: license
-          referral_count: 1.4658129805029452
+          referral_count: 5.962133916683182
           account_type: account_type
           role: role
-          referral_renewal_countdown: 5.962133916683182
+          referral_renewal_countdown: 5.637376656633329
           created: created
-          quota: 6.027456183070403
-          usage: 5.637376656633329
+          quota: 1.4658129805029452
           warp_plus: true
-          premium_data: 0.8008281904610115
+          usage: 2.3021358869347655
+          premium_data: 6.027456183070403
           id: id
           updated: updated
-        key: key
-      properties:
-        account:
-          $ref: "#/components/schemas/GetSourceDevice_200_Response_account"
-        config:
-          $ref: "#/components/schemas/GetSourceDevice_200_Response_config"
-        created:
-          type: string
-        enabled:
-          type: boolean
-        fcm_token:
-          type: string
-        id:
-          type: string
-        install_id:
-          type: string
-        key:
-          type: string
-        locale:
-          type: string
-        model:
-          type: string
-        name:
-          type: string
-        place:
-          type: number
-        token:
-          type: string
-        tos:
-          type: string
-        type:
-          type: string
-        updated:
-          type: string
-        waitlist_enabled:
-          type: boolean
-        warp_enabled:
-          type: boolean
-      required:
-      - account
-      - config
-      - created
-      - enabled
-      - fcm_token
-      - id
-      - install_id
-      - key
-      - locale
-      - model
-      - name
-      - place
-      - token
-      - tos
-      - type
-      - updated
-      - waitlist_enabled
-      - warp_enabled
-      type: object
     Register_Request:
       properties:
         fcm_token:
@@ -699,41 +769,7 @@ components:
       - license
       type: object
     UpdateBoundDevice_200_Response:
-      example:
-        role: role
-        created: created
-        name: name
-        active: true
-        model: model
-        id: id
-        type: type
-        activated: activated
-      properties:
-        activated:
-          type: string
-        active:
-          type: boolean
-        created:
-          type: string
-        id:
-          type: string
-        model:
-          type: string
-        name:
-          type: string
-        role:
-          type: string
-        type:
-          type: string
-      required:
-      - activated
-      - active
-      - created
-      - id
-      - model
-      - role
-      - type
-      type: object
+      $ref: "#/components/schemas/BoundDevice"
     UpdateBoundDevice_Request:
       properties:
         active:
@@ -742,6 +778,17 @@ components:
           type: string
       type: object
     UpdateSourceDevice_200_Response:
+      allOf:
+      - $ref: "#/components/schemas/SourceDevice"
+      - properties:
+          account:
+            $ref: "#/components/schemas/Account"
+          config:
+            $ref: "#/components/schemas/Config"
+        required:
+        - account
+        - config
+        type: object
       example:
         created: created
         locale: locale
@@ -755,7 +802,8 @@ components:
         tos: tos
         model: model
         id: id
-        place: 5.637376656633329
+        place: 0.8008281904610115
+        updated: updated
         config:
           peers:
           - public_key: public_key
@@ -775,80 +823,46 @@ components:
               v6: v6
               v4: v4
           client_id: client_id
-        updated: updated
+        key: key
         account:
           license: license
-          referral_count: 1.4658129805029452
+          referral_count: 5.962133916683182
           account_type: account_type
           role: role
-          referral_renewal_countdown: 5.962133916683182
+          referral_renewal_countdown: 5.637376656633329
           created: created
-          quota: 6.027456183070403
+          quota: 1.4658129805029452
           warp_plus: true
-          premium_data: 0.8008281904610115
+          usage: 2.3021358869347655
+          premium_data: 6.027456183070403
           id: id
           updated: updated
-        key: key
-      properties:
-        account:
-          $ref: "#/components/schemas/UpdateSourceDevice_200_Response_account"
-        config:
-          $ref: "#/components/schemas/GetSourceDevice_200_Response_config"
-        created:
-          type: string
-        enabled:
-          type: boolean
-        fcm_token:
-          type: string
-        id:
-          type: string
-        install_id:
-          type: string
-        key:
-          type: string
-        locale:
-          type: string
-        model:
-          type: string
-        name:
-          type: string
-        place:
-          type: number
-        tos:
-          type: string
-        type:
-          type: string
-        updated:
-          type: string
-        waitlist_enabled:
-          type: boolean
-        warp_enabled:
-          type: boolean
-      required:
-      - account
-      - config
-      - created
-      - enabled
-      - fcm_token
-      - id
-      - install_id
-      - key
-      - locale
-      - model
-      - name
-      - place
-      - tos
-      - type
-      - updated
-      - waitlist_enabled
-      - warp_enabled
-      type: object
     UpdateSourceDevice_Request:
       properties:
         key:
           type: string
       required:
       - key
+      type: object
+    Config_interface:
+      example:
+        addresses:
+          v6: v6
+          v4: v4
+      properties:
+        addresses:
+          $ref: "#/components/schemas/NetworkAddress"
+      required:
+      - addresses
+      type: object
+    Config_services:
+      example:
+        http_proxy: http_proxy
+      properties:
+        http_proxy:
+          type: string
+      required:
+      - http_proxy
       type: object
     GetClientConfig_200_Response_captive_portal_inner_networks_inner:
       example:
@@ -876,32 +890,6 @@ components:
       - name
       - networks
       type: object
-    GetClientConfig_200_Response_denylist_inner_networks_v4_inner:
-      example:
-        address: address
-        netmask: netmask
-      properties:
-        address:
-          type: string
-        netmask:
-          type: string
-      required:
-      - address
-      - netmask
-      type: object
-    GetClientConfig_200_Response_denylist_inner_networks_v6_inner:
-      example:
-        address: address
-        prefix: 0.8008281904610115
-      properties:
-        address:
-          type: string
-        prefix:
-          type: number
-      required:
-      - address
-      - prefix
-      type: object
     GetClientConfig_200_Response_denylist_inner_networks:
       example:
         v6:
@@ -917,11 +905,11 @@ components:
       properties:
         v4:
           items:
-            $ref: "#/components/schemas/GetClientConfig_200_Response_denylist_inner_networks_v4_inner"
+            $ref: "#/components/schemas/IPv4Network"
           type: array
         v6:
           items:
-            $ref: "#/components/schemas/GetClientConfig_200_Response_denylist_inner_networks_v6_inner"
+            $ref: "#/components/schemas/IPv6Network"
           type: array
       required:
       - v4
@@ -959,209 +947,4 @@ components:
       required:
       - name
       - visible
-      type: object
-    GetSourceDevice_200_Response_account:
-      example:
-        license: license
-        referral_count: 1.4658129805029452
-        account_type: account_type
-        role: role
-        referral_renewal_countdown: 5.962133916683182
-        created: created
-        quota: 6.027456183070403
-        usage: 5.637376656633329
-        warp_plus: true
-        premium_data: 0.8008281904610115
-        id: id
-        updated: updated
-      properties:
-        account_type:
-          type: string
-        created:
-          type: string
-        id:
-          type: string
-        license:
-          type: string
-        premium_data:
-          type: number
-        quota:
-          type: number
-        referral_count:
-          type: number
-        referral_renewal_countdown:
-          type: number
-        role:
-          type: string
-        updated:
-          type: string
-        usage:
-          type: number
-        warp_plus:
-          type: boolean
-      required:
-      - account_type
-      - created
-      - id
-      - license
-      - premium_data
-      - quota
-      - referral_count
-      - referral_renewal_countdown
-      - role
-      - updated
-      - usage
-      - warp_plus
-      type: object
-    GetSourceDevice_200_Response_config_interface_addresses:
-      example:
-        v6: v6
-        v4: v4
-      properties:
-        v4:
-          type: string
-        v6:
-          type: string
-      required:
-      - v4
-      - v6
-      type: object
-    GetSourceDevice_200_Response_config_interface:
-      example:
-        addresses:
-          v6: v6
-          v4: v4
-      properties:
-        addresses:
-          $ref: "#/components/schemas/GetSourceDevice_200_Response_config_interface_addresses"
-      required:
-      - addresses
-      type: object
-    GetSourceDevice_200_Response_config_peers_inner_endpoint:
-      example:
-        v6: v6
-        host: host
-        v4: v4
-      properties:
-        host:
-          type: string
-        v4:
-          type: string
-        v6:
-          type: string
-      required:
-      - host
-      - v4
-      - v6
-      type: object
-    GetSourceDevice_200_Response_config_peers_inner:
-      example:
-        public_key: public_key
-        endpoint:
-          v6: v6
-          host: host
-          v4: v4
-      properties:
-        endpoint:
-          $ref: "#/components/schemas/GetSourceDevice_200_Response_config_peers_inner_endpoint"
-        public_key:
-          type: string
-      required:
-      - endpoint
-      - public_key
-      type: object
-    GetSourceDevice_200_Response_config_services:
-      example:
-        http_proxy: http_proxy
-      properties:
-        http_proxy:
-          type: string
-      required:
-      - http_proxy
-      type: object
-    GetSourceDevice_200_Response_config:
-      example:
-        peers:
-        - public_key: public_key
-          endpoint:
-            v6: v6
-            host: host
-            v4: v4
-        - public_key: public_key
-          endpoint:
-            v6: v6
-            host: host
-            v4: v4
-        services:
-          http_proxy: http_proxy
-        interface:
-          addresses:
-            v6: v6
-            v4: v4
-        client_id: client_id
-      properties:
-        client_id:
-          type: string
-        interface:
-          $ref: "#/components/schemas/GetSourceDevice_200_Response_config_interface"
-        peers:
-          items:
-            $ref: "#/components/schemas/GetSourceDevice_200_Response_config_peers_inner"
-          type: array
-        services:
-          $ref: "#/components/schemas/GetSourceDevice_200_Response_config_services"
-      required:
-      - client_id
-      - interface
-      - peers
-      - services
-      type: object
-    UpdateSourceDevice_200_Response_account:
-      example:
-        license: license
-        referral_count: 1.4658129805029452
-        account_type: account_type
-        role: role
-        referral_renewal_countdown: 5.962133916683182
-        created: created
-        quota: 6.027456183070403
-        warp_plus: true
-        premium_data: 0.8008281904610115
-        id: id
-        updated: updated
-      properties:
-        account_type:
-          type: string
-        created:
-          type: string
-        id:
-          type: string
-        license:
-          type: string
-        premium_data:
-          type: number
-        quota:
-          type: number
-        referral_count:
-          type: number
-        referral_renewal_countdown:
-          type: number
-        role:
-          type: string
-        updated:
-          type: string
-        warp_plus:
-          type: boolean
-      required:
-      - account_type
-      - created
-      - id
-      - license
-      - premium_data
-      - quota
-      - referral_count
-      - referral_renewal_countdown
-      - role
-      - updated
-      - warp_plus
       type: object

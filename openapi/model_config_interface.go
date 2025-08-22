@@ -15,60 +15,60 @@ import (
 	"fmt"
 )
 
-// checks if the UpdateAccountRequest type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &UpdateAccountRequest{}
+// checks if the ConfigInterface type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ConfigInterface{}
 
-// UpdateAccountRequest struct for UpdateAccountRequest
-type UpdateAccountRequest struct {
-	License string `json:"license"`
+// ConfigInterface struct for ConfigInterface
+type ConfigInterface struct {
+	Addresses NetworkAddress `json:"addresses"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _UpdateAccountRequest UpdateAccountRequest
+type _ConfigInterface ConfigInterface
 
-// NewUpdateAccountRequest instantiates a new UpdateAccountRequest object
+// NewConfigInterface instantiates a new ConfigInterface object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateAccountRequest(license string) *UpdateAccountRequest {
-	this := UpdateAccountRequest{}
-	this.License = license
+func NewConfigInterface(addresses NetworkAddress) *ConfigInterface {
+	this := ConfigInterface{}
+	this.Addresses = addresses
 	return &this
 }
 
-// NewUpdateAccountRequestWithDefaults instantiates a new UpdateAccountRequest object
+// NewConfigInterfaceWithDefaults instantiates a new ConfigInterface object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewUpdateAccountRequestWithDefaults() *UpdateAccountRequest {
-	this := UpdateAccountRequest{}
+func NewConfigInterfaceWithDefaults() *ConfigInterface {
+	this := ConfigInterface{}
 	return &this
 }
 
-// GetLicense returns the License field value
-func (o *UpdateAccountRequest) GetLicense() string {
+// GetAddresses returns the Addresses field value
+func (o *ConfigInterface) GetAddresses() NetworkAddress {
 	if o == nil {
-		var ret string
+		var ret NetworkAddress
 		return ret
 	}
 
-	return o.License
+	return o.Addresses
 }
 
-// GetLicenseOk returns a tuple with the License field value
+// GetAddressesOk returns a tuple with the Addresses field value
 // and a boolean to check if the value has been set.
-func (o *UpdateAccountRequest) GetLicenseOk() (*string, bool) {
+func (o *ConfigInterface) GetAddressesOk() (*NetworkAddress, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.License, true
+	return &o.Addresses, true
 }
 
-// SetLicense sets field value
-func (o *UpdateAccountRequest) SetLicense(v string) {
-	o.License = v
+// SetAddresses sets field value
+func (o *ConfigInterface) SetAddresses(v NetworkAddress) {
+	o.Addresses = v
 }
 
-func (o UpdateAccountRequest) MarshalJSON() ([]byte, error) {
+func (o ConfigInterface) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -76,9 +76,9 @@ func (o UpdateAccountRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UpdateAccountRequest) ToMap() (map[string]interface{}, error) {
+func (o ConfigInterface) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["license"] = o.License
+	toSerialize["addresses"] = o.Addresses
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -87,12 +87,12 @@ func (o UpdateAccountRequest) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *UpdateAccountRequest) UnmarshalJSON(data []byte) (err error) {
+func (o *ConfigInterface) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"license",
+		"addresses",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -109,58 +109,58 @@ func (o *UpdateAccountRequest) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varUpdateAccountRequest := _UpdateAccountRequest{}
+	varConfigInterface := _ConfigInterface{}
 
-	err = json.Unmarshal(data, &varUpdateAccountRequest)
+	err = json.Unmarshal(data, &varConfigInterface)
 
 	if err != nil {
 		return err
 	}
 
-	*o = UpdateAccountRequest(varUpdateAccountRequest)
+	*o = ConfigInterface(varConfigInterface)
 
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "license")
+		delete(additionalProperties, "addresses")
 		o.AdditionalProperties = additionalProperties
 	}
 
 	return err
 }
 
-type NullableUpdateAccountRequest struct {
-	value *UpdateAccountRequest
+type NullableConfigInterface struct {
+	value *ConfigInterface
 	isSet bool
 }
 
-func (v NullableUpdateAccountRequest) Get() *UpdateAccountRequest {
+func (v NullableConfigInterface) Get() *ConfigInterface {
 	return v.value
 }
 
-func (v *NullableUpdateAccountRequest) Set(val *UpdateAccountRequest) {
+func (v *NullableConfigInterface) Set(val *ConfigInterface) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableUpdateAccountRequest) IsSet() bool {
+func (v NullableConfigInterface) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableUpdateAccountRequest) Unset() {
+func (v *NullableConfigInterface) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableUpdateAccountRequest(val *UpdateAccountRequest) *NullableUpdateAccountRequest {
-	return &NullableUpdateAccountRequest{value: val, isSet: true}
+func NewNullableConfigInterface(val *ConfigInterface) *NullableConfigInterface {
+	return &NullableConfigInterface{value: val, isSet: true}
 }
 
-func (v NullableUpdateAccountRequest) MarshalJSON() ([]byte, error) {
+func (v NullableConfigInterface) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableUpdateAccountRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableConfigInterface) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

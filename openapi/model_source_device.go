@@ -15,11 +15,11 @@ import (
 	"fmt"
 )
 
-// checks if the GetSourceDevice200Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &GetSourceDevice200Response{}
+// checks if the SourceDevice type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SourceDevice{}
 
-// GetSourceDevice200Response struct for GetSourceDevice200Response
-type GetSourceDevice200Response struct {
+// SourceDevice struct for SourceDevice
+type SourceDevice struct {
 	Created string `json:"created"`
 	Enabled bool `json:"enabled"`
 	FcmToken string `json:"fcm_token"`
@@ -35,19 +35,17 @@ type GetSourceDevice200Response struct {
 	Updated string `json:"updated"`
 	WaitlistEnabled bool `json:"waitlist_enabled"`
 	WarpEnabled bool `json:"warp_enabled"`
-	Account Account `json:"account"`
-	Config Config `json:"config"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _GetSourceDevice200Response GetSourceDevice200Response
+type _SourceDevice SourceDevice
 
-// NewGetSourceDevice200Response instantiates a new GetSourceDevice200Response object
+// NewSourceDevice instantiates a new SourceDevice object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetSourceDevice200Response(created string, enabled bool, fcmToken string, id string, installId string, key string, locale string, model string, name string, place float32, tos string, type_ string, updated string, waitlistEnabled bool, warpEnabled bool, account Account, config Config) *GetSourceDevice200Response {
-	this := GetSourceDevice200Response{}
+func NewSourceDevice(created string, enabled bool, fcmToken string, id string, installId string, key string, locale string, model string, name string, place float32, tos string, type_ string, updated string, waitlistEnabled bool, warpEnabled bool) *SourceDevice {
+	this := SourceDevice{}
 	this.Created = created
 	this.Enabled = enabled
 	this.FcmToken = fcmToken
@@ -63,21 +61,19 @@ func NewGetSourceDevice200Response(created string, enabled bool, fcmToken string
 	this.Updated = updated
 	this.WaitlistEnabled = waitlistEnabled
 	this.WarpEnabled = warpEnabled
-	this.Account = account
-	this.Config = config
 	return &this
 }
 
-// NewGetSourceDevice200ResponseWithDefaults instantiates a new GetSourceDevice200Response object
+// NewSourceDeviceWithDefaults instantiates a new SourceDevice object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewGetSourceDevice200ResponseWithDefaults() *GetSourceDevice200Response {
-	this := GetSourceDevice200Response{}
+func NewSourceDeviceWithDefaults() *SourceDevice {
+	this := SourceDevice{}
 	return &this
 }
 
 // GetCreated returns the Created field value
-func (o *GetSourceDevice200Response) GetCreated() string {
+func (o *SourceDevice) GetCreated() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -88,7 +84,7 @@ func (o *GetSourceDevice200Response) GetCreated() string {
 
 // GetCreatedOk returns a tuple with the Created field value
 // and a boolean to check if the value has been set.
-func (o *GetSourceDevice200Response) GetCreatedOk() (*string, bool) {
+func (o *SourceDevice) GetCreatedOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -96,12 +92,12 @@ func (o *GetSourceDevice200Response) GetCreatedOk() (*string, bool) {
 }
 
 // SetCreated sets field value
-func (o *GetSourceDevice200Response) SetCreated(v string) {
+func (o *SourceDevice) SetCreated(v string) {
 	o.Created = v
 }
 
 // GetEnabled returns the Enabled field value
-func (o *GetSourceDevice200Response) GetEnabled() bool {
+func (o *SourceDevice) GetEnabled() bool {
 	if o == nil {
 		var ret bool
 		return ret
@@ -112,7 +108,7 @@ func (o *GetSourceDevice200Response) GetEnabled() bool {
 
 // GetEnabledOk returns a tuple with the Enabled field value
 // and a boolean to check if the value has been set.
-func (o *GetSourceDevice200Response) GetEnabledOk() (*bool, bool) {
+func (o *SourceDevice) GetEnabledOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -120,12 +116,12 @@ func (o *GetSourceDevice200Response) GetEnabledOk() (*bool, bool) {
 }
 
 // SetEnabled sets field value
-func (o *GetSourceDevice200Response) SetEnabled(v bool) {
+func (o *SourceDevice) SetEnabled(v bool) {
 	o.Enabled = v
 }
 
 // GetFcmToken returns the FcmToken field value
-func (o *GetSourceDevice200Response) GetFcmToken() string {
+func (o *SourceDevice) GetFcmToken() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -136,7 +132,7 @@ func (o *GetSourceDevice200Response) GetFcmToken() string {
 
 // GetFcmTokenOk returns a tuple with the FcmToken field value
 // and a boolean to check if the value has been set.
-func (o *GetSourceDevice200Response) GetFcmTokenOk() (*string, bool) {
+func (o *SourceDevice) GetFcmTokenOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -144,12 +140,12 @@ func (o *GetSourceDevice200Response) GetFcmTokenOk() (*string, bool) {
 }
 
 // SetFcmToken sets field value
-func (o *GetSourceDevice200Response) SetFcmToken(v string) {
+func (o *SourceDevice) SetFcmToken(v string) {
 	o.FcmToken = v
 }
 
 // GetId returns the Id field value
-func (o *GetSourceDevice200Response) GetId() string {
+func (o *SourceDevice) GetId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -160,7 +156,7 @@ func (o *GetSourceDevice200Response) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *GetSourceDevice200Response) GetIdOk() (*string, bool) {
+func (o *SourceDevice) GetIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -168,12 +164,12 @@ func (o *GetSourceDevice200Response) GetIdOk() (*string, bool) {
 }
 
 // SetId sets field value
-func (o *GetSourceDevice200Response) SetId(v string) {
+func (o *SourceDevice) SetId(v string) {
 	o.Id = v
 }
 
 // GetInstallId returns the InstallId field value
-func (o *GetSourceDevice200Response) GetInstallId() string {
+func (o *SourceDevice) GetInstallId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -184,7 +180,7 @@ func (o *GetSourceDevice200Response) GetInstallId() string {
 
 // GetInstallIdOk returns a tuple with the InstallId field value
 // and a boolean to check if the value has been set.
-func (o *GetSourceDevice200Response) GetInstallIdOk() (*string, bool) {
+func (o *SourceDevice) GetInstallIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -192,12 +188,12 @@ func (o *GetSourceDevice200Response) GetInstallIdOk() (*string, bool) {
 }
 
 // SetInstallId sets field value
-func (o *GetSourceDevice200Response) SetInstallId(v string) {
+func (o *SourceDevice) SetInstallId(v string) {
 	o.InstallId = v
 }
 
 // GetKey returns the Key field value
-func (o *GetSourceDevice200Response) GetKey() string {
+func (o *SourceDevice) GetKey() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -208,7 +204,7 @@ func (o *GetSourceDevice200Response) GetKey() string {
 
 // GetKeyOk returns a tuple with the Key field value
 // and a boolean to check if the value has been set.
-func (o *GetSourceDevice200Response) GetKeyOk() (*string, bool) {
+func (o *SourceDevice) GetKeyOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -216,12 +212,12 @@ func (o *GetSourceDevice200Response) GetKeyOk() (*string, bool) {
 }
 
 // SetKey sets field value
-func (o *GetSourceDevice200Response) SetKey(v string) {
+func (o *SourceDevice) SetKey(v string) {
 	o.Key = v
 }
 
 // GetLocale returns the Locale field value
-func (o *GetSourceDevice200Response) GetLocale() string {
+func (o *SourceDevice) GetLocale() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -232,7 +228,7 @@ func (o *GetSourceDevice200Response) GetLocale() string {
 
 // GetLocaleOk returns a tuple with the Locale field value
 // and a boolean to check if the value has been set.
-func (o *GetSourceDevice200Response) GetLocaleOk() (*string, bool) {
+func (o *SourceDevice) GetLocaleOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -240,12 +236,12 @@ func (o *GetSourceDevice200Response) GetLocaleOk() (*string, bool) {
 }
 
 // SetLocale sets field value
-func (o *GetSourceDevice200Response) SetLocale(v string) {
+func (o *SourceDevice) SetLocale(v string) {
 	o.Locale = v
 }
 
 // GetModel returns the Model field value
-func (o *GetSourceDevice200Response) GetModel() string {
+func (o *SourceDevice) GetModel() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -256,7 +252,7 @@ func (o *GetSourceDevice200Response) GetModel() string {
 
 // GetModelOk returns a tuple with the Model field value
 // and a boolean to check if the value has been set.
-func (o *GetSourceDevice200Response) GetModelOk() (*string, bool) {
+func (o *SourceDevice) GetModelOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -264,12 +260,12 @@ func (o *GetSourceDevice200Response) GetModelOk() (*string, bool) {
 }
 
 // SetModel sets field value
-func (o *GetSourceDevice200Response) SetModel(v string) {
+func (o *SourceDevice) SetModel(v string) {
 	o.Model = v
 }
 
 // GetName returns the Name field value
-func (o *GetSourceDevice200Response) GetName() string {
+func (o *SourceDevice) GetName() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -280,7 +276,7 @@ func (o *GetSourceDevice200Response) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *GetSourceDevice200Response) GetNameOk() (*string, bool) {
+func (o *SourceDevice) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -288,12 +284,12 @@ func (o *GetSourceDevice200Response) GetNameOk() (*string, bool) {
 }
 
 // SetName sets field value
-func (o *GetSourceDevice200Response) SetName(v string) {
+func (o *SourceDevice) SetName(v string) {
 	o.Name = v
 }
 
 // GetPlace returns the Place field value
-func (o *GetSourceDevice200Response) GetPlace() float32 {
+func (o *SourceDevice) GetPlace() float32 {
 	if o == nil {
 		var ret float32
 		return ret
@@ -304,7 +300,7 @@ func (o *GetSourceDevice200Response) GetPlace() float32 {
 
 // GetPlaceOk returns a tuple with the Place field value
 // and a boolean to check if the value has been set.
-func (o *GetSourceDevice200Response) GetPlaceOk() (*float32, bool) {
+func (o *SourceDevice) GetPlaceOk() (*float32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -312,12 +308,12 @@ func (o *GetSourceDevice200Response) GetPlaceOk() (*float32, bool) {
 }
 
 // SetPlace sets field value
-func (o *GetSourceDevice200Response) SetPlace(v float32) {
+func (o *SourceDevice) SetPlace(v float32) {
 	o.Place = v
 }
 
 // GetTos returns the Tos field value
-func (o *GetSourceDevice200Response) GetTos() string {
+func (o *SourceDevice) GetTos() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -328,7 +324,7 @@ func (o *GetSourceDevice200Response) GetTos() string {
 
 // GetTosOk returns a tuple with the Tos field value
 // and a boolean to check if the value has been set.
-func (o *GetSourceDevice200Response) GetTosOk() (*string, bool) {
+func (o *SourceDevice) GetTosOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -336,12 +332,12 @@ func (o *GetSourceDevice200Response) GetTosOk() (*string, bool) {
 }
 
 // SetTos sets field value
-func (o *GetSourceDevice200Response) SetTos(v string) {
+func (o *SourceDevice) SetTos(v string) {
 	o.Tos = v
 }
 
 // GetType returns the Type field value
-func (o *GetSourceDevice200Response) GetType() string {
+func (o *SourceDevice) GetType() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -352,7 +348,7 @@ func (o *GetSourceDevice200Response) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *GetSourceDevice200Response) GetTypeOk() (*string, bool) {
+func (o *SourceDevice) GetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -360,12 +356,12 @@ func (o *GetSourceDevice200Response) GetTypeOk() (*string, bool) {
 }
 
 // SetType sets field value
-func (o *GetSourceDevice200Response) SetType(v string) {
+func (o *SourceDevice) SetType(v string) {
 	o.Type = v
 }
 
 // GetUpdated returns the Updated field value
-func (o *GetSourceDevice200Response) GetUpdated() string {
+func (o *SourceDevice) GetUpdated() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -376,7 +372,7 @@ func (o *GetSourceDevice200Response) GetUpdated() string {
 
 // GetUpdatedOk returns a tuple with the Updated field value
 // and a boolean to check if the value has been set.
-func (o *GetSourceDevice200Response) GetUpdatedOk() (*string, bool) {
+func (o *SourceDevice) GetUpdatedOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -384,12 +380,12 @@ func (o *GetSourceDevice200Response) GetUpdatedOk() (*string, bool) {
 }
 
 // SetUpdated sets field value
-func (o *GetSourceDevice200Response) SetUpdated(v string) {
+func (o *SourceDevice) SetUpdated(v string) {
 	o.Updated = v
 }
 
 // GetWaitlistEnabled returns the WaitlistEnabled field value
-func (o *GetSourceDevice200Response) GetWaitlistEnabled() bool {
+func (o *SourceDevice) GetWaitlistEnabled() bool {
 	if o == nil {
 		var ret bool
 		return ret
@@ -400,7 +396,7 @@ func (o *GetSourceDevice200Response) GetWaitlistEnabled() bool {
 
 // GetWaitlistEnabledOk returns a tuple with the WaitlistEnabled field value
 // and a boolean to check if the value has been set.
-func (o *GetSourceDevice200Response) GetWaitlistEnabledOk() (*bool, bool) {
+func (o *SourceDevice) GetWaitlistEnabledOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -408,12 +404,12 @@ func (o *GetSourceDevice200Response) GetWaitlistEnabledOk() (*bool, bool) {
 }
 
 // SetWaitlistEnabled sets field value
-func (o *GetSourceDevice200Response) SetWaitlistEnabled(v bool) {
+func (o *SourceDevice) SetWaitlistEnabled(v bool) {
 	o.WaitlistEnabled = v
 }
 
 // GetWarpEnabled returns the WarpEnabled field value
-func (o *GetSourceDevice200Response) GetWarpEnabled() bool {
+func (o *SourceDevice) GetWarpEnabled() bool {
 	if o == nil {
 		var ret bool
 		return ret
@@ -424,7 +420,7 @@ func (o *GetSourceDevice200Response) GetWarpEnabled() bool {
 
 // GetWarpEnabledOk returns a tuple with the WarpEnabled field value
 // and a boolean to check if the value has been set.
-func (o *GetSourceDevice200Response) GetWarpEnabledOk() (*bool, bool) {
+func (o *SourceDevice) GetWarpEnabledOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -432,59 +428,11 @@ func (o *GetSourceDevice200Response) GetWarpEnabledOk() (*bool, bool) {
 }
 
 // SetWarpEnabled sets field value
-func (o *GetSourceDevice200Response) SetWarpEnabled(v bool) {
+func (o *SourceDevice) SetWarpEnabled(v bool) {
 	o.WarpEnabled = v
 }
 
-// GetAccount returns the Account field value
-func (o *GetSourceDevice200Response) GetAccount() Account {
-	if o == nil {
-		var ret Account
-		return ret
-	}
-
-	return o.Account
-}
-
-// GetAccountOk returns a tuple with the Account field value
-// and a boolean to check if the value has been set.
-func (o *GetSourceDevice200Response) GetAccountOk() (*Account, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Account, true
-}
-
-// SetAccount sets field value
-func (o *GetSourceDevice200Response) SetAccount(v Account) {
-	o.Account = v
-}
-
-// GetConfig returns the Config field value
-func (o *GetSourceDevice200Response) GetConfig() Config {
-	if o == nil {
-		var ret Config
-		return ret
-	}
-
-	return o.Config
-}
-
-// GetConfigOk returns a tuple with the Config field value
-// and a boolean to check if the value has been set.
-func (o *GetSourceDevice200Response) GetConfigOk() (*Config, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Config, true
-}
-
-// SetConfig sets field value
-func (o *GetSourceDevice200Response) SetConfig(v Config) {
-	o.Config = v
-}
-
-func (o GetSourceDevice200Response) MarshalJSON() ([]byte, error) {
+func (o SourceDevice) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -492,7 +440,7 @@ func (o GetSourceDevice200Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GetSourceDevice200Response) ToMap() (map[string]interface{}, error) {
+func (o SourceDevice) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["created"] = o.Created
 	toSerialize["enabled"] = o.Enabled
@@ -509,8 +457,6 @@ func (o GetSourceDevice200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize["updated"] = o.Updated
 	toSerialize["waitlist_enabled"] = o.WaitlistEnabled
 	toSerialize["warp_enabled"] = o.WarpEnabled
-	toSerialize["account"] = o.Account
-	toSerialize["config"] = o.Config
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -519,7 +465,7 @@ func (o GetSourceDevice200Response) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *GetSourceDevice200Response) UnmarshalJSON(data []byte) (err error) {
+func (o *SourceDevice) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -539,8 +485,6 @@ func (o *GetSourceDevice200Response) UnmarshalJSON(data []byte) (err error) {
 		"updated",
 		"waitlist_enabled",
 		"warp_enabled",
-		"account",
-		"config",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -557,15 +501,15 @@ func (o *GetSourceDevice200Response) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varGetSourceDevice200Response := _GetSourceDevice200Response{}
+	varSourceDevice := _SourceDevice{}
 
-	err = json.Unmarshal(data, &varGetSourceDevice200Response)
+	err = json.Unmarshal(data, &varSourceDevice)
 
 	if err != nil {
 		return err
 	}
 
-	*o = GetSourceDevice200Response(varGetSourceDevice200Response)
+	*o = SourceDevice(varSourceDevice)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -585,46 +529,44 @@ func (o *GetSourceDevice200Response) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "updated")
 		delete(additionalProperties, "waitlist_enabled")
 		delete(additionalProperties, "warp_enabled")
-		delete(additionalProperties, "account")
-		delete(additionalProperties, "config")
 		o.AdditionalProperties = additionalProperties
 	}
 
 	return err
 }
 
-type NullableGetSourceDevice200Response struct {
-	value *GetSourceDevice200Response
+type NullableSourceDevice struct {
+	value *SourceDevice
 	isSet bool
 }
 
-func (v NullableGetSourceDevice200Response) Get() *GetSourceDevice200Response {
+func (v NullableSourceDevice) Get() *SourceDevice {
 	return v.value
 }
 
-func (v *NullableGetSourceDevice200Response) Set(val *GetSourceDevice200Response) {
+func (v *NullableSourceDevice) Set(val *SourceDevice) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableGetSourceDevice200Response) IsSet() bool {
+func (v NullableSourceDevice) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableGetSourceDevice200Response) Unset() {
+func (v *NullableSourceDevice) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableGetSourceDevice200Response(val *GetSourceDevice200Response) *NullableGetSourceDevice200Response {
-	return &NullableGetSourceDevice200Response{value: val, isSet: true}
+func NewNullableSourceDevice(val *SourceDevice) *NullableSourceDevice {
+	return &NullableSourceDevice{value: val, isSet: true}
 }
 
-func (v NullableGetSourceDevice200Response) MarshalJSON() ([]byte, error) {
+func (v NullableSourceDevice) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableGetSourceDevice200Response) UnmarshalJSON(src []byte) error {
+func (v *NullableSourceDevice) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

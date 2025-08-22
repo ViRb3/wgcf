@@ -15,60 +15,60 @@ import (
 	"fmt"
 )
 
-// checks if the UpdateAccountRequest type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &UpdateAccountRequest{}
+// checks if the ConfigServices type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ConfigServices{}
 
-// UpdateAccountRequest struct for UpdateAccountRequest
-type UpdateAccountRequest struct {
-	License string `json:"license"`
+// ConfigServices struct for ConfigServices
+type ConfigServices struct {
+	HttpProxy string `json:"http_proxy"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _UpdateAccountRequest UpdateAccountRequest
+type _ConfigServices ConfigServices
 
-// NewUpdateAccountRequest instantiates a new UpdateAccountRequest object
+// NewConfigServices instantiates a new ConfigServices object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateAccountRequest(license string) *UpdateAccountRequest {
-	this := UpdateAccountRequest{}
-	this.License = license
+func NewConfigServices(httpProxy string) *ConfigServices {
+	this := ConfigServices{}
+	this.HttpProxy = httpProxy
 	return &this
 }
 
-// NewUpdateAccountRequestWithDefaults instantiates a new UpdateAccountRequest object
+// NewConfigServicesWithDefaults instantiates a new ConfigServices object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewUpdateAccountRequestWithDefaults() *UpdateAccountRequest {
-	this := UpdateAccountRequest{}
+func NewConfigServicesWithDefaults() *ConfigServices {
+	this := ConfigServices{}
 	return &this
 }
 
-// GetLicense returns the License field value
-func (o *UpdateAccountRequest) GetLicense() string {
+// GetHttpProxy returns the HttpProxy field value
+func (o *ConfigServices) GetHttpProxy() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.License
+	return o.HttpProxy
 }
 
-// GetLicenseOk returns a tuple with the License field value
+// GetHttpProxyOk returns a tuple with the HttpProxy field value
 // and a boolean to check if the value has been set.
-func (o *UpdateAccountRequest) GetLicenseOk() (*string, bool) {
+func (o *ConfigServices) GetHttpProxyOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.License, true
+	return &o.HttpProxy, true
 }
 
-// SetLicense sets field value
-func (o *UpdateAccountRequest) SetLicense(v string) {
-	o.License = v
+// SetHttpProxy sets field value
+func (o *ConfigServices) SetHttpProxy(v string) {
+	o.HttpProxy = v
 }
 
-func (o UpdateAccountRequest) MarshalJSON() ([]byte, error) {
+func (o ConfigServices) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -76,9 +76,9 @@ func (o UpdateAccountRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UpdateAccountRequest) ToMap() (map[string]interface{}, error) {
+func (o ConfigServices) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["license"] = o.License
+	toSerialize["http_proxy"] = o.HttpProxy
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -87,12 +87,12 @@ func (o UpdateAccountRequest) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *UpdateAccountRequest) UnmarshalJSON(data []byte) (err error) {
+func (o *ConfigServices) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"license",
+		"http_proxy",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -109,58 +109,58 @@ func (o *UpdateAccountRequest) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varUpdateAccountRequest := _UpdateAccountRequest{}
+	varConfigServices := _ConfigServices{}
 
-	err = json.Unmarshal(data, &varUpdateAccountRequest)
+	err = json.Unmarshal(data, &varConfigServices)
 
 	if err != nil {
 		return err
 	}
 
-	*o = UpdateAccountRequest(varUpdateAccountRequest)
+	*o = ConfigServices(varConfigServices)
 
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "license")
+		delete(additionalProperties, "http_proxy")
 		o.AdditionalProperties = additionalProperties
 	}
 
 	return err
 }
 
-type NullableUpdateAccountRequest struct {
-	value *UpdateAccountRequest
+type NullableConfigServices struct {
+	value *ConfigServices
 	isSet bool
 }
 
-func (v NullableUpdateAccountRequest) Get() *UpdateAccountRequest {
+func (v NullableConfigServices) Get() *ConfigServices {
 	return v.value
 }
 
-func (v *NullableUpdateAccountRequest) Set(val *UpdateAccountRequest) {
+func (v *NullableConfigServices) Set(val *ConfigServices) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableUpdateAccountRequest) IsSet() bool {
+func (v NullableConfigServices) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableUpdateAccountRequest) Unset() {
+func (v *NullableConfigServices) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableUpdateAccountRequest(val *UpdateAccountRequest) *NullableUpdateAccountRequest {
-	return &NullableUpdateAccountRequest{value: val, isSet: true}
+func NewNullableConfigServices(val *ConfigServices) *NullableConfigServices {
+	return &NullableConfigServices{value: val, isSet: true}
 }
 
-func (v NullableUpdateAccountRequest) MarshalJSON() ([]byte, error) {
+func (v NullableConfigServices) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableUpdateAccountRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableConfigServices) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

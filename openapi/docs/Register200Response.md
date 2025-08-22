@@ -4,8 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Account** | [**GetSourceDevice200ResponseAccount**](GetSourceDevice200ResponseAccount.md) |  | 
-**Config** | [**GetSourceDevice200ResponseConfig**](GetSourceDevice200ResponseConfig.md) |  | 
 **Created** | **string** |  | 
 **Enabled** | **bool** |  | 
 **FcmToken** | **string** |  | 
@@ -16,18 +14,20 @@ Name | Type | Description | Notes
 **Model** | **string** |  | 
 **Name** | **string** |  | 
 **Place** | **float32** |  | 
-**Token** | **string** |  | 
 **Tos** | **string** |  | 
 **Type** | **string** |  | 
 **Updated** | **string** |  | 
 **WaitlistEnabled** | **bool** |  | 
 **WarpEnabled** | **bool** |  | 
+**Account** | [**Account**](Account.md) |  | 
+**Config** | [**Config**](Config.md) |  | 
+**Token** | **string** |  | 
 
 ## Methods
 
 ### NewRegister200Response
 
-`func NewRegister200Response(account GetSourceDevice200ResponseAccount, config GetSourceDevice200ResponseConfig, created string, enabled bool, fcmToken string, id string, installId string, key string, locale string, model string, name string, place float32, token string, tos string, type_ string, updated string, waitlistEnabled bool, warpEnabled bool, ) *Register200Response`
+`func NewRegister200Response(created string, enabled bool, fcmToken string, id string, installId string, key string, locale string, model string, name string, place float32, tos string, type_ string, updated string, waitlistEnabled bool, warpEnabled bool, account Account, config Config, token string, ) *Register200Response`
 
 NewRegister200Response instantiates a new Register200Response object
 This constructor will assign default values to properties that have it defined,
@@ -41,46 +41,6 @@ will change when the set of required properties is changed
 NewRegister200ResponseWithDefaults instantiates a new Register200Response object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetAccount
-
-`func (o *Register200Response) GetAccount() GetSourceDevice200ResponseAccount`
-
-GetAccount returns the Account field if non-nil, zero value otherwise.
-
-### GetAccountOk
-
-`func (o *Register200Response) GetAccountOk() (*GetSourceDevice200ResponseAccount, bool)`
-
-GetAccountOk returns a tuple with the Account field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAccount
-
-`func (o *Register200Response) SetAccount(v GetSourceDevice200ResponseAccount)`
-
-SetAccount sets Account field to given value.
-
-
-### GetConfig
-
-`func (o *Register200Response) GetConfig() GetSourceDevice200ResponseConfig`
-
-GetConfig returns the Config field if non-nil, zero value otherwise.
-
-### GetConfigOk
-
-`func (o *Register200Response) GetConfigOk() (*GetSourceDevice200ResponseConfig, bool)`
-
-GetConfigOk returns a tuple with the Config field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetConfig
-
-`func (o *Register200Response) SetConfig(v GetSourceDevice200ResponseConfig)`
-
-SetConfig sets Config field to given value.
-
 
 ### GetCreated
 
@@ -282,26 +242,6 @@ and a boolean to check if the value has been set.
 SetPlace sets Place field to given value.
 
 
-### GetToken
-
-`func (o *Register200Response) GetToken() string`
-
-GetToken returns the Token field if non-nil, zero value otherwise.
-
-### GetTokenOk
-
-`func (o *Register200Response) GetTokenOk() (*string, bool)`
-
-GetTokenOk returns a tuple with the Token field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetToken
-
-`func (o *Register200Response) SetToken(v string)`
-
-SetToken sets Token field to given value.
-
-
 ### GetTos
 
 `func (o *Register200Response) GetTos() string`
@@ -400,6 +340,66 @@ and a boolean to check if the value has been set.
 `func (o *Register200Response) SetWarpEnabled(v bool)`
 
 SetWarpEnabled sets WarpEnabled field to given value.
+
+
+### GetAccount
+
+`func (o *Register200Response) GetAccount() Account`
+
+GetAccount returns the Account field if non-nil, zero value otherwise.
+
+### GetAccountOk
+
+`func (o *Register200Response) GetAccountOk() (*Account, bool)`
+
+GetAccountOk returns a tuple with the Account field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccount
+
+`func (o *Register200Response) SetAccount(v Account)`
+
+SetAccount sets Account field to given value.
+
+
+### GetConfig
+
+`func (o *Register200Response) GetConfig() Config`
+
+GetConfig returns the Config field if non-nil, zero value otherwise.
+
+### GetConfigOk
+
+`func (o *Register200Response) GetConfigOk() (*Config, bool)`
+
+GetConfigOk returns a tuple with the Config field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConfig
+
+`func (o *Register200Response) SetConfig(v Config)`
+
+SetConfig sets Config field to given value.
+
+
+### GetToken
+
+`func (o *Register200Response) GetToken() string`
+
+GetToken returns the Token field if non-nil, zero value otherwise.
+
+### GetTokenOk
+
+`func (o *Register200Response) GetTokenOk() (*string, bool)`
+
+GetTokenOk returns a tuple with the Token field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetToken
+
+`func (o *Register200Response) SetToken(v string)`
+
+SetToken sets Token field to given value.
 
 
 
