@@ -20,9 +20,7 @@ var Cmd = &cobra.Command{
 	Short: shortMsg,
 	Long:  FormatMessage(shortMsg, ``),
 	Run: func(cmd *cobra.Command, args []string) {
-		if err := generateProfile(); err != nil {
-			log.Fatalf("%+v\n", err)
-		}
+		RunCommandFatal(generateProfile)
 	},
 }
 
@@ -31,16 +29,12 @@ func init() {
 }
 
 func generateProfile() error {
-	if !IsConfigValidAccount() {
-		return errors.New("no account detected")
+	if err := EnsureConfigValidAccount(); err != nil {
+		return errors.WithStack(err)
 	}
 
 	ctx := CreateContext()
 	thisDevice, err := cloudflare.GetSourceDevice(ctx)
-	if err != nil {
-		return errors.WithStack(err)
-	}
-	boundDevice, err := cloudflare.GetSourceBoundDevice(ctx)
 	if err != nil {
 		return errors.WithStack(err)
 	}
@@ -59,7 +53,6 @@ func generateProfile() error {
 		return errors.WithStack(err)
 	}
 
-	PrintDeviceData(thisDevice, boundDevice)
 	log.Println("Successfully generated WireGuard profile:", profileFile)
 	return nil
 }

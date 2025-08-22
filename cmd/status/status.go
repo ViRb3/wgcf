@@ -1,8 +1,6 @@
 package status
 
 import (
-	"log"
-
 	"github.com/ViRb3/wgcf/v2/cloudflare"
 	. "github.com/ViRb3/wgcf/v2/cmd/shared"
 	"github.com/cockroachdb/errors"
@@ -16,9 +14,7 @@ var Cmd = &cobra.Command{
 	Short: shortMsg,
 	Long:  FormatMessage(shortMsg, ``),
 	Run: func(cmd *cobra.Command, args []string) {
-		if err := status(); err != nil {
-			log.Fatalf("%+v\n", err)
-		}
+		RunCommandFatal(status)
 	},
 }
 
@@ -26,20 +22,21 @@ func init() {
 }
 
 func status() error {
-	if !IsConfigValidAccount() {
-		return errors.New("no valid account detected")
+	if err := EnsureConfigValidAccount(); err != nil {
+		return errors.WithStack(err)
 	}
 
 	ctx := CreateContext()
-	thisDevice, err := cloudflare.GetSourceDevice(ctx)
+
+	account, err := cloudflare.GetAccount(ctx)
 	if err != nil {
 		return errors.WithStack(err)
 	}
-	boundDevice, err := cloudflare.GetSourceBoundDevice(ctx)
+	boundDevices, err := cloudflare.GetBoundDevices(ctx)
 	if err != nil {
 		return errors.WithStack(err)
 	}
 
-	PrintDeviceData(thisDevice, boundDevice)
+	PrintAccountDetails(account, boundDevices)
 	return nil
 }

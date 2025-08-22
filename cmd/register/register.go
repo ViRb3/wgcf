@@ -7,7 +7,6 @@ import (
 	"github.com/ViRb3/wgcf/v2/cloudflare"
 	. "github.com/ViRb3/wgcf/v2/cmd/shared"
 	"github.com/ViRb3/wgcf/v2/config"
-	"github.com/ViRb3/wgcf/v2/util"
 	"github.com/ViRb3/wgcf/v2/wireguard"
 	"github.com/cockroachdb/errors"
 	"github.com/manifoldco/promptui"
@@ -26,9 +25,7 @@ var Cmd = &cobra.Command{
 	Short: shortMsg,
 	Long:  FormatMessage(shortMsg, ``),
 	Run: func(cmd *cobra.Command, args []string) {
-		if err := registerAccount(); err != nil {
-			log.Fatalf("%+v\n", err)
-		}
+		RunCommandFatal(registerAccount)
 	},
 }
 
@@ -40,10 +37,11 @@ func init() {
 }
 
 func registerAccount() error {
-	if IsConfigValidAccount() {
-		return errors.New("existing account detected")
+	if err := EnsureNoExistingAccount(); err != nil {
+		return errors.WithStack(err)
 	}
-	if accepted, err := checkTOS(); err != nil || !accepted {
+
+	if err := checkTOS(); err != nil {
 		return errors.WithStack(err)
 	}
 
@@ -73,30 +71,25 @@ func registerAccount() error {
 	}
 
 	ctx := CreateContext()
-	if _, err := SetDeviceName(ctx, deviceName); util.IsHttp500Error(err) {
-		// server-side issue, but the operation still succeeds
-	} else if err != nil {
+	if _, err := SetDeviceName(ctx, deviceName); err != nil {
 		return errors.WithStack(err)
 	}
-	thisDevice, err := cloudflare.GetSourceDevice(ctx)
+
+	account, err := cloudflare.GetAccount(ctx)
+	if err != nil {
+		return errors.WithStack(err)
+	}
+	boundDevices, err := cloudflare.GetBoundDevices(ctx)
 	if err != nil {
 		return errors.WithStack(err)
 	}
 
-	boundDevice, err := cloudflare.GetSourceBoundDevice(ctx)
-	if err != nil {
-		return errors.WithStack(err)
-	}
-	if !boundDevice.Active {
-		return errors.New("failed to activate device")
-	}
-
-	PrintDeviceData(thisDevice, boundDevice)
+	PrintAccountDetails(account, boundDevices)
 	log.Println("Successfully created Cloudflare Warp account")
 	return nil
 }
 
-func checkTOS() (bool, error) {
+func checkTOS() error {
 	if !acceptedTOS {
 		fmt.Println("This project is in no way affiliated with Cloudflare")
 		fmt.Println("Cloudflare's Terms of Service: https://www.cloudflare.com/application/terms/")
@@ -104,9 +97,11 @@ func checkTOS() (bool, error) {
 			Label: "Do you agree?",
 			Items: []string{"Yes", "No"},
 		}
-		if _, result, err := prompt.Run(); err != nil || result != "Yes" {
-			return false, errors.WithStack(err)
+		if _, result, err := prompt.Run(); err != nil {
+			return errors.WithStack(err)
+		} else if result != "Yes" {
+			return ErrTOSNotAccepted
 		}
 	}
-	return true, nil
+	return nil
 }
