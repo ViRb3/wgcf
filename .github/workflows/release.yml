@@ -72,3 +72,14 @@ jobs:
           args: release --clean
         env:
           GITHUB_TOKEN: ${{ secrets.API_GITHUB_TOKEN }}
+
+  winget:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Winget Release
+        uses: vedantmgoyal9/winget-releaser@main
+        with:
+          identifier: ViRb3.wgcf
+          installers-regex: '_(386|amd64|arm64|armv7)\.exe$'
+          token: ${{ secrets.API_GITHUB_TOKEN }}
