@@ -17,6 +17,9 @@ MTU = 1280
 PublicKey = {{ .PublicKey }}
 AllowedIPs = 0.0.0.0/0, ::/0
 Endpoint = {{ .Endpoint }}
+{{- if .Keepalive }}
+PersistentKeepalive = {{ .Keepalive }}
+{{- end }}
 `
 
 type Profile struct {
@@ -29,6 +32,7 @@ type ProfileData struct {
 	Address2   string
 	PublicKey  string
 	Endpoint   string
+	Keepalive  int
 }
 
 func NewProfile(data *ProfileData) (*Profile, error) {
