@@ -76,7 +76,8 @@ func TestGenerateProfileWithCustomKeepalive(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if expected := "PersistentKeepalive = 60\n"; !strings.HasSuffix(result, expected) {
+	expected := "PersistentKeepalive = 60\n"
+	if !strings.HasSuffix(result, expected) {
 		t.Errorf("expected profile to end with %q, got:\n%s", expected, result)
 	}
 }
