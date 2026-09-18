@@ -7,6 +7,7 @@ import (
 	"github.com/ViRb3/wgcf/v2/cloudflare"
 	. "github.com/ViRb3/wgcf/v2/cmd/shared"
 	"github.com/ViRb3/wgcf/v2/config"
+	"github.com/ViRb3/wgcf/v2/util"
 	"github.com/ViRb3/wgcf/v2/wireguard"
 	"github.com/cockroachdb/errors"
 	"github.com/manifoldco/promptui"
@@ -41,19 +42,25 @@ func registerAccount() error {
 		return errors.WithStack(err)
 	}
 
-	if err := checkTOS(); err != nil {
-		return errors.WithStack(err)
-	}
-
 	var privateKey *wireguard.Key
 	var err error
 
 	if existingKey != "" {
+		if util.IsWarpLicenseKey(existingKey) {
+			return NewUserError("--key looks like a WARP license key; use it with `wgcf update --license-key`")
+		}
 		privateKey, err = wireguard.NewKey(existingKey)
+		if err != nil {
+			return NewUserError("invalid --key: expected a 44-character Base64 WireGuard private key")
+		}
 	} else {
 		privateKey, err = wireguard.NewPrivateKey()
+		if err != nil {
+			return errors.WithStack(err)
+		}
 	}
-	if err != nil {
+
+	if err := checkTOS(); err != nil {
 		return errors.WithStack(err)
 	}
 

@@ -10,6 +10,7 @@ import (
 	"crypto/rand"
 	"crypto/subtle"
 	"encoding/base64"
+	"fmt"
 
 	"github.com/cockroachdb/errors"
 	"golang.org/x/crypto/curve25519"
@@ -58,7 +59,15 @@ func NewKey(base64Key string) (*Key, error) {
 	if err != nil {
 		return nil, errors.WithStack(err)
 	}
+	if len(k) != KeyLength {
+		return nil, errors.WithStack(fmt.Errorf("decoded key is %d bytes; expected %d", len(k), KeyLength))
+	}
 	var key Key
 	copy(key[:], k)
 	return &key, nil
+}
+
+func IsKey(value string) bool {
+	decoded, err := base64.StdEncoding.DecodeString(value)
+	return err == nil && len(decoded) == KeyLength
 }

@@ -20,10 +20,23 @@ var ErrExistingAccount = errors2.New("existing account detected, refusing to ove
 var ErrNoAccount = errors2.New("no account detected, register one first")
 var ErrTOSNotAccepted = errors2.New("TOS not accepted")
 
+type UserError struct {
+	message string
+}
+
+func (e *UserError) Error() string {
+	return e.message
+}
+
+func NewUserError(message string) error {
+	return &UserError{message: message}
+}
+
 func RunCommandFatal(cmd func() error) {
 	if err := cmd(); err != nil {
 		expectedErrs := []error{ErrNoAccount, ErrExistingAccount, ErrTOSNotAccepted}
-		if slices.ContainsFunc(expectedErrs, func(e error) bool { return errors.Is(err, e) }) {
+		var userError *UserError
+		if slices.ContainsFunc(expectedErrs, func(e error) bool { return errors.Is(err, e) }) || errors.As(err, &userError) {
 			log.Fatalln(err)
 		} else {
 			log.Fatalf("%+v\n", err)
