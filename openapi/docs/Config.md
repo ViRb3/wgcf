@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ClientId** | **string** |  | 
-**Interface** | [**ConfigInterface**](ConfigInterface.md) |  | 
-**Peers** | [**[]Peer**](Peer.md) |  | 
-**Services** | [**ConfigServices**](ConfigServices.md) |  | 
+**ClientId** | **string** |  |
+**Interface** | [**ConfigInterface**](ConfigInterface.md) |  |
+**Peers** | [**[]Peer**](Peer.md) |  |
+**Services** | [**ConfigServices**](ConfigServices.md) |  |
 
 ## Methods
 

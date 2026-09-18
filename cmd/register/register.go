@@ -65,7 +65,7 @@ func registerAccount() error {
 	viper.Set(config.PrivateKey, privateKey.String())
 	viper.Set(config.DeviceId, device.Id)
 	viper.Set(config.AccessToken, device.Token)
-	viper.Set(config.LicenseKey, device.Account.License)
+	viper.Set(config.LicenseKey, device.Account.GetLicense())
 	if err := viper.WriteConfig(); err != nil {
 		return errors.WithStack(err)
 	}

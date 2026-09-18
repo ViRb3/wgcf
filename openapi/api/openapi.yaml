@@ -1,9 +1,10 @@
 openapi: 3.0.1
 info:
+  description: Cloudflare WARP Android API contract for version 6.38.9 (build 5641)
   title: Cloudflare WARP API
-  version: "536"
+  version: "5641"
 servers:
-- url: /
+- url: https://api.cloudflareclient.com
 paths:
   /{apiVersion}/client_config:
     get:
@@ -22,6 +23,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetClientConfig_200_Response"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/GetClientConfig_200_Response"
           description: ""
       summary: GetClientConfig
   /{apiVersion}/reg:
@@ -32,6 +36,13 @@ paths:
         in: path
         name: apiVersion
         required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: header
+        name: Cf-Access-Jwt-Assertion
+        required: false
         schema:
           type: string
         style: simple
@@ -49,6 +60,27 @@ paths:
           description: ""
       summary: Register
   /{apiVersion}/reg/{sourceDeviceId}:
+    delete:
+      operationId: DeleteSourceDevice
+      parameters:
+      - explode: false
+        in: path
+        name: apiVersion
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: sourceDeviceId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Registration deleted
+      summary: DeleteSourceDevice
     get:
       operationId: GetSourceDevice
       parameters:
@@ -66,6 +98,13 @@ paths:
         schema:
           type: string
         style: simple
+      - explode: true
+        in: query
+        name: network
+        required: false
+        schema:
+          type: string
+        style: form
       responses:
         "200":
           content:
@@ -101,8 +140,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UpdateSourceDevice_200_Response"
+                $ref: "#/components/schemas/GetSourceDevice_200_Response"
           description: ""
+        "204":
+          description: Details or device name updated
       summary: UpdateSourceDevice
   /{apiVersion}/reg/{sourceDeviceId}/account:
     get:
@@ -158,7 +199,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UpdateAccount_200_Response"
-          description: ""
+          description: Updated account
+        "204":
+          description: License binding updated
       summary: UpdateAccount
   /{apiVersion}/reg/{sourceDeviceId}/account/devices:
     get:
@@ -214,6 +257,34 @@ paths:
                 $ref: "#/components/schemas/ResetAccountLicense_200_Response"
           description: ""
       summary: ResetAccountLicense
+  /{apiVersion}/reg/{sourceDeviceId}/account/receipts:
+    post:
+      operationId: UpdateReceiptToken
+      parameters:
+      - explode: false
+        in: path
+        name: sourceDeviceId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: apiVersion
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReceiptTokenUpdate"
+        required: true
+      responses:
+        "204":
+          description: Receipt token updated
+      summary: UpdateReceiptToken
   /{apiVersion}/reg/{sourceDeviceId}/account/reg/{boundDeviceId}:
     delete:
       operationId: DeleteBoundDevice
@@ -240,8 +311,14 @@ paths:
           type: string
         style: simple
       responses:
-        "204":
-          description: ""
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/BoundDevice"
+                type: array
+          description: Remaining account devices
       summary: DeleteBoundDevice
     patch:
       operationId: UpdateBoundDevice
@@ -282,75 +359,172 @@ paths:
                 type: array
           description: ""
       summary: UpdateBoundDevice
+  /{apiVersion}/accounts/{accountId}/reg/{sourceDeviceId}/auth:
+    get:
+      operationId: GetGatewayAuth
+      parameters:
+      - explode: false
+        in: path
+        name: apiVersion
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: sourceDeviceId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayAuth"
+          description: Gateway authentication token
+      summary: GetGatewayAuth
+  /notifications/v1/accounts/{accountId}/reg/{sourceDeviceId}/ack:
+    post:
+      operationId: AcknowledgeNotification
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: sourceDeviceId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NotificationAckRequest"
+        required: true
+      responses:
+        "204":
+          description: Notification acknowledged
+      summary: AcknowledgeNotification
 components:
   schemas:
     Account:
       example:
-        license: license
-        referral_count: 5.962133916683182
-        account_type: account_type
-        role: role
-        referral_renewal_countdown: 5.637376656633329
-        created: created
-        quota: 1.4658129805029452
+        account_type: free
+        role: parent
+        referral_renewal_countdown: 5
+        created: 2000-01-23T04:56:07.000+00:00
+        usage: 2
         warp_plus: true
-        usage: 2.3021358869347655
-        premium_data: 6.027456183070403
-        id: id
-        updated: updated
+        plus_expires_at: 2000-01-23T04:56:07.000+00:00
+        ttl: 2000-01-23T04:56:07.000+00:00
+        license: license
+        referral_count: 5
+        managed: api
+        quota: 1
+        premium_data: 6
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        updated: 2000-01-23T04:56:07.000+00:00
       properties:
         account_type:
+          enum:
+          - free
+          - limited
+          - unlimited
+          - team
           type: string
         created:
+          format: date-time
           type: string
         id:
+          format: uuid
           type: string
         license:
           type: string
+        plus_expires_at:
+          format: date-time
+          type: string
+        managed:
+          enum:
+          - api
+          - not_api_managed
+          type: string
         premium_data:
-          type: number
+          format: int64
+          type: integer
         quota:
-          type: number
+          format: int64
+          type: integer
         referral_count:
-          type: number
+          format: int32
+          type: integer
         referral_renewal_countdown:
-          type: number
+          format: int32
+          type: integer
         role:
+          enum:
+          - parent
+          - child
+          type: string
+        ttl:
+          format: date-time
           type: string
         updated:
+          format: date-time
           type: string
+        usage:
+          format: int64
+          type: integer
         warp_plus:
           type: boolean
-        usage:
-          type: number
       required:
       - account_type
-      - created
       - id
-      - license
-      - premium_data
-      - quota
-      - referral_count
-      - referral_renewal_countdown
-      - role
-      - updated
-      - warp_plus
       type: object
     BoundDevice:
+      example:
+        role: parent
+        created: 2000-01-23T04:56:07.000+00:00
+        name: name
+        active: true
+        model: model
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        type: type
+        activated: 2000-01-23T04:56:07.000+00:00
       properties:
         activated:
+          format: date-time
           type: string
         active:
           type: boolean
         created:
+          format: date-time
           type: string
         id:
+          format: uuid
           type: string
         model:
           type: string
         name:
           type: string
         role:
+          enum:
+          - parent
+          - child
           type: string
         type:
           type: string
@@ -379,6 +553,9 @@ components:
       example:
         v6: v6
         host: host
+        ports:
+        - 46277
+        - 46277
         v4: v4
       properties:
         host:
@@ -387,8 +564,19 @@ components:
           type: string
         v6:
           type: string
+        ports:
+          default:
+          - 2408
+          - 500
+          - 1701
+          - 4500
+          items:
+            format: int32
+            maximum: 65535
+            minimum: 1
+            type: integer
+          type: array
       required:
-      - host
       - v4
       - v6
       type: object
@@ -398,6 +586,9 @@ components:
         endpoint:
           v6: v6
           host: host
+          ports:
+          - 46277
+          - 46277
           v4: v4
       properties:
         endpoint:
@@ -415,11 +606,17 @@ components:
           endpoint:
             v6: v6
             host: host
+            ports:
+            - 46277
+            - 46277
             v4: v4
         - public_key: public_key
           endpoint:
             v6: v6
             host: host
+            ports:
+            - 46277
+            - 46277
             v4: v4
         services:
           http_proxy: http_proxy
@@ -448,12 +645,14 @@ components:
     SourceDevice:
       properties:
         created:
+          format: date-time
           type: string
         enabled:
           type: boolean
         fcm_token:
           type: string
         id:
+          format: uuid
           type: string
         install_id:
           type: string
@@ -463,36 +662,33 @@ components:
           type: string
         model:
           type: string
+        manufacturer:
+          type: string
         name:
           type: string
+        os_version:
+          type: string
         place:
-          type: number
+          format: int32
+          type: integer
+        serial_number:
+          type: string
+        device_id:
+          type: string
         tos:
+          format: date-time
           type: string
         type:
           type: string
         updated:
+          format: date-time
           type: string
         waitlist_enabled:
           type: boolean
         warp_enabled:
           type: boolean
       required:
-      - created
-      - enabled
-      - fcm_token
       - id
-      - install_id
-      - key
-      - locale
-      - model
-      - name
-      - place
-      - tos
-      - type
-      - updated
-      - waitlist_enabled
-      - warp_enabled
       type: object
     IPv4Network:
       example:
@@ -510,12 +706,15 @@ components:
     IPv6Network:
       example:
         address: address
-        prefix: 0.8008281904610115
+        prefix: 10
       properties:
         address:
           type: string
         prefix:
-          type: number
+          format: int32
+          maximum: 128
+          minimum: 0
+          type: integer
       required:
       - address
       - prefix
@@ -524,7 +723,7 @@ components:
       $ref: "#/components/schemas/Account"
     GetBoundDevices_200_Response:
       $ref: "#/components/schemas/BoundDevice"
-    GetClientConfig_200_Response:
+    ClientConfig:
       example:
         captive_portal:
         - name: name
@@ -541,9 +740,9 @@ components:
           networks:
             v6:
             - address: address
-              prefix: 0.8008281904610115
+              prefix: 10
             - address: address
-              prefix: 0.8008281904610115
+              prefix: 10
             v4:
             - address: address
               netmask: netmask
@@ -557,9 +756,9 @@ components:
           networks:
             v6:
             - address: address
-              prefix: 0.8008281904610115
+              prefix: 10
             - address: address
-              prefix: 0.8008281904610115
+              prefix: 10
             v4:
             - address: address
               netmask: netmask
@@ -568,26 +767,420 @@ components:
           android-packages:
           - android-packages
           - android-packages
-        referral_reward_bytes: 1.4658129805029452
-        premium_data_bytes: 6.027456183070403
+        referral_reward_bytes: 1
+        premium_data_bytes: 6
       properties:
-        captive_portal:
-          items:
-            $ref: "#/components/schemas/GetClientConfig_200_Response_captive_portal_inner"
-          type: array
         denylist:
           items:
-            $ref: "#/components/schemas/GetClientConfig_200_Response_denylist_inner"
+            $ref: "#/components/schemas/ClientConfig_denylist_inner"
+          type: array
+        captive_portal:
+          items:
+            $ref: "#/components/schemas/CaptivePortal"
           type: array
         premium_data_bytes:
-          type: number
+          format: int64
+          type: integer
         referral_reward_bytes:
-          type: number
+          format: int64
+          type: integer
       required:
       - captive_portal
       - denylist
       - premium_data_bytes
       - referral_reward_bytes
+      type: object
+    CaptivePortal:
+      example:
+        name: name
+        networks:
+        - address: address
+        - address: address
+      properties:
+        name:
+          type: string
+        networks:
+          items:
+            $ref: "#/components/schemas/CaptivePortalNetwork"
+          type: array
+      required:
+      - name
+      - networks
+      type: object
+    CaptivePortalNetwork:
+      example:
+        address: address
+      properties:
+        address:
+          type: string
+      required:
+      - address
+      type: object
+    AppMode:
+      enum:
+      - 1dot1
+      - warp
+      - posture_only
+      - warp_tunnel_only
+      - proxy
+      type: string
+    PostQuantumSupport:
+      enum:
+      - disabled
+      - enabled
+      - enabled_with_downgrades
+      type: string
+    ServiceMode:
+      additionalProperties: true
+      example:
+        mode: null
+        port: 9
+      properties:
+        mode:
+          $ref: "#/components/schemas/AppMode"
+        port:
+          format: int32
+          type: integer
+      type: object
+    PolicyIP:
+      additionalProperties: true
+      example:
+        ip: ip
+      properties:
+        ip:
+          type: string
+      required:
+      - ip
+      type: object
+    PolicyExclude:
+      additionalProperties: true
+      example:
+        address: address
+        host: host
+        description: description
+      properties:
+        address:
+          type: string
+        host:
+          type: string
+        description:
+          type: string
+      type: object
+    FallbackDomain:
+      additionalProperties: true
+      example:
+        dns_server:
+        - dns_server
+        - dns_server
+        description: description
+        suffix: suffix
+      properties:
+        suffix:
+          type: string
+        description:
+          type: string
+        dns_server:
+          items:
+            type: string
+          type: array
+      type: object
+    Policy:
+      additionalProperties: true
+      example:
+        policy_id: policy_id
+        fallback_domains:
+        - dns_server:
+          - dns_server
+          - dns_server
+          description: description
+          suffix: suffix
+        - dns_server:
+          - dns_server
+          - dns_server
+          description: description
+          suffix: suffix
+        gateway_unique_id: gateway_unique_id
+        managed_mode: true
+        unique_client_id: unique_client_id
+        switch_locked: true
+        support_url: support_url
+        override_doh_endpoint: override_doh_endpoint
+        enable: true
+        auto_connect: 3
+        onboarding: true
+        exclude:
+        - address: address
+          host: host
+          description: description
+        - address: address
+          host: host
+          description: description
+        service_mode: 1dot1
+        allowed_to_leave: true
+        tunnel_protocol: wireguard
+        include:
+        - address: address
+          host: host
+          description: description
+        - address: address
+          host: host
+          description: description
+        always_include:
+        - ip: ip
+        - ip: ip
+        auth_client_id: auth_client_id
+        allow_mode_switch: true
+        override_warp_endpoint: override_warp_endpoint
+        organization: organization
+        always_exclude:
+        - ip: ip
+        - ip: ip
+        service_mode_v2:
+          mode: null
+          port: 9
+        auth_client_secret: auth_client_secret
+        override_api_endpoint: override_api_endpoint
+        post_quantum: disabled
+      properties:
+        organization:
+          type: string
+        enable:
+          type: boolean
+        service_mode:
+          $ref: "#/components/schemas/AppMode"
+        service_mode_v2:
+          $ref: "#/components/schemas/ServiceMode"
+        gateway_unique_id:
+          type: string
+        support_url:
+          type: string
+        onboarding:
+          type: boolean
+        exclude:
+          items:
+            $ref: "#/components/schemas/PolicyExclude"
+          type: array
+        include:
+          items:
+            $ref: "#/components/schemas/PolicyExclude"
+          type: array
+        fallback_domains:
+          items:
+            $ref: "#/components/schemas/FallbackDomain"
+          type: array
+        switch_locked:
+          type: boolean
+        auto_connect:
+          format: int32
+          type: integer
+        managed_mode:
+          type: boolean
+        allow_mode_switch:
+          type: boolean
+        auth_client_id:
+          type: string
+        auth_client_secret:
+          type: string
+        allowed_to_leave:
+          type: boolean
+        override_doh_endpoint:
+          type: string
+        override_warp_endpoint:
+          type: string
+        override_api_endpoint:
+          type: string
+        unique_client_id:
+          type: string
+        tunnel_protocol:
+          enum:
+          - wireguard
+          - masque
+          type: string
+        policy_id:
+          type: string
+        post_quantum:
+          $ref: "#/components/schemas/PostQuantumSupport"
+        always_exclude:
+          items:
+            $ref: "#/components/schemas/PolicyIP"
+          type: array
+        always_include:
+          items:
+            $ref: "#/components/schemas/PolicyIP"
+          type: array
+      type: object
+    DisableForTime:
+      additionalProperties: true
+      example:
+        seconds: 0
+        secret: secret
+      properties:
+        seconds:
+          format: int64
+          minimum: 0
+          type: integer
+        secret:
+          type: string
+      required:
+      - seconds
+      - secret
+      type: object
+    OverrideCodes:
+      additionalProperties: true
+      example:
+        disable_for_time:
+          seconds: 0
+          secret: secret
+      properties:
+        disable_for_time:
+          $ref: "#/components/schemas/DisableForTime"
+      type: object
+    DexDataKind:
+      enum:
+      - http
+      - traceroute
+      type: string
+    HTTPRequestMethod:
+      enum:
+      - DELETE
+      - GET
+      - PATCH
+      - POST
+      - PUT
+      type: string
+    DexData:
+      additionalProperties: true
+      example:
+        method: DELETE
+        kind: http
+        host: host
+      properties:
+        kind:
+          $ref: "#/components/schemas/DexDataKind"
+        method:
+          $ref: "#/components/schemas/HTTPRequestMethod"
+        host:
+          type: string
+      required:
+      - host
+      - kind
+      type: object
+    DexTest:
+      additionalProperties: true
+      example:
+        data:
+          method: DELETE
+          kind: http
+          host: host
+        created: created
+        name: name
+        description: description
+        interval: 0
+        updated: updated
+        enabled: true
+        test_id: test_id
+      properties:
+        test_id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        interval:
+          format: int64
+          minimum: 0
+          type: integer
+        enabled:
+          type: boolean
+        data:
+          $ref: "#/components/schemas/DexData"
+        updated:
+          type: string
+        created:
+          type: string
+      required:
+      - created
+      - data
+      - enabled
+      - interval
+      - name
+      - test_id
+      - updated
+      type: object
+    GetClientConfig_200_Response:
+      example:
+        result:
+          captive_portal:
+          - name: name
+            networks:
+            - address: address
+            - address: address
+          - name: name
+            networks:
+            - address: address
+            - address: address
+          denylist:
+          - visible: true
+            name: name
+            networks:
+              v6:
+              - address: address
+                prefix: 10
+              - address: address
+                prefix: 10
+              v4:
+              - address: address
+                netmask: netmask
+              - address: address
+                netmask: netmask
+            android-packages:
+            - android-packages
+            - android-packages
+          - visible: true
+            name: name
+            networks:
+              v6:
+              - address: address
+                prefix: 10
+              - address: address
+                prefix: 10
+              v4:
+              - address: address
+                netmask: netmask
+              - address: address
+                netmask: netmask
+            android-packages:
+            - android-packages
+            - android-packages
+          referral_reward_bytes: 1
+          premium_data_bytes: 6
+        success: true
+        messages:
+        - key: ""
+        - key: ""
+        errors:
+        - key: ""
+        - key: ""
+      properties:
+        result:
+          $ref: "#/components/schemas/ClientConfig"
+        success:
+          type: boolean
+        errors:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+        messages:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+      required:
+      - errors
+      - messages
+      - result
+      - success
       type: object
     GetSourceDevice_200_Response:
       allOf:
@@ -597,36 +1190,161 @@ components:
             $ref: "#/components/schemas/Account"
           config:
             $ref: "#/components/schemas/Config"
+          policy:
+            $ref: "#/components/schemas/Policy"
+          override_codes:
+            $ref: "#/components/schemas/OverrideCodes"
+          alternate_networks:
+            items:
+              $ref: "#/components/schemas/AlternateNetwork"
+            type: array
+          dex_tests:
+            items:
+              $ref: "#/components/schemas/DexTest"
+            type: array
+          key_type:
+            type: string
+          tunnel_type:
+            enum:
+            - wireguard
+            - masque
+            type: string
         required:
         - account
-        - config
+        - id
+        - key_type
+        - tunnel_type
         type: object
       example:
-        created: created
+        key_type: key_type
         locale: locale
         type: type
         enabled: true
-        waitlist_enabled: true
+        manufacturer: manufacturer
         install_id: install_id
-        warp_enabled: true
+        dex_tests:
+        - data:
+            method: DELETE
+            kind: http
+            host: host
+          created: created
+          name: name
+          description: description
+          interval: 0
+          updated: updated
+          enabled: true
+          test_id: test_id
+        - data:
+            method: DELETE
+            kind: http
+            host: host
+          created: created
+          name: name
+          description: description
+          interval: 0
+          updated: updated
+          enabled: true
+          test_id: test_id
         fcm_token: fcm_token
-        name: name
-        tos: tos
+        tos: 2000-01-23T04:56:07.000+00:00
         model: model
-        id: id
-        place: 0.8008281904610115
-        updated: updated
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        place: 0
+        tunnel_type: wireguard
+        key: key
+        policy:
+          policy_id: policy_id
+          fallback_domains:
+          - dns_server:
+            - dns_server
+            - dns_server
+            description: description
+            suffix: suffix
+          - dns_server:
+            - dns_server
+            - dns_server
+            description: description
+            suffix: suffix
+          gateway_unique_id: gateway_unique_id
+          managed_mode: true
+          unique_client_id: unique_client_id
+          switch_locked: true
+          support_url: support_url
+          override_doh_endpoint: override_doh_endpoint
+          enable: true
+          auto_connect: 3
+          onboarding: true
+          exclude:
+          - address: address
+            host: host
+            description: description
+          - address: address
+            host: host
+            description: description
+          service_mode: 1dot1
+          allowed_to_leave: true
+          tunnel_protocol: wireguard
+          include:
+          - address: address
+            host: host
+            description: description
+          - address: address
+            host: host
+            description: description
+          always_include:
+          - ip: ip
+          - ip: ip
+          auth_client_id: auth_client_id
+          allow_mode_switch: true
+          override_warp_endpoint: override_warp_endpoint
+          organization: organization
+          always_exclude:
+          - ip: ip
+          - ip: ip
+          service_mode_v2:
+            mode: null
+            port: 9
+          auth_client_secret: auth_client_secret
+          override_api_endpoint: override_api_endpoint
+          post_quantum: disabled
+        override_codes:
+          disable_for_time:
+            seconds: 0
+            secret: secret
+        device_id: device_id
+        created: 2000-01-23T04:56:07.000+00:00
+        os_version: os_version
+        alternate_networks:
+        - tls_sockaddr: tls_sockaddr
+          network_id: network_id
+          sha256: sha256
+          name: name
+        - tls_sockaddr: tls_sockaddr
+          network_id: network_id
+          sha256: sha256
+          name: name
+        serial_number: serial_number
+        waitlist_enabled: true
+        warp_enabled: true
+        name: name
+        updated: 2000-01-23T04:56:07.000+00:00
         config:
           peers:
           - public_key: public_key
             endpoint:
               v6: v6
               host: host
+              ports:
+              - 46277
+              - 46277
               v4: v4
           - public_key: public_key
             endpoint:
               v6: v6
               host: host
+              ports:
+              - 46277
+              - 46277
               v4: v4
           services:
             http_proxy: http_proxy
@@ -635,20 +1353,22 @@ components:
               v6: v6
               v4: v4
           client_id: client_id
-        key: key
         account:
-          license: license
-          referral_count: 5.962133916683182
-          account_type: account_type
-          role: role
-          referral_renewal_countdown: 5.637376656633329
-          created: created
-          quota: 1.4658129805029452
+          account_type: free
+          role: parent
+          referral_renewal_countdown: 5
+          created: 2000-01-23T04:56:07.000+00:00
+          usage: 2
           warp_plus: true
-          usage: 2.3021358869347655
-          premium_data: 6.027456183070403
-          id: id
-          updated: updated
+          plus_expires_at: 2000-01-23T04:56:07.000+00:00
+          ttl: 2000-01-23T04:56:07.000+00:00
+          license: license
+          referral_count: 5
+          managed: api
+          quota: 1
+          premium_data: 6
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          updated: 2000-01-23T04:56:07.000+00:00
     Register_200_Response:
       allOf:
       - $ref: "#/components/schemas/SourceDevice"
@@ -658,39 +1378,165 @@ components:
           config:
             $ref: "#/components/schemas/Config"
           token:
+            format: uuid
+            type: string
+          policy:
+            $ref: "#/components/schemas/Policy"
+          override_codes:
+            $ref: "#/components/schemas/OverrideCodes"
+          alternate_networks:
+            items:
+              $ref: "#/components/schemas/AlternateNetwork"
+            type: array
+          dex_tests:
+            items:
+              $ref: "#/components/schemas/DexTest"
+            type: array
+          key_type:
+            type: string
+          tunnel_type:
+            enum:
+            - wireguard
+            - masque
             type: string
         required:
         - account
-        - config
+        - id
+        - key_type
         - token
+        - tunnel_type
         type: object
       example:
-        created: created
+        key_type: key_type
         locale: locale
         type: type
         enabled: true
-        token: token
-        waitlist_enabled: true
+        manufacturer: manufacturer
         install_id: install_id
-        warp_enabled: true
+        dex_tests:
+        - data:
+            method: DELETE
+            kind: http
+            host: host
+          created: created
+          name: name
+          description: description
+          interval: 0
+          updated: updated
+          enabled: true
+          test_id: test_id
+        - data:
+            method: DELETE
+            kind: http
+            host: host
+          created: created
+          name: name
+          description: description
+          interval: 0
+          updated: updated
+          enabled: true
+          test_id: test_id
         fcm_token: fcm_token
-        name: name
-        tos: tos
+        tos: 2000-01-23T04:56:07.000+00:00
         model: model
-        id: id
-        place: 0.8008281904610115
-        updated: updated
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        place: 0
+        tunnel_type: wireguard
+        key: key
+        policy:
+          policy_id: policy_id
+          fallback_domains:
+          - dns_server:
+            - dns_server
+            - dns_server
+            description: description
+            suffix: suffix
+          - dns_server:
+            - dns_server
+            - dns_server
+            description: description
+            suffix: suffix
+          gateway_unique_id: gateway_unique_id
+          managed_mode: true
+          unique_client_id: unique_client_id
+          switch_locked: true
+          support_url: support_url
+          override_doh_endpoint: override_doh_endpoint
+          enable: true
+          auto_connect: 3
+          onboarding: true
+          exclude:
+          - address: address
+            host: host
+            description: description
+          - address: address
+            host: host
+            description: description
+          service_mode: 1dot1
+          allowed_to_leave: true
+          tunnel_protocol: wireguard
+          include:
+          - address: address
+            host: host
+            description: description
+          - address: address
+            host: host
+            description: description
+          always_include:
+          - ip: ip
+          - ip: ip
+          auth_client_id: auth_client_id
+          allow_mode_switch: true
+          override_warp_endpoint: override_warp_endpoint
+          organization: organization
+          always_exclude:
+          - ip: ip
+          - ip: ip
+          service_mode_v2:
+            mode: null
+            port: 9
+          auth_client_secret: auth_client_secret
+          override_api_endpoint: override_api_endpoint
+          post_quantum: disabled
+        override_codes:
+          disable_for_time:
+            seconds: 0
+            secret: secret
+        device_id: device_id
+        created: 2000-01-23T04:56:07.000+00:00
+        os_version: os_version
+        alternate_networks:
+        - tls_sockaddr: tls_sockaddr
+          network_id: network_id
+          sha256: sha256
+          name: name
+        - tls_sockaddr: tls_sockaddr
+          network_id: network_id
+          sha256: sha256
+          name: name
+        serial_number: serial_number
+        token: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        waitlist_enabled: true
+        warp_enabled: true
+        name: name
+        updated: 2000-01-23T04:56:07.000+00:00
         config:
           peers:
           - public_key: public_key
             endpoint:
               v6: v6
               host: host
+              ports:
+              - 46277
+              - 46277
               v4: v4
           - public_key: public_key
             endpoint:
               v6: v6
               host: host
+              ports:
+              - 46277
+              - 46277
               v4: v4
           services:
             http_proxy: http_proxy
@@ -699,20 +1545,22 @@ components:
               v6: v6
               v4: v4
           client_id: client_id
-        key: key
         account:
-          license: license
-          referral_count: 5.962133916683182
-          account_type: account_type
-          role: role
-          referral_renewal_countdown: 5.637376656633329
-          created: created
-          quota: 1.4658129805029452
+          account_type: free
+          role: parent
+          referral_renewal_countdown: 5
+          created: 2000-01-23T04:56:07.000+00:00
+          usage: 2
           warp_plus: true
-          usage: 2.3021358869347655
-          premium_data: 6.027456183070403
-          id: id
-          updated: updated
+          plus_expires_at: 2000-01-23T04:56:07.000+00:00
+          ttl: 2000-01-23T04:56:07.000+00:00
+          license: license
+          referral_count: 5
+          managed: api
+          quota: 1
+          premium_data: 6
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          updated: 2000-01-23T04:56:07.000+00:00
     Register_Request:
       properties:
         fcm_token:
@@ -725,18 +1573,91 @@ components:
           type: string
         model:
           type: string
+        referrer:
+          type: string
         tos:
           type: string
-        type:
+        expired:
+          type: string
+        serial_number:
+          type: string
+        os_version:
+          type: string
+        key_type:
+          type: string
+        tunnel_type:
+          enum:
+          - wireguard
+          - masque
           type: string
       required:
       - fcm_token
       - install_id
       - key
       - locale
-      - model
-      - tos
-      - type
+      - serial_number
+      type: object
+    AlternateNetwork:
+      example:
+        tls_sockaddr: tls_sockaddr
+        network_id: network_id
+        sha256: sha256
+        name: name
+      properties:
+        name:
+          type: string
+        network_id:
+          type: string
+        tls_sockaddr:
+          type: string
+        sha256:
+          type: string
+      required:
+      - name
+      - network_id
+      - sha256
+      - tls_sockaddr
+      type: object
+    ReceiptTokenUpdate:
+      example:
+        token: token
+      properties:
+        token:
+          type: string
+      required:
+      - token
+      type: object
+    NotificationAckRequest:
+      example:
+        success: true
+        fcm_message_id: fcm_message_id
+        notification_id: notification_id
+        error: error
+      properties:
+        fcm_message_id:
+          nullable: true
+          type: string
+        success:
+          type: boolean
+        error:
+          nullable: true
+          type: string
+        notification_id:
+          nullable: true
+          type: string
+      required:
+      - fcm_message_id
+      - success
+      type: object
+    GatewayAuth:
+      example:
+        token: token
+      properties:
+        token:
+          nullable: true
+          type: string
+      required:
+      - token
       type: object
     ResetAccountLicense_200_Response:
       example:
@@ -747,33 +1668,50 @@ components:
       required:
       - license
       type: object
+    UpdateAccount_Request:
+      properties:
+        license:
+          type: string
+      required:
+      - license
+      type: object
     UpdateAccount_200_Response:
       example:
-        referral_count: 1.4658129805029452
-        role: role
-        referral_renewal_countdown: 5.962133916683182
-        created: created
-        quota: 6.027456183070403
+        referral_count: 1
+        role: parent
+        referral_renewal_countdown: 5
+        created: 2000-01-23T04:56:07.000+00:00
+        quota: 6
         warp_plus: true
-        premium_data: 0.8008281904610115
-        id: id
-        updated: updated
+        premium_data: 0
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        updated: 2000-01-23T04:56:07.000+00:00
       properties:
         created:
+          format: date-time
           type: string
         id:
+          format: uuid
           type: string
         premium_data:
-          type: number
+          format: int64
+          type: integer
         quota:
-          type: number
+          format: int64
+          type: integer
         referral_count:
-          type: number
+          format: int32
+          type: integer
         referral_renewal_countdown:
-          type: number
+          format: int32
+          type: integer
         role:
+          enum:
+          - parent
+          - child
           type: string
         updated:
+          format: date-time
           type: string
         warp_plus:
           type: boolean
@@ -788,88 +1726,40 @@ components:
       - updated
       - warp_plus
       type: object
-    UpdateAccount_Request:
-      properties:
-        license:
-          type: string
-      required:
-      - license
-      type: object
     UpdateBoundDevice_200_Response:
       $ref: "#/components/schemas/BoundDevice"
     UpdateBoundDevice_Request:
+      minProperties: 1
       properties:
         active:
           type: boolean
         name:
           type: string
       type: object
-    UpdateSourceDevice_200_Response:
-      allOf:
-      - $ref: "#/components/schemas/SourceDevice"
-      - properties:
-          account:
-            $ref: "#/components/schemas/Account"
-          config:
-            $ref: "#/components/schemas/Config"
-        required:
-        - account
-        - config
-        type: object
-      example:
-        created: created
-        locale: locale
-        type: type
-        enabled: true
-        waitlist_enabled: true
-        install_id: install_id
-        warp_enabled: true
-        fcm_token: fcm_token
-        name: name
-        tos: tos
-        model: model
-        id: id
-        place: 0.8008281904610115
-        updated: updated
-        config:
-          peers:
-          - public_key: public_key
-            endpoint:
-              v6: v6
-              host: host
-              v4: v4
-          - public_key: public_key
-            endpoint:
-              v6: v6
-              host: host
-              v4: v4
-          services:
-            http_proxy: http_proxy
-          interface:
-            addresses:
-              v6: v6
-              v4: v4
-          client_id: client_id
-        key: key
-        account:
-          license: license
-          referral_count: 5.962133916683182
-          account_type: account_type
-          role: role
-          referral_renewal_countdown: 5.637376656633329
-          created: created
-          quota: 1.4658129805029452
-          warp_plus: true
-          usage: 2.3021358869347655
-          premium_data: 6.027456183070403
-          id: id
-          updated: updated
     UpdateSourceDevice_Request:
+      minProperties: 1
       properties:
         key:
           type: string
-      required:
-      - key
+        key_type:
+          type: string
+        tunnel_type:
+          enum:
+          - wireguard
+          - masque
+          type: string
+        fcm_token:
+          type: string
+        name:
+          type: string
+        os_version:
+          type: string
+        manufacturer:
+          type: string
+        model:
+          type: string
+        device_id:
+          type: string
       type: object
     Config_interface:
       example:
@@ -891,39 +1781,13 @@ components:
       required:
       - http_proxy
       type: object
-    GetClientConfig_200_Response_captive_portal_inner_networks_inner:
-      example:
-        address: address
-      properties:
-        address:
-          type: string
-      required:
-      - address
-      type: object
-    GetClientConfig_200_Response_captive_portal_inner:
-      example:
-        name: name
-        networks:
-        - address: address
-        - address: address
-      properties:
-        name:
-          type: string
-        networks:
-          items:
-            $ref: "#/components/schemas/GetClientConfig_200_Response_captive_portal_inner_networks_inner"
-          type: array
-      required:
-      - name
-      - networks
-      type: object
-    GetClientConfig_200_Response_denylist_inner_networks:
+    ClientConfig_denylist_inner_networks:
       example:
         v6:
         - address: address
-          prefix: 0.8008281904610115
+          prefix: 10
         - address: address
-          prefix: 0.8008281904610115
+          prefix: 10
         v4:
         - address: address
           netmask: netmask
@@ -942,16 +1806,16 @@ components:
       - v4
       - v6
       type: object
-    GetClientConfig_200_Response_denylist_inner:
+    ClientConfig_denylist_inner:
       example:
         visible: true
         name: name
         networks:
           v6:
           - address: address
-            prefix: 0.8008281904610115
+            prefix: 10
           - address: address
-            prefix: 0.8008281904610115
+            prefix: 10
           v4:
           - address: address
             netmask: netmask
@@ -968,7 +1832,7 @@ components:
         name:
           type: string
         networks:
-          $ref: "#/components/schemas/GetClientConfig_200_Response_denylist_inner_networks"
+          $ref: "#/components/schemas/ClientConfig_denylist_inner_networks"
         visible:
           type: boolean
       required:

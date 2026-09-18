@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Addresses** | [**NetworkAddress**](NetworkAddress.md) |  | 
+**Addresses** | [**NetworkAddress**](NetworkAddress.md) |  |
 
 ## Methods
 

@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Address** | **string** |  | 
-**Prefix** | **float32** |  | 
+**Address** | **string** |  |
+**Prefix** | **int32** |  |
 
 ## Methods
 
 ### NewIPv6Network
 
-`func NewIPv6Network(address string, prefix float32, ) *IPv6Network`
+`func NewIPv6Network(address string, prefix int32, ) *IPv6Network`
 
 NewIPv6Network instantiates a new IPv6Network object
 This constructor will assign default values to properties that have it defined,
@@ -48,20 +48,20 @@ SetAddress sets Address field to given value.
 
 ### GetPrefix
 
-`func (o *IPv6Network) GetPrefix() float32`
+`func (o *IPv6Network) GetPrefix() int32`
 
 GetPrefix returns the Prefix field if non-nil, zero value otherwise.
 
 ### GetPrefixOk
 
-`func (o *IPv6Network) GetPrefixOk() (*float32, bool)`
+`func (o *IPv6Network) GetPrefixOk() (*int32, bool)`
 
 GetPrefixOk returns a tuple with the Prefix field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrefix
 
-`func (o *IPv6Network) SetPrefix(v float32)`
+`func (o *IPv6Network) SetPrefix(v int32)`
 
 SetPrefix sets Prefix field to given value.
 

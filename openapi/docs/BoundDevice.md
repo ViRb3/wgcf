@@ -4,20 +4,20 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Activated** | **string** |  | 
-**Active** | **bool** |  | 
-**Created** | **string** |  | 
-**Id** | **string** |  | 
-**Model** | Pointer to **string** |  | [optional] 
-**Name** | Pointer to **string** |  | [optional] 
-**Role** | **string** |  | 
-**Type** | **string** |  | 
+**Activated** | **time.Time** |  |
+**Active** | **bool** |  |
+**Created** | **time.Time** |  |
+**Id** | **string** |  |
+**Model** | Pointer to **string** |  | [optional]
+**Name** | Pointer to **string** |  | [optional]
+**Role** | **string** |  |
+**Type** | **string** |  |
 
 ## Methods
 
 ### NewBoundDevice
 
-`func NewBoundDevice(activated string, active bool, created string, id string, role string, type_ string, ) *BoundDevice`
+`func NewBoundDevice(activated time.Time, active bool, created time.Time, id string, role string, type_ string, ) *BoundDevice`
 
 NewBoundDevice instantiates a new BoundDevice object
 This constructor will assign default values to properties that have it defined,
@@ -34,20 +34,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetActivated
 
-`func (o *BoundDevice) GetActivated() string`
+`func (o *BoundDevice) GetActivated() time.Time`
 
 GetActivated returns the Activated field if non-nil, zero value otherwise.
 
 ### GetActivatedOk
 
-`func (o *BoundDevice) GetActivatedOk() (*string, bool)`
+`func (o *BoundDevice) GetActivatedOk() (*time.Time, bool)`
 
 GetActivatedOk returns a tuple with the Activated field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetActivated
 
-`func (o *BoundDevice) SetActivated(v string)`
+`func (o *BoundDevice) SetActivated(v time.Time)`
 
 SetActivated sets Activated field to given value.
 
@@ -74,20 +74,20 @@ SetActive sets Active field to given value.
 
 ### GetCreated
 
-`func (o *BoundDevice) GetCreated() string`
+`func (o *BoundDevice) GetCreated() time.Time`
 
 GetCreated returns the Created field if non-nil, zero value otherwise.
 
 ### GetCreatedOk
 
-`func (o *BoundDevice) GetCreatedOk() (*string, bool)`
+`func (o *BoundDevice) GetCreatedOk() (*time.Time, bool)`
 
 GetCreatedOk returns a tuple with the Created field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCreated
 
-`func (o *BoundDevice) SetCreated(v string)`
+`func (o *BoundDevice) SetCreated(v time.Time)`
 
 SetCreated sets Created field to given value.
 

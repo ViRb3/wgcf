@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Active** | Pointer to **bool** |  | [optional] 
-**Name** | Pointer to **string** |  | [optional] 
+**Active** | Pointer to **bool** |  | [optional]
+**Name** | Pointer to **string** |  | [optional]
 
 ## Methods
 

@@ -4,24 +4,27 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AccountType** | **string** |  | 
-**Created** | **string** |  | 
-**Id** | **string** |  | 
-**License** | **string** |  | 
-**PremiumData** | **float32** |  | 
-**Quota** | **float32** |  | 
-**ReferralCount** | **float32** |  | 
-**ReferralRenewalCountdown** | **float32** |  | 
-**Role** | **string** |  | 
-**Updated** | **string** |  | 
-**WarpPlus** | **bool** |  | 
-**Usage** | Pointer to **float32** |  | [optional] 
+**AccountType** | **string** |  |
+**Created** | Pointer to **time.Time** |  | [optional]
+**Id** | **string** |  |
+**License** | Pointer to **string** |  | [optional]
+**PlusExpiresAt** | Pointer to **time.Time** |  | [optional]
+**Managed** | Pointer to **string** |  | [optional]
+**PremiumData** | Pointer to **int64** |  | [optional]
+**Quota** | Pointer to **int64** |  | [optional]
+**ReferralCount** | Pointer to **int32** |  | [optional]
+**ReferralRenewalCountdown** | Pointer to **int32** |  | [optional]
+**Role** | Pointer to **string** |  | [optional]
+**Ttl** | Pointer to **time.Time** |  | [optional]
+**Updated** | Pointer to **time.Time** |  | [optional]
+**Usage** | Pointer to **int64** |  | [optional]
+**WarpPlus** | Pointer to **bool** |  | [optional]
 
 ## Methods
 
 ### NewAccount
 
-`func NewAccount(accountType string, created string, id string, license string, premiumData float32, quota float32, referralCount float32, referralRenewalCountdown float32, role string, updated string, warpPlus bool, ) *Account`
+`func NewAccount(accountType string, id string, ) *Account`
 
 NewAccount instantiates a new Account object
 This constructor will assign default values to properties that have it defined,
@@ -58,23 +61,28 @@ SetAccountType sets AccountType field to given value.
 
 ### GetCreated
 
-`func (o *Account) GetCreated() string`
+`func (o *Account) GetCreated() time.Time`
 
 GetCreated returns the Created field if non-nil, zero value otherwise.
 
 ### GetCreatedOk
 
-`func (o *Account) GetCreatedOk() (*string, bool)`
+`func (o *Account) GetCreatedOk() (*time.Time, bool)`
 
 GetCreatedOk returns a tuple with the Created field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCreated
 
-`func (o *Account) SetCreated(v string)`
+`func (o *Account) SetCreated(v time.Time)`
 
 SetCreated sets Created field to given value.
 
+### HasCreated
+
+`func (o *Account) HasCreated() bool`
+
+HasCreated returns a boolean if a field has been set.
 
 ### GetId
 
@@ -115,86 +123,161 @@ and a boolean to check if the value has been set.
 
 SetLicense sets License field to given value.
 
+### HasLicense
+
+`func (o *Account) HasLicense() bool`
+
+HasLicense returns a boolean if a field has been set.
+
+### GetPlusExpiresAt
+
+`func (o *Account) GetPlusExpiresAt() time.Time`
+
+GetPlusExpiresAt returns the PlusExpiresAt field if non-nil, zero value otherwise.
+
+### GetPlusExpiresAtOk
+
+`func (o *Account) GetPlusExpiresAtOk() (*time.Time, bool)`
+
+GetPlusExpiresAtOk returns a tuple with the PlusExpiresAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPlusExpiresAt
+
+`func (o *Account) SetPlusExpiresAt(v time.Time)`
+
+SetPlusExpiresAt sets PlusExpiresAt field to given value.
+
+### HasPlusExpiresAt
+
+`func (o *Account) HasPlusExpiresAt() bool`
+
+HasPlusExpiresAt returns a boolean if a field has been set.
+
+### GetManaged
+
+`func (o *Account) GetManaged() string`
+
+GetManaged returns the Managed field if non-nil, zero value otherwise.
+
+### GetManagedOk
+
+`func (o *Account) GetManagedOk() (*string, bool)`
+
+GetManagedOk returns a tuple with the Managed field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetManaged
+
+`func (o *Account) SetManaged(v string)`
+
+SetManaged sets Managed field to given value.
+
+### HasManaged
+
+`func (o *Account) HasManaged() bool`
+
+HasManaged returns a boolean if a field has been set.
 
 ### GetPremiumData
 
-`func (o *Account) GetPremiumData() float32`
+`func (o *Account) GetPremiumData() int64`
 
 GetPremiumData returns the PremiumData field if non-nil, zero value otherwise.
 
 ### GetPremiumDataOk
 
-`func (o *Account) GetPremiumDataOk() (*float32, bool)`
+`func (o *Account) GetPremiumDataOk() (*int64, bool)`
 
 GetPremiumDataOk returns a tuple with the PremiumData field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPremiumData
 
-`func (o *Account) SetPremiumData(v float32)`
+`func (o *Account) SetPremiumData(v int64)`
 
 SetPremiumData sets PremiumData field to given value.
 
+### HasPremiumData
+
+`func (o *Account) HasPremiumData() bool`
+
+HasPremiumData returns a boolean if a field has been set.
 
 ### GetQuota
 
-`func (o *Account) GetQuota() float32`
+`func (o *Account) GetQuota() int64`
 
 GetQuota returns the Quota field if non-nil, zero value otherwise.
 
 ### GetQuotaOk
 
-`func (o *Account) GetQuotaOk() (*float32, bool)`
+`func (o *Account) GetQuotaOk() (*int64, bool)`
 
 GetQuotaOk returns a tuple with the Quota field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetQuota
 
-`func (o *Account) SetQuota(v float32)`
+`func (o *Account) SetQuota(v int64)`
 
 SetQuota sets Quota field to given value.
 
+### HasQuota
+
+`func (o *Account) HasQuota() bool`
+
+HasQuota returns a boolean if a field has been set.
 
 ### GetReferralCount
 
-`func (o *Account) GetReferralCount() float32`
+`func (o *Account) GetReferralCount() int32`
 
 GetReferralCount returns the ReferralCount field if non-nil, zero value otherwise.
 
 ### GetReferralCountOk
 
-`func (o *Account) GetReferralCountOk() (*float32, bool)`
+`func (o *Account) GetReferralCountOk() (*int32, bool)`
 
 GetReferralCountOk returns a tuple with the ReferralCount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetReferralCount
 
-`func (o *Account) SetReferralCount(v float32)`
+`func (o *Account) SetReferralCount(v int32)`
 
 SetReferralCount sets ReferralCount field to given value.
 
+### HasReferralCount
+
+`func (o *Account) HasReferralCount() bool`
+
+HasReferralCount returns a boolean if a field has been set.
 
 ### GetReferralRenewalCountdown
 
-`func (o *Account) GetReferralRenewalCountdown() float32`
+`func (o *Account) GetReferralRenewalCountdown() int32`
 
 GetReferralRenewalCountdown returns the ReferralRenewalCountdown field if non-nil, zero value otherwise.
 
 ### GetReferralRenewalCountdownOk
 
-`func (o *Account) GetReferralRenewalCountdownOk() (*float32, bool)`
+`func (o *Account) GetReferralRenewalCountdownOk() (*int32, bool)`
 
 GetReferralRenewalCountdownOk returns a tuple with the ReferralRenewalCountdown field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetReferralRenewalCountdown
 
-`func (o *Account) SetReferralRenewalCountdown(v float32)`
+`func (o *Account) SetReferralRenewalCountdown(v int32)`
 
 SetReferralRenewalCountdown sets ReferralRenewalCountdown field to given value.
 
+### HasReferralRenewalCountdown
+
+`func (o *Account) HasReferralRenewalCountdown() bool`
+
+HasReferralRenewalCountdown returns a boolean if a field has been set.
 
 ### GetRole
 
@@ -215,26 +298,86 @@ and a boolean to check if the value has been set.
 
 SetRole sets Role field to given value.
 
+### HasRole
+
+`func (o *Account) HasRole() bool`
+
+HasRole returns a boolean if a field has been set.
+
+### GetTtl
+
+`func (o *Account) GetTtl() time.Time`
+
+GetTtl returns the Ttl field if non-nil, zero value otherwise.
+
+### GetTtlOk
+
+`func (o *Account) GetTtlOk() (*time.Time, bool)`
+
+GetTtlOk returns a tuple with the Ttl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTtl
+
+`func (o *Account) SetTtl(v time.Time)`
+
+SetTtl sets Ttl field to given value.
+
+### HasTtl
+
+`func (o *Account) HasTtl() bool`
+
+HasTtl returns a boolean if a field has been set.
 
 ### GetUpdated
 
-`func (o *Account) GetUpdated() string`
+`func (o *Account) GetUpdated() time.Time`
 
 GetUpdated returns the Updated field if non-nil, zero value otherwise.
 
 ### GetUpdatedOk
 
-`func (o *Account) GetUpdatedOk() (*string, bool)`
+`func (o *Account) GetUpdatedOk() (*time.Time, bool)`
 
 GetUpdatedOk returns a tuple with the Updated field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUpdated
 
-`func (o *Account) SetUpdated(v string)`
+`func (o *Account) SetUpdated(v time.Time)`
 
 SetUpdated sets Updated field to given value.
 
+### HasUpdated
+
+`func (o *Account) HasUpdated() bool`
+
+HasUpdated returns a boolean if a field has been set.
+
+### GetUsage
+
+`func (o *Account) GetUsage() int64`
+
+GetUsage returns the Usage field if non-nil, zero value otherwise.
+
+### GetUsageOk
+
+`func (o *Account) GetUsageOk() (*int64, bool)`
+
+GetUsageOk returns a tuple with the Usage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUsage
+
+`func (o *Account) SetUsage(v int64)`
+
+SetUsage sets Usage field to given value.
+
+### HasUsage
+
+`func (o *Account) HasUsage() bool`
+
+HasUsage returns a boolean if a field has been set.
 
 ### GetWarpPlus
 
@@ -255,31 +398,11 @@ and a boolean to check if the value has been set.
 
 SetWarpPlus sets WarpPlus field to given value.
 
+### HasWarpPlus
 
-### GetUsage
+`func (o *Account) HasWarpPlus() bool`
 
-`func (o *Account) GetUsage() float32`
-
-GetUsage returns the Usage field if non-nil, zero value otherwise.
-
-### GetUsageOk
-
-`func (o *Account) GetUsageOk() (*float32, bool)`
-
-GetUsageOk returns a tuple with the Usage field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUsage
-
-`func (o *Account) SetUsage(v float32)`
-
-SetUsage sets Usage field to given value.
-
-### HasUsage
-
-`func (o *Account) HasUsage() bool`
-
-HasUsage returns a boolean if a field has been set.
+HasWarpPlus returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CaptivePortal** | [**[]GetClientConfig200ResponseCaptivePortalInner**](GetClientConfig200ResponseCaptivePortalInner.md) |  | 
-**Denylist** | [**[]GetClientConfig200ResponseDenylistInner**](GetClientConfig200ResponseDenylistInner.md) |  | 
-**PremiumDataBytes** | **float32** |  | 
-**ReferralRewardBytes** | **float32** |  | 
+**Result** | [**ClientConfig**](ClientConfig.md) |  |
+**Success** | **bool** |  |
+**Errors** | **[]map[string]interface{}** |  |
+**Messages** | **[]map[string]interface{}** |  |
 
 ## Methods
 
 ### NewGetClientConfig200Response
 
-`func NewGetClientConfig200Response(captivePortal []GetClientConfig200ResponseCaptivePortalInner, denylist []GetClientConfig200ResponseDenylistInner, premiumDataBytes float32, referralRewardBytes float32, ) *GetClientConfig200Response`
+`func NewGetClientConfig200Response(result ClientConfig, success bool, errors []map[string]interface{}, messages []map[string]interface{}, ) *GetClientConfig200Response`
 
 NewGetClientConfig200Response instantiates a new GetClientConfig200Response object
 This constructor will assign default values to properties that have it defined,
@@ -28,84 +28,84 @@ NewGetClientConfig200ResponseWithDefaults instantiates a new GetClientConfig200R
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetCaptivePortal
+### GetResult
 
-`func (o *GetClientConfig200Response) GetCaptivePortal() []GetClientConfig200ResponseCaptivePortalInner`
+`func (o *GetClientConfig200Response) GetResult() ClientConfig`
 
-GetCaptivePortal returns the CaptivePortal field if non-nil, zero value otherwise.
+GetResult returns the Result field if non-nil, zero value otherwise.
 
-### GetCaptivePortalOk
+### GetResultOk
 
-`func (o *GetClientConfig200Response) GetCaptivePortalOk() (*[]GetClientConfig200ResponseCaptivePortalInner, bool)`
+`func (o *GetClientConfig200Response) GetResultOk() (*ClientConfig, bool)`
 
-GetCaptivePortalOk returns a tuple with the CaptivePortal field if it's non-nil, zero value otherwise
+GetResultOk returns a tuple with the Result field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCaptivePortal
+### SetResult
 
-`func (o *GetClientConfig200Response) SetCaptivePortal(v []GetClientConfig200ResponseCaptivePortalInner)`
+`func (o *GetClientConfig200Response) SetResult(v ClientConfig)`
 
-SetCaptivePortal sets CaptivePortal field to given value.
+SetResult sets Result field to given value.
 
 
-### GetDenylist
+### GetSuccess
 
-`func (o *GetClientConfig200Response) GetDenylist() []GetClientConfig200ResponseDenylistInner`
+`func (o *GetClientConfig200Response) GetSuccess() bool`
 
-GetDenylist returns the Denylist field if non-nil, zero value otherwise.
+GetSuccess returns the Success field if non-nil, zero value otherwise.
 
-### GetDenylistOk
+### GetSuccessOk
 
-`func (o *GetClientConfig200Response) GetDenylistOk() (*[]GetClientConfig200ResponseDenylistInner, bool)`
+`func (o *GetClientConfig200Response) GetSuccessOk() (*bool, bool)`
 
-GetDenylistOk returns a tuple with the Denylist field if it's non-nil, zero value otherwise
+GetSuccessOk returns a tuple with the Success field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDenylist
+### SetSuccess
 
-`func (o *GetClientConfig200Response) SetDenylist(v []GetClientConfig200ResponseDenylistInner)`
+`func (o *GetClientConfig200Response) SetSuccess(v bool)`
 
-SetDenylist sets Denylist field to given value.
+SetSuccess sets Success field to given value.
 
 
-### GetPremiumDataBytes
+### GetErrors
 
-`func (o *GetClientConfig200Response) GetPremiumDataBytes() float32`
+`func (o *GetClientConfig200Response) GetErrors() []map[string]interface{}`
 
-GetPremiumDataBytes returns the PremiumDataBytes field if non-nil, zero value otherwise.
+GetErrors returns the Errors field if non-nil, zero value otherwise.
 
-### GetPremiumDataBytesOk
+### GetErrorsOk
 
-`func (o *GetClientConfig200Response) GetPremiumDataBytesOk() (*float32, bool)`
+`func (o *GetClientConfig200Response) GetErrorsOk() (*[]map[string]interface{}, bool)`
 
-GetPremiumDataBytesOk returns a tuple with the PremiumDataBytes field if it's non-nil, zero value otherwise
+GetErrorsOk returns a tuple with the Errors field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPremiumDataBytes
+### SetErrors
 
-`func (o *GetClientConfig200Response) SetPremiumDataBytes(v float32)`
+`func (o *GetClientConfig200Response) SetErrors(v []map[string]interface{})`
 
-SetPremiumDataBytes sets PremiumDataBytes field to given value.
+SetErrors sets Errors field to given value.
 
 
-### GetReferralRewardBytes
+### GetMessages
 
-`func (o *GetClientConfig200Response) GetReferralRewardBytes() float32`
+`func (o *GetClientConfig200Response) GetMessages() []map[string]interface{}`
 
-GetReferralRewardBytes returns the ReferralRewardBytes field if non-nil, zero value otherwise.
+GetMessages returns the Messages field if non-nil, zero value otherwise.
 
-### GetReferralRewardBytesOk
+### GetMessagesOk
 
-`func (o *GetClientConfig200Response) GetReferralRewardBytesOk() (*float32, bool)`
+`func (o *GetClientConfig200Response) GetMessagesOk() (*[]map[string]interface{}, bool)`
 
-GetReferralRewardBytesOk returns a tuple with the ReferralRewardBytes field if it's non-nil, zero value otherwise
+GetMessagesOk returns a tuple with the Messages field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetReferralRewardBytes
+### SetMessages
 
-`func (o *GetClientConfig200Response) SetReferralRewardBytes(v float32)`
+`func (o *GetClientConfig200Response) SetMessages(v []map[string]interface{})`
 
-SetReferralRewardBytes sets ReferralRewardBytes field to given value.
+SetMessages sets Messages field to given value.
 
 
 

@@ -5,58 +5,72 @@ components:
       properties:
         account_type:
           type: "string"
+          enum: ["free", "limited", "unlimited", "team"]
         created:
           type: "string"
+          format: "date-time"
         id:
           type: "string"
+          format: "uuid"
         license:
           type: "string"
+        plus_expires_at:
+          type: "string"
+          format: "date-time"
+        managed:
+          type: "string"
+          enum: ["api", "not_api_managed"]
         premium_data:
-          type: "number"
+          type: "integer"
+          format: "int64"
         quota:
-          type: "number"
+          type: "integer"
+          format: "int64"
         referral_count:
-          type: "number"
+          type: "integer"
+          format: "int32"
         referral_renewal_countdown:
-          type: "number"
+          type: "integer"
+          format: "int32"
         role:
           type: "string"
+          enum: ["parent", "child"]
+        ttl:
+          type: "string"
+          format: "date-time"
         updated:
           type: "string"
+          format: "date-time"
+        usage:
+          type: "integer"
+          format: "int64"
         warp_plus:
           type: "boolean"
-        usage:
-          type: "number"
       required:
         - "account_type"
-        - "created"
         - "id"
-        - "license"
-        - "premium_data"
-        - "quota"
-        - "referral_count"
-        - "referral_renewal_countdown"
-        - "role"
-        - "updated"
-        - "warp_plus"
 
     BoundDevice:
       type: "object"
       properties:
         activated:
           type: "string"
+          format: "date-time"
         active:
           type: "boolean"
         created:
           type: "string"
+          format: "date-time"
         id:
           type: "string"
+          format: "uuid"
         model:
           type: "string"
         name:
           type: "string"
         role:
           type: "string"
+          enum: ["parent", "child"]
         type:
           type: "string"
       required:
@@ -87,8 +101,15 @@ components:
           type: "string"
         v6:
           type: "string"
+        ports:
+          type: "array"
+          default: [2408, 500, 1701, 4500]
+          items:
+            type: "integer"
+            format: "int32"
+            minimum: 1
+            maximum: 65535
       required:
-        - "host"
         - "v4"
         - "v6"
 
@@ -137,12 +158,14 @@ components:
       properties:
         created:
           type: "string"
+          format: "date-time"
         enabled:
           type: "boolean"
         fcm_token:
           type: "string"
         id:
           type: "string"
+          format: "uuid"
         install_id:
           type: "string"
         key:
@@ -151,36 +174,33 @@ components:
           type: "string"
         model:
           type: "string"
+        manufacturer:
+          type: "string"
         name:
           type: "string"
+        os_version:
+          type: "string"
         place:
-          type: "number"
+          type: "integer"
+          format: "int32"
+        serial_number:
+          type: "string"
+        device_id:
+          type: "string"
         tos:
           type: "string"
+          format: "date-time"
         type:
           type: "string"
         updated:
           type: "string"
+          format: "date-time"
         waitlist_enabled:
           type: "boolean"
         warp_enabled:
           type: "boolean"
       required:
-        - "created"
-        - "enabled"
-        - "fcm_token"
         - "id"
-        - "install_id"
-        - "key"
-        - "locale"
-        - "model"
-        - "name"
-        - "place"
-        - "tos"
-        - "type"
-        - "updated"
-        - "waitlist_enabled"
-        - "warp_enabled"
 
     IPv4Network:
       type: "object"
@@ -199,7 +219,10 @@ components:
         address:
           type: "string"
         prefix:
-          type: "number"
+          type: "integer"
+          format: "int32"
+          minimum: 0
+          maximum: 128
       required:
         - "address"
         - "prefix"
@@ -210,28 +233,9 @@ components:
     GetBoundDevices_200_Response:
       $ref: "#/components/schemas/BoundDevice"
 
-    GetClientConfig_200_Response:
+    ClientConfig:
       type: "object"
       properties:
-        captive_portal:
-          type: "array"
-          items:
-            type: "object"
-            properties:
-              name:
-                type: "string"
-              networks:
-                type: "array"
-                items:
-                  type: "object"
-                  properties:
-                    address:
-                      type: "string"
-                  required:
-                    - "address"
-            required:
-              - "name"
-              - "networks"
         denylist:
           type: "array"
           items:
@@ -262,15 +266,240 @@ components:
             required:
               - "name"
               - "visible"
+        captive_portal:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/CaptivePortal"
         premium_data_bytes:
-          type: "number"
+          type: "integer"
+          format: "int64"
         referral_reward_bytes:
-          type: "number"
+          type: "integer"
+          format: "int64"
       required:
         - "captive_portal"
         - "denylist"
         - "premium_data_bytes"
         - "referral_reward_bytes"
+
+    CaptivePortal:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        networks:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/CaptivePortalNetwork"
+      required: ["name", "networks"]
+
+    CaptivePortalNetwork:
+      type: "object"
+      properties:
+        address:
+          type: "string"
+      required: ["address"]
+
+    AppMode:
+      type: "string"
+      enum: ["1dot1", "warp", "posture_only", "warp_tunnel_only", "proxy"]
+
+    PostQuantumSupport:
+      type: "string"
+      enum: ["disabled", "enabled", "enabled_with_downgrades"]
+
+    ServiceMode:
+      type: "object"
+      additionalProperties: true
+      properties:
+        mode:
+          $ref: "#/components/schemas/AppMode"
+        port:
+          type: "integer"
+          format: "int32"
+
+    PolicyIP:
+      type: "object"
+      additionalProperties: true
+      properties:
+        ip:
+          type: "string"
+      required: ["ip"]
+
+    PolicyExclude:
+      type: "object"
+      additionalProperties: true
+      properties:
+        address:
+          type: "string"
+        host:
+          type: "string"
+        description:
+          type: "string"
+
+    FallbackDomain:
+      type: "object"
+      additionalProperties: true
+      properties:
+        suffix:
+          type: "string"
+        description:
+          type: "string"
+        dns_server:
+          type: "array"
+          items:
+            type: "string"
+
+    Policy:
+      type: "object"
+      additionalProperties: true
+      properties:
+        organization:
+          type: "string"
+        enable:
+          type: "boolean"
+        service_mode:
+          $ref: "#/components/schemas/AppMode"
+        service_mode_v2:
+          $ref: "#/components/schemas/ServiceMode"
+        gateway_unique_id:
+          type: "string"
+        support_url:
+          type: "string"
+        onboarding:
+          type: "boolean"
+        exclude:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/PolicyExclude"
+        include:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/PolicyExclude"
+        fallback_domains:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/FallbackDomain"
+        switch_locked:
+          type: "boolean"
+        auto_connect:
+          type: "integer"
+          format: "int32"
+        managed_mode:
+          type: "boolean"
+        allow_mode_switch:
+          type: "boolean"
+        auth_client_id:
+          type: "string"
+        auth_client_secret:
+          type: "string"
+        allowed_to_leave:
+          type: "boolean"
+        override_doh_endpoint:
+          type: "string"
+        override_warp_endpoint:
+          type: "string"
+        override_api_endpoint:
+          type: "string"
+        unique_client_id:
+          type: "string"
+        tunnel_protocol:
+          type: "string"
+          enum: ["wireguard", "masque"]
+        policy_id:
+          type: "string"
+        post_quantum:
+          $ref: "#/components/schemas/PostQuantumSupport"
+        always_exclude:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/PolicyIP"
+        always_include:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/PolicyIP"
+
+    DisableForTime:
+      type: "object"
+      additionalProperties: true
+      properties:
+        seconds:
+          type: "integer"
+          format: "int64"
+          minimum: 0
+        secret:
+          type: "string"
+      required: ["seconds", "secret"]
+
+    OverrideCodes:
+      type: "object"
+      additionalProperties: true
+      properties:
+        disable_for_time:
+          $ref: "#/components/schemas/DisableForTime"
+
+    DexDataKind:
+      type: "string"
+      enum: ["http", "traceroute"]
+
+    HTTPRequestMethod:
+      type: "string"
+      enum: ["DELETE", "GET", "PATCH", "POST", "PUT"]
+
+    DexData:
+      type: "object"
+      additionalProperties: true
+      properties:
+        kind:
+          $ref: "#/components/schemas/DexDataKind"
+        method:
+          $ref: "#/components/schemas/HTTPRequestMethod"
+        host:
+          type: "string"
+      required: ["kind", "host"]
+
+    DexTest:
+      type: "object"
+      additionalProperties: true
+      properties:
+        test_id:
+          type: "string"
+        name:
+          type: "string"
+        description:
+          type: "string"
+        interval:
+          type: "integer"
+          format: "int64"
+          minimum: 0
+        enabled:
+          type: "boolean"
+        data:
+          $ref: "#/components/schemas/DexData"
+        updated:
+          type: "string"
+        created:
+          type: "string"
+      required: ["test_id", "name", "interval", "enabled", "data", "updated", "created"]
+
+    GetClientConfig_200_Response:
+      type: "object"
+      properties:
+        result:
+          $ref: "#/components/schemas/ClientConfig"
+        success:
+          type: "boolean"
+        errors:
+          type: "array"
+          items:
+            type: "object"
+            additionalProperties: true
+        messages:
+          type: "array"
+          items:
+            type: "object"
+            additionalProperties: true
+      required: ["result", "success", "errors", "messages"]
 
     GetSourceDevice_200_Response:
       allOf:
@@ -281,9 +510,28 @@ components:
               $ref: "#/components/schemas/Account"
             config:
               $ref: "#/components/schemas/Config"
+            policy:
+              $ref: "#/components/schemas/Policy"
+            override_codes:
+              $ref: "#/components/schemas/OverrideCodes"
+            alternate_networks:
+              type: "array"
+              items:
+                $ref: "#/components/schemas/AlternateNetwork"
+            dex_tests:
+              type: "array"
+              items:
+                $ref: "#/components/schemas/DexTest"
+            key_type:
+              type: "string"
+            tunnel_type:
+              type: "string"
+              enum: ["wireguard", "masque"]
           required:
             - "account"
-            - "config"
+            - "id"
+            - "key_type"
+            - "tunnel_type"
 
     Register_200_Response:
       allOf:
@@ -296,10 +544,30 @@ components:
               $ref: "#/components/schemas/Config"
             token:
               type: "string"
+              format: "uuid"
+            policy:
+              $ref: "#/components/schemas/Policy"
+            override_codes:
+              $ref: "#/components/schemas/OverrideCodes"
+            alternate_networks:
+              type: "array"
+              items:
+                $ref: "#/components/schemas/AlternateNetwork"
+            dex_tests:
+              type: "array"
+              items:
+                $ref: "#/components/schemas/DexTest"
+            key_type:
+              type: "string"
+            tunnel_type:
+              type: "string"
+              enum: ["wireguard", "masque"]
           required:
             - "account"
-            - "config"
+            - "id"
             - "token"
+            - "key_type"
+            - "tunnel_type"
 
     Register_Request:
       type: "object"
@@ -314,20 +582,81 @@ components:
           type: "string"
         model:
           type: "string"
+        referrer:
+          type: "string"
         tos:
           type: "string"
-        type:
+        expired:
           type: "string"
+        serial_number:
+          type: "string"
+        os_version:
+          type: "string"
+        key_type:
+          type: "string"
+        tunnel_type:
+          type: "string"
+          enum: ["wireguard", "masque"]
       required:
         - "fcm_token"
         - "install_id"
         - "key"
         - "locale"
-        - "model"
-        - "tos"
-        - "type"
+        - "serial_number"
+
+    AlternateNetwork:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        network_id:
+          type: "string"
+        tls_sockaddr:
+          type: "string"
+        sha256:
+          type: "string"
+      required: ["name", "network_id", "tls_sockaddr", "sha256"]
+
+    ReceiptTokenUpdate:
+      type: "object"
+      properties:
+        token:
+          type: "string"
+      required: ["token"]
+
+    NotificationAckRequest:
+      type: "object"
+      properties:
+        fcm_message_id:
+          type: "string"
+          nullable: true
+        success:
+          type: "boolean"
+        error:
+          type: "string"
+          nullable: true
+        notification_id:
+          type: "string"
+          nullable: true
+      required: ["fcm_message_id", "success"]
+
+    GatewayAuth:
+      type: "object"
+      properties:
+        token:
+          type: "string"
+          nullable: true
+      required: ["token"]
 
     ResetAccountLicense_200_Response:
+      type: "object"
+      properties:
+        license:
+          type: "string"
+      required:
+        - "license"
+
+    UpdateAccount_Request:
       type: "object"
       properties:
         license:
@@ -340,20 +669,28 @@ components:
       properties:
         created:
           type: "string"
+          format: "date-time"
         id:
           type: "string"
+          format: "uuid"
         premium_data:
-          type: "number"
+          type: "integer"
+          format: "int64"
         quota:
-          type: "number"
+          type: "integer"
+          format: "int64"
         referral_count:
-          type: "number"
+          type: "integer"
+          format: "int32"
         referral_renewal_countdown:
-          type: "number"
+          type: "integer"
+          format: "int32"
         role:
           type: "string"
+          enum: ["parent", "child"]
         updated:
           type: "string"
+          format: "date-time"
         warp_plus:
           type: "boolean"
       required:
@@ -367,50 +704,49 @@ components:
         - "updated"
         - "warp_plus"
 
-    UpdateAccount_Request:
-      type: "object"
-      properties:
-        license:
-          type: "string"
-      required:
-        - "license"
-
     UpdateBoundDevice_200_Response:
       $ref: "#/components/schemas/BoundDevice"
 
     UpdateBoundDevice_Request:
       type: "object"
+      minProperties: 1
       properties:
         active:
           type: "boolean"
         name:
           type: "string"
 
-    UpdateSourceDevice_200_Response:
-      allOf:
-        - $ref: "#/components/schemas/SourceDevice"
-        - type: "object"
-          properties:
-            account:
-              $ref: "#/components/schemas/Account"
-            config:
-              $ref: "#/components/schemas/Config"
-          required:
-            - "account"
-            - "config"
-
     UpdateSourceDevice_Request:
       type: "object"
+      minProperties: 1
       properties:
         key:
           type: "string"
-      required:
-        - "key"
+        key_type:
+          type: "string"
+        tunnel_type:
+          type: "string"
+          enum: ["wireguard", "masque"]
+        fcm_token:
+          type: "string"
+        name:
+          type: "string"
+        os_version:
+          type: "string"
+        manufacturer:
+          type: "string"
+        model:
+          type: "string"
+        device_id:
+          type: "string"
 
 info:
   title: "Cloudflare WARP API"
-  version: "536"
+  description: "Cloudflare WARP Android API contract for version 6.38.9 (build 5641)"
+  version: "5641"
 openapi: "3.0.1"
+servers:
+  - url: "https://api.cloudflareclient.com"
 paths:
   /{apiVersion}/client_config:
     get:
@@ -419,6 +755,9 @@ paths:
         200:
           content:
             application/json:
+              schema:
+                $ref: "#/components/schemas/GetClientConfig_200_Response"
+            text/plain:
               schema:
                 $ref: "#/components/schemas/GetClientConfig_200_Response"
           description: ""
@@ -438,6 +777,12 @@ paths:
           type: "string"
     post:
       operationId: "Register"
+      parameters:
+        - in: "header"
+          name: "Cf-Access-Jwt-Assertion"
+          required: false
+          schema:
+            type: "string"
       requestBody:
         content:
           application/json:
@@ -454,6 +799,12 @@ paths:
   /{apiVersion}/reg/{sourceDeviceId}:
     get:
       operationId: "GetSourceDevice"
+      parameters:
+        - in: "query"
+          name: "network"
+          required: false
+          schema:
+            type: "string"
       responses:
         200:
           content:
@@ -485,9 +836,17 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UpdateSourceDevice_200_Response"
+                $ref: "#/components/schemas/GetSourceDevice_200_Response"
           description: ""
+        204:
+          description: "Details or device name updated"
       summary: "UpdateSourceDevice"
+    delete:
+      operationId: "DeleteSourceDevice"
+      responses:
+        204:
+          description: "Registration deleted"
+      summary: "DeleteSourceDevice"
   /{apiVersion}/reg/{sourceDeviceId}/account:
     get:
       operationId: "GetAccount"
@@ -523,7 +882,9 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UpdateAccount_200_Response"
-          description: ""
+          description: "Updated account"
+        204:
+          description: "License binding updated"
       summary: "UpdateAccount"
   /{apiVersion}/reg/{sourceDeviceId}/account/devices:
     get:
@@ -571,6 +932,30 @@ paths:
                 $ref: "#/components/schemas/ResetAccountLicense_200_Response"
           description: ""
       summary: "ResetAccountLicense"
+  /{apiVersion}/reg/{sourceDeviceId}/account/receipts:
+    parameters:
+      - in: "path"
+        name: "sourceDeviceId"
+        required: true
+        schema:
+          type: "string"
+      - in: "path"
+        name: "apiVersion"
+        required: true
+        schema:
+          type: "string"
+    post:
+      operationId: "UpdateReceiptToken"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReceiptTokenUpdate"
+        required: true
+      responses:
+        204:
+          description: "Receipt token updated"
+      summary: "UpdateReceiptToken"
   /{apiVersion}/reg/{sourceDeviceId}/account/reg/{boundDeviceId}:
     parameters:
       - in: "path"
@@ -608,6 +993,63 @@ paths:
     delete:
       operationId: "DeleteBoundDevice"
       responses:
-        204:
-          description: ""
+        200:
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/BoundDevice"
+          description: "Remaining account devices"
       summary: "DeleteBoundDevice"
+  /{apiVersion}/accounts/{accountId}/reg/{sourceDeviceId}/auth:
+    parameters:
+      - in: "path"
+        name: "apiVersion"
+        required: true
+        schema:
+          type: "string"
+      - in: "path"
+        name: "accountId"
+        required: true
+        schema:
+          type: "string"
+      - in: "path"
+        name: "sourceDeviceId"
+        required: true
+        schema:
+          type: "string"
+    get:
+      operationId: "GetGatewayAuth"
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayAuth"
+          description: "Gateway authentication token"
+      summary: "GetGatewayAuth"
+  /notifications/v1/accounts/{accountId}/reg/{sourceDeviceId}/ack:
+    parameters:
+      - in: "path"
+        name: "accountId"
+        required: true
+        schema:
+          type: "string"
+      - in: "path"
+        name: "sourceDeviceId"
+        required: true
+        schema:
+          type: "string"
+    post:
+      operationId: "AcknowledgeNotification"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NotificationAckRequest"
+        required: true
+      responses:
+        204:
+          description: "Notification acknowledged"
+      summary: "AcknowledgeNotification"

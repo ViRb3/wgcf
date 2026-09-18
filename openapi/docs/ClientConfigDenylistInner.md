@@ -1,119 +1,119 @@
-# GetClientConfig200ResponseDenylistInner
+# ClientConfigDenylistInner
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AndroidPackages** | Pointer to **[]string** |  | [optional] 
-**Name** | **string** |  | 
-**Networks** | Pointer to [**GetClientConfig200ResponseDenylistInnerNetworks**](GetClientConfig200ResponseDenylistInnerNetworks.md) |  | [optional] 
-**Visible** | **bool** |  | 
+**AndroidPackages** | Pointer to **[]string** |  | [optional]
+**Name** | **string** |  |
+**Networks** | Pointer to [**ClientConfigDenylistInnerNetworks**](ClientConfigDenylistInnerNetworks.md) |  | [optional]
+**Visible** | **bool** |  |
 
 ## Methods
 
-### NewGetClientConfig200ResponseDenylistInner
+### NewClientConfigDenylistInner
 
-`func NewGetClientConfig200ResponseDenylistInner(name string, visible bool, ) *GetClientConfig200ResponseDenylistInner`
+`func NewClientConfigDenylistInner(name string, visible bool, ) *ClientConfigDenylistInner`
 
-NewGetClientConfig200ResponseDenylistInner instantiates a new GetClientConfig200ResponseDenylistInner object
+NewClientConfigDenylistInner instantiates a new ClientConfigDenylistInner object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewGetClientConfig200ResponseDenylistInnerWithDefaults
+### NewClientConfigDenylistInnerWithDefaults
 
-`func NewGetClientConfig200ResponseDenylistInnerWithDefaults() *GetClientConfig200ResponseDenylistInner`
+`func NewClientConfigDenylistInnerWithDefaults() *ClientConfigDenylistInner`
 
-NewGetClientConfig200ResponseDenylistInnerWithDefaults instantiates a new GetClientConfig200ResponseDenylistInner object
+NewClientConfigDenylistInnerWithDefaults instantiates a new ClientConfigDenylistInner object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetAndroidPackages
 
-`func (o *GetClientConfig200ResponseDenylistInner) GetAndroidPackages() []string`
+`func (o *ClientConfigDenylistInner) GetAndroidPackages() []string`
 
 GetAndroidPackages returns the AndroidPackages field if non-nil, zero value otherwise.
 
 ### GetAndroidPackagesOk
 
-`func (o *GetClientConfig200ResponseDenylistInner) GetAndroidPackagesOk() (*[]string, bool)`
+`func (o *ClientConfigDenylistInner) GetAndroidPackagesOk() (*[]string, bool)`
 
 GetAndroidPackagesOk returns a tuple with the AndroidPackages field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAndroidPackages
 
-`func (o *GetClientConfig200ResponseDenylistInner) SetAndroidPackages(v []string)`
+`func (o *ClientConfigDenylistInner) SetAndroidPackages(v []string)`
 
 SetAndroidPackages sets AndroidPackages field to given value.
 
 ### HasAndroidPackages
 
-`func (o *GetClientConfig200ResponseDenylistInner) HasAndroidPackages() bool`
+`func (o *ClientConfigDenylistInner) HasAndroidPackages() bool`
 
 HasAndroidPackages returns a boolean if a field has been set.
 
 ### GetName
 
-`func (o *GetClientConfig200ResponseDenylistInner) GetName() string`
+`func (o *ClientConfigDenylistInner) GetName() string`
 
 GetName returns the Name field if non-nil, zero value otherwise.
 
 ### GetNameOk
 
-`func (o *GetClientConfig200ResponseDenylistInner) GetNameOk() (*string, bool)`
+`func (o *ClientConfigDenylistInner) GetNameOk() (*string, bool)`
 
 GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetName
 
-`func (o *GetClientConfig200ResponseDenylistInner) SetName(v string)`
+`func (o *ClientConfigDenylistInner) SetName(v string)`
 
 SetName sets Name field to given value.
 
 
 ### GetNetworks
 
-`func (o *GetClientConfig200ResponseDenylistInner) GetNetworks() GetClientConfig200ResponseDenylistInnerNetworks`
+`func (o *ClientConfigDenylistInner) GetNetworks() ClientConfigDenylistInnerNetworks`
 
 GetNetworks returns the Networks field if non-nil, zero value otherwise.
 
 ### GetNetworksOk
 
-`func (o *GetClientConfig200ResponseDenylistInner) GetNetworksOk() (*GetClientConfig200ResponseDenylistInnerNetworks, bool)`
+`func (o *ClientConfigDenylistInner) GetNetworksOk() (*ClientConfigDenylistInnerNetworks, bool)`
 
 GetNetworksOk returns a tuple with the Networks field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNetworks
 
-`func (o *GetClientConfig200ResponseDenylistInner) SetNetworks(v GetClientConfig200ResponseDenylistInnerNetworks)`
+`func (o *ClientConfigDenylistInner) SetNetworks(v ClientConfigDenylistInnerNetworks)`
 
 SetNetworks sets Networks field to given value.
 
 ### HasNetworks
 
-`func (o *GetClientConfig200ResponseDenylistInner) HasNetworks() bool`
+`func (o *ClientConfigDenylistInner) HasNetworks() bool`
 
 HasNetworks returns a boolean if a field has been set.
 
 ### GetVisible
 
-`func (o *GetClientConfig200ResponseDenylistInner) GetVisible() bool`
+`func (o *ClientConfigDenylistInner) GetVisible() bool`
 
 GetVisible returns the Visible field if non-nil, zero value otherwise.
 
 ### GetVisibleOk
 
-`func (o *GetClientConfig200ResponseDenylistInner) GetVisibleOk() (*bool, bool)`
+`func (o *ClientConfigDenylistInner) GetVisibleOk() (*bool, bool)`
 
 GetVisibleOk returns a tuple with the Visible field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetVisible
 
-`func (o *GetClientConfig200ResponseDenylistInner) SetVisible(v bool)`
+`func (o *ClientConfigDenylistInner) SetVisible(v bool)`
 
 SetVisible sets Visible field to given value.
 

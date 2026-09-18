@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**V4** | **string** |  | 
-**V6** | **string** |  | 
+**V4** | **string** |  |
+**V6** | **string** |  |
 
 ## Methods
 

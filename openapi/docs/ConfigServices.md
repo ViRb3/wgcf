@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**HttpProxy** | **string** |  | 
+**HttpProxy** | **string** |  |
 
 ## Methods
 

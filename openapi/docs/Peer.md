@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Endpoint** | [**Endpoint**](Endpoint.md) |  | 
-**PublicKey** | **string** |  | 
+**Endpoint** | [**Endpoint**](Endpoint.md) |  |
+**PublicKey** | **string** |  |
 
 ## Methods
 

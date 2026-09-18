@@ -4,15 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Host** | **string** |  | 
-**V4** | **string** |  | 
-**V6** | **string** |  | 
+**Host** | Pointer to **string** |  | [optional]
+**V4** | **string** |  |
+**V6** | **string** |  |
+**Ports** | Pointer to **[]int32** |  | [optional] [default to {2408, 500, 1701, 4500}]
 
 ## Methods
 
 ### NewEndpoint
 
-`func NewEndpoint(host string, v4 string, v6 string, ) *Endpoint`
+`func NewEndpoint(v4 string, v6 string, ) *Endpoint`
 
 NewEndpoint instantiates a new Endpoint object
 This constructor will assign default values to properties that have it defined,
@@ -46,6 +47,11 @@ and a boolean to check if the value has been set.
 
 SetHost sets Host field to given value.
 
+### HasHost
+
+`func (o *Endpoint) HasHost() bool`
+
+HasHost returns a boolean if a field has been set.
 
 ### GetV4
 
@@ -86,6 +92,31 @@ and a boolean to check if the value has been set.
 
 SetV6 sets V6 field to given value.
 
+
+### GetPorts
+
+`func (o *Endpoint) GetPorts() []int32`
+
+GetPorts returns the Ports field if non-nil, zero value otherwise.
+
+### GetPortsOk
+
+`func (o *Endpoint) GetPortsOk() (*[]int32, bool)`
+
+GetPortsOk returns a tuple with the Ports field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPorts
+
+`func (o *Endpoint) SetPorts(v []int32)`
+
+SetPorts sets Ports field to given value.
+
+### HasPorts
+
+`func (o *Endpoint) HasPorts() bool`
+
+HasPorts returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

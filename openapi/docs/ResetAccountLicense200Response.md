@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**License** | **string** |  | 
+**License** | **string** |  |
 
 ## Methods
 

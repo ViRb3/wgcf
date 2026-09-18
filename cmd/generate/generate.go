@@ -39,12 +39,21 @@ func generateProfile() error {
 		return errors.WithStack(err)
 	}
 
+	if thisDevice.Config == nil || len(thisDevice.Config.Peers) == 0 {
+		return errors.New("Cloudflare response did not contain a WireGuard peer")
+	}
+	peer := thisDevice.Config.Peers[0]
+	endpoint, err := cloudflare.WireGuardEndpoint(peer.Endpoint)
+	if err != nil {
+		return errors.WithStack(err)
+	}
+
 	profile, err := wireguard.NewProfile(&wireguard.ProfileData{
 		PrivateKey: viper.GetString(config.PrivateKey),
 		Address1:   thisDevice.Config.Interface.Addresses.V4,
 		Address2:   thisDevice.Config.Interface.Addresses.V6,
-		PublicKey:  thisDevice.Config.Peers[0].PublicKey,
-		Endpoint:   thisDevice.Config.Peers[0].Endpoint.Host,
+		PublicKey:  peer.PublicKey,
+		Endpoint:   endpoint,
 	})
 	if err != nil {
 		return errors.WithStack(err)

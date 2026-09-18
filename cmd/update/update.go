@@ -53,9 +53,13 @@ func updateAccount() error {
 	if err != nil {
 		return errors.WithStack(err)
 	}
-	if account.License != ctx.LicenseKey {
+	accountLicense := ""
+	if account.License != nil {
+		accountLicense = *account.License
+	}
+	if accountLicense != ctx.LicenseKey {
 		log.Println("Updated license key detected, re-binding device to new account")
-		if _, err := cloudflare.UpdateLicenseKey(ctx); err != nil {
+		if err := cloudflare.UpdateLicenseKey(ctx); err != nil {
 			return errors.WithStack(err)
 		}
 		viper.Set(config.LicenseKey, ctx.LicenseKey)

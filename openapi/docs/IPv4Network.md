@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Address** | **string** |  | 
-**Netmask** | **string** |  | 
+**Address** | **string** |  |
+**Netmask** | **string** |  |
 
 ## Methods
 

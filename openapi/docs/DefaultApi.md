@@ -1,25 +1,100 @@
 # \DefaultAPI
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://api.cloudflareclient.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**AcknowledgeNotification**](DefaultAPI.md#AcknowledgeNotification) | **Post** /notifications/v1/accounts/{accountId}/reg/{sourceDeviceId}/ack | AcknowledgeNotification
 [**DeleteBoundDevice**](DefaultAPI.md#DeleteBoundDevice) | **Delete** /{apiVersion}/reg/{sourceDeviceId}/account/reg/{boundDeviceId} | DeleteBoundDevice
+[**DeleteSourceDevice**](DefaultAPI.md#DeleteSourceDevice) | **Delete** /{apiVersion}/reg/{sourceDeviceId} | DeleteSourceDevice
 [**GetAccount**](DefaultAPI.md#GetAccount) | **Get** /{apiVersion}/reg/{sourceDeviceId}/account | GetAccount
 [**GetBoundDevices**](DefaultAPI.md#GetBoundDevices) | **Get** /{apiVersion}/reg/{sourceDeviceId}/account/devices | GetBoundDevices
 [**GetClientConfig**](DefaultAPI.md#GetClientConfig) | **Get** /{apiVersion}/client_config | GetClientConfig
+[**GetGatewayAuth**](DefaultAPI.md#GetGatewayAuth) | **Get** /{apiVersion}/accounts/{accountId}/reg/{sourceDeviceId}/auth | GetGatewayAuth
 [**GetSourceDevice**](DefaultAPI.md#GetSourceDevice) | **Get** /{apiVersion}/reg/{sourceDeviceId} | GetSourceDevice
 [**Register**](DefaultAPI.md#Register) | **Post** /{apiVersion}/reg | Register
 [**ResetAccountLicense**](DefaultAPI.md#ResetAccountLicense) | **Post** /{apiVersion}/reg/{sourceDeviceId}/account/license | ResetAccountLicense
 [**UpdateAccount**](DefaultAPI.md#UpdateAccount) | **Put** /{apiVersion}/reg/{sourceDeviceId}/account | UpdateAccount
 [**UpdateBoundDevice**](DefaultAPI.md#UpdateBoundDevice) | **Patch** /{apiVersion}/reg/{sourceDeviceId}/account/reg/{boundDeviceId} | UpdateBoundDevice
+[**UpdateReceiptToken**](DefaultAPI.md#UpdateReceiptToken) | **Post** /{apiVersion}/reg/{sourceDeviceId}/account/receipts | UpdateReceiptToken
 [**UpdateSourceDevice**](DefaultAPI.md#UpdateSourceDevice) | **Patch** /{apiVersion}/reg/{sourceDeviceId} | UpdateSourceDevice
 
 
 
+## AcknowledgeNotification
+
+> AcknowledgeNotification(ctx, accountId, sourceDeviceId).NotificationAckRequest(notificationAckRequest).Execute()
+
+AcknowledgeNotification
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	accountId := "accountId_example" // string |
+	sourceDeviceId := "sourceDeviceId_example" // string |
+	notificationAckRequest := *openapiclient.NewNotificationAckRequest("FcmMessageId_example", false) // NotificationAckRequest |
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.DefaultAPI.AcknowledgeNotification(context.Background(), accountId, sourceDeviceId).NotificationAckRequest(notificationAckRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.AcknowledgeNotification``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**accountId** | **string** |  |
+**sourceDeviceId** | **string** |  |
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiAcknowledgeNotificationRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **notificationAckRequest** | [**NotificationAckRequest**](NotificationAckRequest.md) |  |
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## DeleteBoundDevice
 
-> DeleteBoundDevice(ctx, sourceDeviceId, apiVersion, boundDeviceId).Execute()
+> []BoundDevice DeleteBoundDevice(ctx, sourceDeviceId, apiVersion, boundDeviceId).Execute()
 
 DeleteBoundDevice
 
@@ -36,15 +111,88 @@ import (
 )
 
 func main() {
-	sourceDeviceId := "sourceDeviceId_example" // string | 
-	apiVersion := "apiVersion_example" // string | 
-	boundDeviceId := "boundDeviceId_example" // string | 
+	sourceDeviceId := "sourceDeviceId_example" // string |
+	apiVersion := "apiVersion_example" // string |
+	boundDeviceId := "boundDeviceId_example" // string |
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.DefaultAPI.DeleteBoundDevice(context.Background(), sourceDeviceId, apiVersion, boundDeviceId).Execute()
+	resp, r, err := apiClient.DefaultAPI.DeleteBoundDevice(context.Background(), sourceDeviceId, apiVersion, boundDeviceId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.DeleteBoundDevice``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `DeleteBoundDevice`: []BoundDevice
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.DeleteBoundDevice`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**sourceDeviceId** | **string** |  |
+**apiVersion** | **string** |  |
+**boundDeviceId** | **string** |  |
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteBoundDeviceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**[]BoundDevice**](BoundDevice.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteSourceDevice
+
+> DeleteSourceDevice(ctx, apiVersion, sourceDeviceId).Execute()
+
+DeleteSourceDevice
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	apiVersion := "apiVersion_example" // string |
+	sourceDeviceId := "sourceDeviceId_example" // string |
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.DefaultAPI.DeleteSourceDevice(context.Background(), apiVersion, sourceDeviceId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.DeleteSourceDevice``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
 }
@@ -56,18 +204,16 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sourceDeviceId** | **string** |  | 
-**apiVersion** | **string** |  | 
-**boundDeviceId** | **string** |  | 
+**apiVersion** | **string** |  |
+**sourceDeviceId** | **string** |  |
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteBoundDeviceRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteSourceDeviceRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
 
 
 
@@ -108,8 +254,8 @@ import (
 )
 
 func main() {
-	sourceDeviceId := "sourceDeviceId_example" // string | 
-	apiVersion := "apiVersion_example" // string | 
+	sourceDeviceId := "sourceDeviceId_example" // string |
+	apiVersion := "apiVersion_example" // string |
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -129,8 +275,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sourceDeviceId** | **string** |  | 
-**apiVersion** | **string** |  | 
+**sourceDeviceId** | **string** |  |
+**apiVersion** | **string** |  |
 
 ### Other Parameters
 
@@ -179,8 +325,8 @@ import (
 )
 
 func main() {
-	sourceDeviceId := "sourceDeviceId_example" // string | 
-	apiVersion := "apiVersion_example" // string | 
+	sourceDeviceId := "sourceDeviceId_example" // string |
+	apiVersion := "apiVersion_example" // string |
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -200,8 +346,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sourceDeviceId** | **string** |  | 
-**apiVersion** | **string** |  | 
+**sourceDeviceId** | **string** |  |
+**apiVersion** | **string** |  |
 
 ### Other Parameters
 
@@ -250,7 +396,7 @@ import (
 )
 
 func main() {
-	apiVersion := "apiVersion_example" // string | 
+	apiVersion := "apiVersion_example" // string |
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -270,7 +416,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**apiVersion** | **string** |  | 
+**apiVersion** | **string** |  |
 
 ### Other Parameters
 
@@ -292,6 +438,80 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json, text/plain
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetGatewayAuth
+
+> GatewayAuth GetGatewayAuth(ctx, apiVersion, accountId, sourceDeviceId).Execute()
+
+GetGatewayAuth
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	apiVersion := "apiVersion_example" // string |
+	accountId := "accountId_example" // string |
+	sourceDeviceId := "sourceDeviceId_example" // string |
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DefaultAPI.GetGatewayAuth(context.Background(), apiVersion, accountId, sourceDeviceId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetGatewayAuth``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetGatewayAuth`: GatewayAuth
+	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.GetGatewayAuth`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**apiVersion** | **string** |  |
+**accountId** | **string** |  |
+**sourceDeviceId** | **string** |  |
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetGatewayAuthRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**GatewayAuth**](GatewayAuth.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -301,7 +521,7 @@ No authorization required
 
 ## GetSourceDevice
 
-> GetSourceDevice200Response GetSourceDevice(ctx, apiVersion, sourceDeviceId).Execute()
+> GetSourceDevice200Response GetSourceDevice(ctx, apiVersion, sourceDeviceId).Network(network).Execute()
 
 GetSourceDevice
 
@@ -318,12 +538,13 @@ import (
 )
 
 func main() {
-	apiVersion := "apiVersion_example" // string | 
-	sourceDeviceId := "sourceDeviceId_example" // string | 
+	apiVersion := "apiVersion_example" // string |
+	sourceDeviceId := "sourceDeviceId_example" // string |
+	network := "network_example" // string |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DefaultAPI.GetSourceDevice(context.Background(), apiVersion, sourceDeviceId).Execute()
+	resp, r, err := apiClient.DefaultAPI.GetSourceDevice(context.Background(), apiVersion, sourceDeviceId).Network(network).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.GetSourceDevice``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -339,8 +560,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**apiVersion** | **string** |  | 
-**sourceDeviceId** | **string** |  | 
+**apiVersion** | **string** |  |
+**sourceDeviceId** | **string** |  |
 
 ### Other Parameters
 
@@ -351,6 +572,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **network** | **string** |  |
 
 ### Return type
 
@@ -372,7 +594,7 @@ No authorization required
 
 ## Register
 
-> Register200Response Register(ctx, apiVersion).RegisterRequest(registerRequest).Execute()
+> Register200Response Register(ctx, apiVersion).CfAccessJwtAssertion(cfAccessJwtAssertion).RegisterRequest(registerRequest).Execute()
 
 Register
 
@@ -389,12 +611,13 @@ import (
 )
 
 func main() {
-	apiVersion := "apiVersion_example" // string | 
-	registerRequest := *openapiclient.NewRegisterRequest("FcmToken_example", "InstallId_example", "Key_example", "Locale_example", "Model_example", "Tos_example", "Type_example") // RegisterRequest |  (optional)
+	apiVersion := "apiVersion_example" // string |
+	cfAccessJwtAssertion := "cfAccessJwtAssertion_example" // string |  (optional)
+	registerRequest := *openapiclient.NewRegisterRequest("FcmToken_example", "InstallId_example", "Key_example", "Locale_example", "SerialNumber_example") // RegisterRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DefaultAPI.Register(context.Background(), apiVersion).RegisterRequest(registerRequest).Execute()
+	resp, r, err := apiClient.DefaultAPI.Register(context.Background(), apiVersion).CfAccessJwtAssertion(cfAccessJwtAssertion).RegisterRequest(registerRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.Register``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -410,7 +633,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**apiVersion** | **string** |  | 
+**apiVersion** | **string** |  |
 
 ### Other Parameters
 
@@ -420,7 +643,8 @@ Other parameters are passed through a pointer to a apiRegisterRequest struct via
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **registerRequest** | [**RegisterRequest**](RegisterRequest.md) |  | 
+ **cfAccessJwtAssertion** | **string** |  |
+ **registerRequest** | [**RegisterRequest**](RegisterRequest.md) |  |
 
 ### Return type
 
@@ -459,8 +683,8 @@ import (
 )
 
 func main() {
-	sourceDeviceId := "sourceDeviceId_example" // string | 
-	apiVersion := "apiVersion_example" // string | 
+	sourceDeviceId := "sourceDeviceId_example" // string |
+	apiVersion := "apiVersion_example" // string |
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -480,8 +704,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sourceDeviceId** | **string** |  | 
-**apiVersion** | **string** |  | 
+**sourceDeviceId** | **string** |  |
+**apiVersion** | **string** |  |
 
 ### Other Parameters
 
@@ -530,8 +754,8 @@ import (
 )
 
 func main() {
-	sourceDeviceId := "sourceDeviceId_example" // string | 
-	apiVersion := "apiVersion_example" // string | 
+	sourceDeviceId := "sourceDeviceId_example" // string |
+	apiVersion := "apiVersion_example" // string |
 	updateAccountRequest := *openapiclient.NewUpdateAccountRequest("License_example") // UpdateAccountRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -552,8 +776,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sourceDeviceId** | **string** |  | 
-**apiVersion** | **string** |  | 
+**sourceDeviceId** | **string** |  |
+**apiVersion** | **string** |  |
 
 ### Other Parameters
 
@@ -564,7 +788,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **updateAccountRequest** | [**UpdateAccountRequest**](UpdateAccountRequest.md) |  | 
+ **updateAccountRequest** | [**UpdateAccountRequest**](UpdateAccountRequest.md) |  |
 
 ### Return type
 
@@ -603,9 +827,9 @@ import (
 )
 
 func main() {
-	sourceDeviceId := "sourceDeviceId_example" // string | 
-	apiVersion := "apiVersion_example" // string | 
-	boundDeviceId := "boundDeviceId_example" // string | 
+	sourceDeviceId := "sourceDeviceId_example" // string |
+	apiVersion := "apiVersion_example" // string |
+	boundDeviceId := "boundDeviceId_example" // string |
 	updateBoundDeviceRequest := *openapiclient.NewUpdateBoundDeviceRequest() // UpdateBoundDeviceRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -626,9 +850,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sourceDeviceId** | **string** |  | 
-**apiVersion** | **string** |  | 
-**boundDeviceId** | **string** |  | 
+**sourceDeviceId** | **string** |  |
+**apiVersion** | **string** |  |
+**boundDeviceId** | **string** |  |
 
 ### Other Parameters
 
@@ -640,7 +864,7 @@ Name | Type | Description  | Notes
 
 
 
- **updateBoundDeviceRequest** | [**UpdateBoundDeviceRequest**](UpdateBoundDeviceRequest.md) |  | 
+ **updateBoundDeviceRequest** | [**UpdateBoundDeviceRequest**](UpdateBoundDeviceRequest.md) |  |
 
 ### Return type
 
@@ -660,9 +884,80 @@ No authorization required
 [[Back to README]](../README.md)
 
 
+## UpdateReceiptToken
+
+> UpdateReceiptToken(ctx, sourceDeviceId, apiVersion).ReceiptTokenUpdate(receiptTokenUpdate).Execute()
+
+UpdateReceiptToken
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+	sourceDeviceId := "sourceDeviceId_example" // string |
+	apiVersion := "apiVersion_example" // string |
+	receiptTokenUpdate := *openapiclient.NewReceiptTokenUpdate("Token_example") // ReceiptTokenUpdate |
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.DefaultAPI.UpdateReceiptToken(context.Background(), sourceDeviceId, apiVersion).ReceiptTokenUpdate(receiptTokenUpdate).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.UpdateReceiptToken``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**sourceDeviceId** | **string** |  |
+**apiVersion** | **string** |  |
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateReceiptTokenRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **receiptTokenUpdate** | [**ReceiptTokenUpdate**](ReceiptTokenUpdate.md) |  |
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## UpdateSourceDevice
 
-> UpdateSourceDevice200Response UpdateSourceDevice(ctx, apiVersion, sourceDeviceId).UpdateSourceDeviceRequest(updateSourceDeviceRequest).Execute()
+> GetSourceDevice200Response UpdateSourceDevice(ctx, apiVersion, sourceDeviceId).UpdateSourceDeviceRequest(updateSourceDeviceRequest).Execute()
 
 UpdateSourceDevice
 
@@ -679,9 +974,9 @@ import (
 )
 
 func main() {
-	apiVersion := "apiVersion_example" // string | 
-	sourceDeviceId := "sourceDeviceId_example" // string | 
-	updateSourceDeviceRequest := *openapiclient.NewUpdateSourceDeviceRequest("Key_example") // UpdateSourceDeviceRequest |  (optional)
+	apiVersion := "apiVersion_example" // string |
+	sourceDeviceId := "sourceDeviceId_example" // string |
+	updateSourceDeviceRequest := *openapiclient.NewUpdateSourceDeviceRequest() // UpdateSourceDeviceRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -690,7 +985,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `DefaultAPI.UpdateSourceDevice``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateSourceDevice`: UpdateSourceDevice200Response
+	// response from `UpdateSourceDevice`: GetSourceDevice200Response
 	fmt.Fprintf(os.Stdout, "Response from `DefaultAPI.UpdateSourceDevice`: %v\n", resp)
 }
 ```
@@ -701,8 +996,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**apiVersion** | **string** |  | 
-**sourceDeviceId** | **string** |  | 
+**apiVersion** | **string** |  |
+**sourceDeviceId** | **string** |  |
 
 ### Other Parameters
 
@@ -713,11 +1008,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **updateSourceDeviceRequest** | [**UpdateSourceDeviceRequest**](UpdateSourceDeviceRequest.md) |  | 
+ **updateSourceDeviceRequest** | [**UpdateSourceDeviceRequest**](UpdateSourceDeviceRequest.md) |  |
 
 ### Return type
 
-[**UpdateSourceDevice200Response**](UpdateSourceDevice200Response.md)
+[**GetSourceDevice200Response**](GetSourceDevice200Response.md)
 
 ### Authorization
 
