@@ -13,7 +13,10 @@ import (
 )
 
 var profileFile string
+var keepalive int
 var shortMsg = "Generates a WireGuard profile from the current Cloudflare Warp account"
+
+const maxKeepalive = 65535
 
 var Cmd = &cobra.Command{
 	Use:   "generate",
@@ -26,9 +29,15 @@ var Cmd = &cobra.Command{
 
 func init() {
 	Cmd.PersistentFlags().StringVarP(&profileFile, "profile", "p", "wgcf-profile.conf", "WireGuard profile file")
+	Cmd.PersistentFlags().IntVarP(&keepalive, "keepalive", "k", 0, "Persistent keepalive interval in seconds (default 25)")
+	Cmd.PersistentFlags().Lookup("keepalive").NoOptDefVal = "25"
 }
 
 func generateProfile() error {
+	if err := validateKeepalive(keepalive); err != nil {
+		return err
+	}
+
 	if err := EnsureConfigValidAccount(); err != nil {
 		return errors.WithStack(err)
 	}
@@ -54,6 +63,7 @@ func generateProfile() error {
 		Address2:   thisDevice.Config.Interface.Addresses.V6,
 		PublicKey:  peer.PublicKey,
 		Endpoint:   endpoint,
+		Keepalive:  keepalive,
 	})
 	if err != nil {
 		return errors.WithStack(err)
@@ -63,5 +73,12 @@ func generateProfile() error {
 	}
 
 	log.Println("Successfully generated WireGuard profile:", profileFile)
+	return nil
+}
+
+func validateKeepalive(interval int) error {
+	if interval < 0 || interval > maxKeepalive {
+		return errors.Errorf("persistent keepalive interval must be between 0 and %d seconds, got %d", maxKeepalive, interval)
+	}
 	return nil
 }

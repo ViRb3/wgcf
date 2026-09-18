@@ -33,6 +33,13 @@ wgcf generate
 ```
 The WireGuard profile will be saved under `wgcf-profile.conf`. For more information on how to use it, please check the official [WireGuard Quick Start](https://www.wireguard.com/quickstart/).
 
+To send periodic packets that keep NAT mappings alive, use the optional keepalive flag:
+```bash
+wgcf generate --keepalive       # defaults to 25 seconds
+wgcf generate --keepalive=60    # uses the specified interval
+```
+This adds `PersistentKeepalive` to the profile's `[Peer]` section. The setting is omitted by default.
+
 #### Maximum transmission unit (MTU)
 To ensure maximum compatibility, the generated profile will have a MTU of 1280, just like the official Android app. If you are experiencing performance issues, you may be able to improve your speed by increasing this value. For more information, please check [#40](https://github.com/ViRb3/wgcf/issues/40).
 
