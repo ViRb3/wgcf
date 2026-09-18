@@ -1,4 +1,5 @@
 .gitignore
+.openapi-generator-ignore
 .travis.yml
 README.md
 api/openapi.yaml
@@ -49,8 +50,6 @@ docs/UpdateAccountRequest.md
 docs/UpdateBoundDeviceRequest.md
 docs/UpdateSourceDeviceRequest.md
 git_push.sh
-go.mod
-go.sum
 model_account.go
 model_alternate_network.go
 model_app_mode.go
@@ -94,4 +93,5 @@ model_update_account_request.go
 model_update_bound_device_request.go
 model_update_source_device_request.go
 response.go
+test/api_default_test.go
 utils.go
