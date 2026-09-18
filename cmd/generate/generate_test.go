@@ -2,6 +2,29 @@ package generate
 
 import "testing"
 
+func TestValidateKeepalive(t *testing.T) {
+	tests := []struct {
+		name     string
+		interval int
+		wantErr  bool
+	}{
+		{name: "negative", interval: -1, wantErr: true},
+		{name: "disabled", interval: 0},
+		{name: "default", interval: 25},
+		{name: "maximum", interval: maxKeepalive},
+		{name: "above maximum", interval: maxKeepalive + 1, wantErr: true},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			err := validateKeepalive(test.interval)
+			if (err != nil) != test.wantErr {
+				t.Fatalf("validateKeepalive(%d) error = %v, wantErr %v", test.interval, err, test.wantErr)
+			}
+		})
+	}
+}
+
 func TestKeepaliveFlag(t *testing.T) {
 	flags := Cmd.PersistentFlags()
 	flag := flags.Lookup("keepalive")

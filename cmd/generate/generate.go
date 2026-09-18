@@ -16,6 +16,8 @@ var profileFile string
 var keepalive int
 var shortMsg = "Generates a WireGuard profile from the current Cloudflare Warp account"
 
+const maxKeepalive = 65535
+
 var Cmd = &cobra.Command{
 	Use:   "generate",
 	Short: shortMsg,
@@ -32,6 +34,10 @@ func init() {
 }
 
 func generateProfile() error {
+	if err := validateKeepalive(keepalive); err != nil {
+		return err
+	}
+
 	if err := EnsureConfigValidAccount(); err != nil {
 		return errors.WithStack(err)
 	}
@@ -67,5 +73,12 @@ func generateProfile() error {
 	}
 
 	log.Println("Successfully generated WireGuard profile:", profileFile)
+	return nil
+}
+
+func validateKeepalive(interval int) error {
+	if interval < 0 || interval > maxKeepalive {
+		return errors.Errorf("persistent keepalive interval must be between 0 and %d seconds, got %d", maxKeepalive, interval)
+	}
 	return nil
 }
