@@ -14,13 +14,57 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/ViRb3/wgcf/v2/openapi"
 )
 
 func Test_openapi_DefaultAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
+
+	t.Run("Test DefaultAPIService AcknowledgeNotification", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var accountId string
+		var sourceDeviceId string
+
+		httpRes, err := apiClient.DefaultAPI.AcknowledgeNotification(context.Background(), accountId, sourceDeviceId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService DeleteBoundDevice", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var sourceDeviceId string
+		var apiVersion string
+		var boundDeviceId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.DeleteBoundDevice(context.Background(), sourceDeviceId, apiVersion, boundDeviceId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService DeleteSourceDevice", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var apiVersion string
+		var sourceDeviceId string
+
+		httpRes, err := apiClient.DefaultAPI.DeleteSourceDevice(context.Background(), apiVersion, sourceDeviceId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
 
 	t.Run("Test DefaultAPIService GetAccount", func(t *testing.T) {
 
@@ -59,6 +103,22 @@ func Test_openapi_DefaultAPIService(t *testing.T) {
 		var apiVersion string
 
 		resp, httpRes, err := apiClient.DefaultAPI.GetClientConfig(context.Background(), apiVersion).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService GetGatewayAuth", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var apiVersion string
+		var accountId string
+		var sourceDeviceId string
+
+		resp, httpRes, err := apiClient.DefaultAPI.GetGatewayAuth(context.Background(), apiVersion, accountId, sourceDeviceId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -137,6 +197,20 @@ func Test_openapi_DefaultAPIService(t *testing.T) {
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService UpdateReceiptToken", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var sourceDeviceId string
+		var apiVersion string
+
+		httpRes, err := apiClient.DefaultAPI.UpdateReceiptToken(context.Background(), sourceDeviceId, apiVersion).Execute()
+
+		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
