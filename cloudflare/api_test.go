@@ -155,6 +155,25 @@ func TestUpdateAccountDecodes200Response(t *testing.T) {
 	}
 }
 
+func TestGetSourceDeviceDecodesLegacyDevice(t *testing.T) {
+	server := httptest.NewServer(http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
+		writer.Header().Set("Content-Type", "application/json; charset=utf-8")
+		_, _ = io.WriteString(writer, `{"id":"device-id","account":{"account_type":"free","id":"account-id"}}`)
+	}))
+	defer server.Close()
+
+	client := MakeApiClient(nil)
+	client.GetConfig().Servers = openapi.ServerConfigurations{{URL: server.URL}}
+	result, response, err := client.DefaultAPI.GetSourceDevice(context.Background(), ApiVersion, "device-id").Execute()
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer response.Body.Close()
+	if result.Id != "device-id" || result.HasKeyType() || result.HasTunnelType() {
+		t.Fatalf("source device = %#v", result)
+	}
+}
+
 func TestWarpClientHelloMatchesAndroidApp(t *testing.T) {
 	clientConn, serverConn := net.Pipe()
 	defer serverConn.Close()

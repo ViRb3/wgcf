@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Seconds** | **int64** |  |
-**Secret** | **string** |  |
+**Seconds** | **int64** |  | 
+**Secret** | **string** |  | 
 
 ## Methods
 

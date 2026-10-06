@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Activated** | **time.Time** |  |
-**Active** | **bool** |  |
-**Created** | **time.Time** |  |
-**Id** | **string** |  |
-**Model** | Pointer to **string** |  | [optional]
-**Name** | Pointer to **string** |  | [optional]
-**Role** | **string** |  |
-**Type** | **string** |  |
+**Activated** | **time.Time** |  | 
+**Active** | **bool** |  | 
+**Created** | **time.Time** |  | 
+**Id** | **string** |  | 
+**Model** | Pointer to **string** |  | [optional] 
+**Name** | Pointer to **string** |  | [optional] 
+**Role** | **string** |  | 
+**Type** | **string** |  | 
 
 ## Methods
 

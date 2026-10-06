@@ -4,34 +4,34 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Created** | Pointer to **time.Time** |  | [optional]
-**Enabled** | Pointer to **bool** |  | [optional]
-**FcmToken** | Pointer to **string** |  | [optional]
-**Id** | **string** |  |
-**InstallId** | Pointer to **string** |  | [optional]
-**Key** | Pointer to **string** |  | [optional]
-**Locale** | Pointer to **string** |  | [optional]
-**Model** | Pointer to **string** |  | [optional]
-**Manufacturer** | Pointer to **string** |  | [optional]
-**Name** | Pointer to **string** |  | [optional]
-**OsVersion** | Pointer to **string** |  | [optional]
-**Place** | Pointer to **int32** |  | [optional]
-**SerialNumber** | Pointer to **string** |  | [optional]
-**DeviceId** | Pointer to **string** |  | [optional]
-**Tos** | Pointer to **time.Time** |  | [optional]
-**Type** | Pointer to **string** |  | [optional]
-**Updated** | Pointer to **time.Time** |  | [optional]
-**WaitlistEnabled** | Pointer to **bool** |  | [optional]
-**WarpEnabled** | Pointer to **bool** |  | [optional]
-**Account** | [**Account**](Account.md) |  |
-**Config** | Pointer to [**Config**](Config.md) |  | [optional]
-**Token** | **string** |  |
-**Policy** | Pointer to [**Policy**](Policy.md) |  | [optional]
-**OverrideCodes** | Pointer to [**OverrideCodes**](OverrideCodes.md) |  | [optional]
-**AlternateNetworks** | Pointer to [**[]AlternateNetwork**](AlternateNetwork.md) |  | [optional]
-**DexTests** | Pointer to [**[]DexTest**](DexTest.md) |  | [optional]
-**KeyType** | **string** |  |
-**TunnelType** | **string** |  |
+**Created** | Pointer to **time.Time** |  | [optional] 
+**Enabled** | Pointer to **bool** |  | [optional] 
+**FcmToken** | Pointer to **string** |  | [optional] 
+**Id** | **string** |  | 
+**InstallId** | Pointer to **string** |  | [optional] 
+**Key** | Pointer to **string** |  | [optional] 
+**Locale** | Pointer to **string** |  | [optional] 
+**Model** | Pointer to **string** |  | [optional] 
+**Manufacturer** | Pointer to **string** |  | [optional] 
+**Name** | Pointer to **string** |  | [optional] 
+**OsVersion** | Pointer to **string** |  | [optional] 
+**Place** | Pointer to **int32** |  | [optional] 
+**SerialNumber** | Pointer to **string** |  | [optional] 
+**DeviceId** | Pointer to **string** |  | [optional] 
+**Tos** | Pointer to **time.Time** |  | [optional] 
+**Type** | Pointer to **string** |  | [optional] 
+**Updated** | Pointer to **time.Time** |  | [optional] 
+**WaitlistEnabled** | Pointer to **bool** |  | [optional] 
+**WarpEnabled** | Pointer to **bool** |  | [optional] 
+**Account** | [**Account**](Account.md) |  | 
+**Config** | Pointer to [**Config**](Config.md) |  | [optional] 
+**Token** | **string** |  | 
+**Policy** | Pointer to [**Policy**](Policy.md) |  | [optional] 
+**OverrideCodes** | Pointer to [**OverrideCodes**](OverrideCodes.md) |  | [optional] 
+**AlternateNetworks** | Pointer to [**[]AlternateNetwork**](AlternateNetwork.md) |  | [optional] 
+**DexTests** | Pointer to [**[]DexTest**](DexTest.md) |  | [optional] 
+**KeyType** | **string** |  | 
+**TunnelType** | **string** |  | 
 
 ## Methods
 

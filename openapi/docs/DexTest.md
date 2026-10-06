@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**TestId** | **string** |  |
-**Name** | **string** |  |
-**Description** | Pointer to **string** |  | [optional]
-**Interval** | **int64** |  |
-**Enabled** | **bool** |  |
-**Data** | [**DexData**](DexData.md) |  |
-**Updated** | **string** |  |
-**Created** | **string** |  |
+**TestId** | **string** |  | 
+**Name** | **string** |  | 
+**Description** | Pointer to **string** |  | [optional] 
+**Interval** | **int64** |  | 
+**Enabled** | **bool** |  | 
+**Data** | [**DexData**](DexData.md) |  | 
+**Updated** | **string** |  | 
+**Created** | **string** |  | 
 
 ## Methods
 

@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Address** | Pointer to **string** |  | [optional]
-**Host** | Pointer to **string** |  | [optional]
-**Description** | Pointer to **string** |  | [optional]
+**Address** | Pointer to **string** |  | [optional] 
+**Host** | Pointer to **string** |  | [optional] 
+**Description** | Pointer to **string** |  | [optional] 
 
 ## Methods
 

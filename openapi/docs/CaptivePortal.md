@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | **string** |  |
-**Networks** | [**[]CaptivePortalNetwork**](CaptivePortalNetwork.md) |  |
+**Name** | **string** |  | 
+**Networks** | [**[]CaptivePortalNetwork**](CaptivePortalNetwork.md) |  | 
 
 ## Methods
 

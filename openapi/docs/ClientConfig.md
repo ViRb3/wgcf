@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Denylist** | [**[]ClientConfigDenylistInner**](ClientConfigDenylistInner.md) |  |
-**CaptivePortal** | [**[]CaptivePortal**](CaptivePortal.md) |  |
-**PremiumDataBytes** | **int64** |  |
-**ReferralRewardBytes** | **int64** |  |
+**Denylist** | [**[]ClientConfigDenylistInner**](ClientConfigDenylistInner.md) |  | 
+**CaptivePortal** | [**[]CaptivePortal**](CaptivePortal.md) |  | 
+**PremiumDataBytes** | **int64** |  | 
+**ReferralRewardBytes** | **int64** |  | 
 
 ## Methods
 

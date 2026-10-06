@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Token** | **NullableString** |  |
+**Token** | **NullableString** |  | 
 
 ## Methods
 

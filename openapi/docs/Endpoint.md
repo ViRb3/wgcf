@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Host** | Pointer to **string** |  | [optional]
-**V4** | **string** |  |
-**V6** | **string** |  |
+**Host** | Pointer to **string** |  | [optional] 
+**V4** | **string** |  | 
+**V6** | **string** |  | 
 **Ports** | Pointer to **[]int32** |  | [optional] [default to {2408, 500, 1701, 4500}]
 
 ## Methods

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Ip** | **string** |  |
+**Ip** | **string** |  | 
 
 ## Methods
 

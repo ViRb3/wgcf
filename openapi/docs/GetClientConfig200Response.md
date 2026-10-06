@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Result** | [**ClientConfig**](ClientConfig.md) |  |
-**Success** | **bool** |  |
-**Errors** | **[]map[string]interface{}** |  |
-**Messages** | **[]map[string]interface{}** |  |
+**Result** | [**ClientConfig**](ClientConfig.md) |  | 
+**Success** | **bool** |  | 
+**Errors** | **[]map[string]interface{}** |  | 
+**Messages** | **[]map[string]interface{}** |  | 
 
 ## Methods
 

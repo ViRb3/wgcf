@@ -46,8 +46,8 @@ type GetSourceDevice200Response struct {
 	OverrideCodes *OverrideCodes `json:"override_codes,omitempty"`
 	AlternateNetworks []AlternateNetwork `json:"alternate_networks,omitempty"`
 	DexTests []DexTest `json:"dex_tests,omitempty"`
-	KeyType string `json:"key_type"`
-	TunnelType string `json:"tunnel_type"`
+	KeyType *string `json:"key_type,omitempty"`
+	TunnelType *string `json:"tunnel_type,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -57,12 +57,10 @@ type _GetSourceDevice200Response GetSourceDevice200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetSourceDevice200Response(id string, account Account, keyType string, tunnelType string) *GetSourceDevice200Response {
+func NewGetSourceDevice200Response(id string, account Account) *GetSourceDevice200Response {
 	this := GetSourceDevice200Response{}
 	this.Id = id
 	this.Account = account
-	this.KeyType = keyType
-	this.TunnelType = tunnelType
 	return &this
 }
 
@@ -858,52 +856,68 @@ func (o *GetSourceDevice200Response) SetDexTests(v []DexTest) {
 	o.DexTests = v
 }
 
-// GetKeyType returns the KeyType field value
+// GetKeyType returns the KeyType field value if set, zero value otherwise.
 func (o *GetSourceDevice200Response) GetKeyType() string {
-	if o == nil {
+	if o == nil || IsNil(o.KeyType) {
 		var ret string
 		return ret
 	}
-
-	return o.KeyType
+	return *o.KeyType
 }
 
-// GetKeyTypeOk returns a tuple with the KeyType field value
+// GetKeyTypeOk returns a tuple with the KeyType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GetSourceDevice200Response) GetKeyTypeOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.KeyType) {
 		return nil, false
 	}
-	return &o.KeyType, true
+	return o.KeyType, true
 }
 
-// SetKeyType sets field value
+// HasKeyType returns a boolean if a field has been set.
+func (o *GetSourceDevice200Response) HasKeyType() bool {
+	if o != nil && !IsNil(o.KeyType) {
+		return true
+	}
+
+	return false
+}
+
+// SetKeyType gets a reference to the given string and assigns it to the KeyType field.
 func (o *GetSourceDevice200Response) SetKeyType(v string) {
-	o.KeyType = v
+	o.KeyType = &v
 }
 
-// GetTunnelType returns the TunnelType field value
+// GetTunnelType returns the TunnelType field value if set, zero value otherwise.
 func (o *GetSourceDevice200Response) GetTunnelType() string {
-	if o == nil {
+	if o == nil || IsNil(o.TunnelType) {
 		var ret string
 		return ret
 	}
-
-	return o.TunnelType
+	return *o.TunnelType
 }
 
-// GetTunnelTypeOk returns a tuple with the TunnelType field value
+// GetTunnelTypeOk returns a tuple with the TunnelType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GetSourceDevice200Response) GetTunnelTypeOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.TunnelType) {
 		return nil, false
 	}
-	return &o.TunnelType, true
+	return o.TunnelType, true
 }
 
-// SetTunnelType sets field value
+// HasTunnelType returns a boolean if a field has been set.
+func (o *GetSourceDevice200Response) HasTunnelType() bool {
+	if o != nil && !IsNil(o.TunnelType) {
+		return true
+	}
+
+	return false
+}
+
+// SetTunnelType gets a reference to the given string and assigns it to the TunnelType field.
 func (o *GetSourceDevice200Response) SetTunnelType(v string) {
-	o.TunnelType = v
+	o.TunnelType = &v
 }
 
 func (o GetSourceDevice200Response) MarshalJSON() ([]byte, error) {
@@ -987,8 +1001,12 @@ func (o GetSourceDevice200Response) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DexTests) {
 		toSerialize["dex_tests"] = o.DexTests
 	}
-	toSerialize["key_type"] = o.KeyType
-	toSerialize["tunnel_type"] = o.TunnelType
+	if !IsNil(o.KeyType) {
+		toSerialize["key_type"] = o.KeyType
+	}
+	if !IsNil(o.TunnelType) {
+		toSerialize["tunnel_type"] = o.TunnelType
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -1004,8 +1022,6 @@ func (o *GetSourceDevice200Response) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"id",
 		"account",
-		"key_type",
-		"tunnel_type",
 	}
 
 	allProperties := make(map[string]interface{})

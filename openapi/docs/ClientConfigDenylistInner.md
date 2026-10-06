@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AndroidPackages** | Pointer to **[]string** |  | [optional]
-**Name** | **string** |  |
-**Networks** | Pointer to [**ClientConfigDenylistInnerNetworks**](ClientConfigDenylistInnerNetworks.md) |  | [optional]
-**Visible** | **bool** |  |
+**AndroidPackages** | Pointer to **[]string** |  | [optional] 
+**Name** | **string** |  | 
+**Networks** | Pointer to [**ClientConfigDenylistInnerNetworks**](ClientConfigDenylistInnerNetworks.md) |  | [optional] 
+**Visible** | **bool** |  | 
 
 ## Methods
 

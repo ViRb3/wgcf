@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Kind** | [**DexDataKind**](DexDataKind.md) |  |
-**Method** | Pointer to [**HTTPRequestMethod**](HTTPRequestMethod.md) |  | [optional]
-**Host** | **string** |  |
+**Kind** | [**DexDataKind**](DexDataKind.md) |  | 
+**Method** | Pointer to [**HTTPRequestMethod**](HTTPRequestMethod.md) |  | [optional] 
+**Host** | **string** |  | 
 
 ## Methods
 

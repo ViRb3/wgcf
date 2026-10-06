@@ -1212,8 +1212,6 @@ components:
         required:
         - account
         - id
-        - key_type
-        - tunnel_type
         type: object
       example:
         key_type: key_type

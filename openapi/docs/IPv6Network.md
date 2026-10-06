@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Address** | **string** |  |
-**Prefix** | **int32** |  |
+**Address** | **string** |  | 
+**Prefix** | **int32** |  | 
 
 ## Methods
 

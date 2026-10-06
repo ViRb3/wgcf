@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Suffix** | Pointer to **string** |  | [optional]
-**Description** | Pointer to **string** |  | [optional]
-**DnsServer** | Pointer to **[]string** |  | [optional]
+**Suffix** | Pointer to **string** |  | [optional] 
+**Description** | Pointer to **string** |  | [optional] 
+**DnsServer** | Pointer to **[]string** |  | [optional] 
 
 ## Methods
 

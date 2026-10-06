@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | **string** |  |
-**NetworkId** | **string** |  |
-**TlsSockaddr** | **string** |  |
-**Sha256** | **string** |  |
+**Name** | **string** |  | 
+**NetworkId** | **string** |  | 
+**TlsSockaddr** | **string** |  | 
+**Sha256** | **string** |  | 
 
 ## Methods
 

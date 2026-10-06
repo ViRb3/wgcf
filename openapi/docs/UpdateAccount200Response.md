@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Created** | **time.Time** |  |
-**Id** | **string** |  |
-**PremiumData** | **int64** |  |
-**Quota** | **int64** |  |
-**ReferralCount** | **int32** |  |
-**ReferralRenewalCountdown** | **int32** |  |
-**Role** | **string** |  |
-**Updated** | **time.Time** |  |
-**WarpPlus** | **bool** |  |
+**Created** | **time.Time** |  | 
+**Id** | **string** |  | 
+**PremiumData** | **int64** |  | 
+**Quota** | **int64** |  | 
+**ReferralCount** | **int32** |  | 
+**ReferralRenewalCountdown** | **int32** |  | 
+**Role** | **string** |  | 
+**Updated** | **time.Time** |  | 
+**WarpPlus** | **bool** |  | 
 
 ## Methods
 

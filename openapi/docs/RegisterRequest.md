@@ -4,18 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FcmToken** | **string** |  |
-**InstallId** | **string** |  |
-**Key** | **string** |  |
-**Locale** | **string** |  |
-**Model** | Pointer to **string** |  | [optional]
-**Referrer** | Pointer to **string** |  | [optional]
-**Tos** | Pointer to **string** |  | [optional]
-**Expired** | Pointer to **string** |  | [optional]
-**SerialNumber** | **string** |  |
-**OsVersion** | Pointer to **string** |  | [optional]
-**KeyType** | Pointer to **string** |  | [optional]
-**TunnelType** | Pointer to **string** |  | [optional]
+**FcmToken** | **string** |  | 
+**InstallId** | **string** |  | 
+**Key** | **string** |  | 
+**Locale** | **string** |  | 
+**Model** | Pointer to **string** |  | [optional] 
+**Referrer** | Pointer to **string** |  | [optional] 
+**Tos** | Pointer to **string** |  | [optional] 
+**Expired** | Pointer to **string** |  | [optional] 
+**SerialNumber** | **string** |  | 
+**OsVersion** | Pointer to **string** |  | [optional] 
+**KeyType** | Pointer to **string** |  | [optional] 
+**TunnelType** | Pointer to **string** |  | [optional] 
 
 ## Methods
 

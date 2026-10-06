@@ -530,8 +530,6 @@ components:
           required:
             - "account"
             - "id"
-            - "key_type"
-            - "tunnel_type"
 
     Register_200_Response:
       allOf:

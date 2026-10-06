@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**V4** | [**[]IPv4Network**](IPv4Network.md) |  |
-**V6** | [**[]IPv6Network**](IPv6Network.md) |  |
+**V4** | [**[]IPv4Network**](IPv4Network.md) |  | 
+**V6** | [**[]IPv6Network**](IPv6Network.md) |  | 
 
 ## Methods
 

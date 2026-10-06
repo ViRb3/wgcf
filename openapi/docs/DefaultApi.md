@@ -40,9 +40,9 @@ import (
 )
 
 func main() {
-	accountId := "accountId_example" // string |
-	sourceDeviceId := "sourceDeviceId_example" // string |
-	notificationAckRequest := *openapiclient.NewNotificationAckRequest("FcmMessageId_example", false) // NotificationAckRequest |
+	accountId := "accountId_example" // string | 
+	sourceDeviceId := "sourceDeviceId_example" // string | 
+	notificationAckRequest := *openapiclient.NewNotificationAckRequest("FcmMessageId_example", false) // NotificationAckRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -60,8 +60,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**accountId** | **string** |  |
-**sourceDeviceId** | **string** |  |
+**accountId** | **string** |  | 
+**sourceDeviceId** | **string** |  | 
 
 ### Other Parameters
 
@@ -72,7 +72,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **notificationAckRequest** | [**NotificationAckRequest**](NotificationAckRequest.md) |  |
+ **notificationAckRequest** | [**NotificationAckRequest**](NotificationAckRequest.md) |  | 
 
 ### Return type
 
@@ -111,9 +111,9 @@ import (
 )
 
 func main() {
-	sourceDeviceId := "sourceDeviceId_example" // string |
-	apiVersion := "apiVersion_example" // string |
-	boundDeviceId := "boundDeviceId_example" // string |
+	sourceDeviceId := "sourceDeviceId_example" // string | 
+	apiVersion := "apiVersion_example" // string | 
+	boundDeviceId := "boundDeviceId_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -133,9 +133,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sourceDeviceId** | **string** |  |
-**apiVersion** | **string** |  |
-**boundDeviceId** | **string** |  |
+**sourceDeviceId** | **string** |  | 
+**apiVersion** | **string** |  | 
+**boundDeviceId** | **string** |  | 
 
 ### Other Parameters
 
@@ -185,8 +185,8 @@ import (
 )
 
 func main() {
-	apiVersion := "apiVersion_example" // string |
-	sourceDeviceId := "sourceDeviceId_example" // string |
+	apiVersion := "apiVersion_example" // string | 
+	sourceDeviceId := "sourceDeviceId_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -204,8 +204,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**apiVersion** | **string** |  |
-**sourceDeviceId** | **string** |  |
+**apiVersion** | **string** |  | 
+**sourceDeviceId** | **string** |  | 
 
 ### Other Parameters
 
@@ -254,8 +254,8 @@ import (
 )
 
 func main() {
-	sourceDeviceId := "sourceDeviceId_example" // string |
-	apiVersion := "apiVersion_example" // string |
+	sourceDeviceId := "sourceDeviceId_example" // string | 
+	apiVersion := "apiVersion_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -275,8 +275,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sourceDeviceId** | **string** |  |
-**apiVersion** | **string** |  |
+**sourceDeviceId** | **string** |  | 
+**apiVersion** | **string** |  | 
 
 ### Other Parameters
 
@@ -325,8 +325,8 @@ import (
 )
 
 func main() {
-	sourceDeviceId := "sourceDeviceId_example" // string |
-	apiVersion := "apiVersion_example" // string |
+	sourceDeviceId := "sourceDeviceId_example" // string | 
+	apiVersion := "apiVersion_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -346,8 +346,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sourceDeviceId** | **string** |  |
-**apiVersion** | **string** |  |
+**sourceDeviceId** | **string** |  | 
+**apiVersion** | **string** |  | 
 
 ### Other Parameters
 
@@ -396,7 +396,7 @@ import (
 )
 
 func main() {
-	apiVersion := "apiVersion_example" // string |
+	apiVersion := "apiVersion_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -416,7 +416,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**apiVersion** | **string** |  |
+**apiVersion** | **string** |  | 
 
 ### Other Parameters
 
@@ -464,9 +464,9 @@ import (
 )
 
 func main() {
-	apiVersion := "apiVersion_example" // string |
-	accountId := "accountId_example" // string |
-	sourceDeviceId := "sourceDeviceId_example" // string |
+	apiVersion := "apiVersion_example" // string | 
+	accountId := "accountId_example" // string | 
+	sourceDeviceId := "sourceDeviceId_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -486,9 +486,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**apiVersion** | **string** |  |
-**accountId** | **string** |  |
-**sourceDeviceId** | **string** |  |
+**apiVersion** | **string** |  | 
+**accountId** | **string** |  | 
+**sourceDeviceId** | **string** |  | 
 
 ### Other Parameters
 
@@ -538,8 +538,8 @@ import (
 )
 
 func main() {
-	apiVersion := "apiVersion_example" // string |
-	sourceDeviceId := "sourceDeviceId_example" // string |
+	apiVersion := "apiVersion_example" // string | 
+	sourceDeviceId := "sourceDeviceId_example" // string | 
 	network := "network_example" // string |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -560,8 +560,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**apiVersion** | **string** |  |
-**sourceDeviceId** | **string** |  |
+**apiVersion** | **string** |  | 
+**sourceDeviceId** | **string** |  | 
 
 ### Other Parameters
 
@@ -572,7 +572,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **network** | **string** |  |
+ **network** | **string** |  | 
 
 ### Return type
 
@@ -611,7 +611,7 @@ import (
 )
 
 func main() {
-	apiVersion := "apiVersion_example" // string |
+	apiVersion := "apiVersion_example" // string | 
 	cfAccessJwtAssertion := "cfAccessJwtAssertion_example" // string |  (optional)
 	registerRequest := *openapiclient.NewRegisterRequest("FcmToken_example", "InstallId_example", "Key_example", "Locale_example", "SerialNumber_example") // RegisterRequest |  (optional)
 
@@ -633,7 +633,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**apiVersion** | **string** |  |
+**apiVersion** | **string** |  | 
 
 ### Other Parameters
 
@@ -643,8 +643,8 @@ Other parameters are passed through a pointer to a apiRegisterRequest struct via
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **cfAccessJwtAssertion** | **string** |  |
- **registerRequest** | [**RegisterRequest**](RegisterRequest.md) |  |
+ **cfAccessJwtAssertion** | **string** |  | 
+ **registerRequest** | [**RegisterRequest**](RegisterRequest.md) |  | 
 
 ### Return type
 
@@ -683,8 +683,8 @@ import (
 )
 
 func main() {
-	sourceDeviceId := "sourceDeviceId_example" // string |
-	apiVersion := "apiVersion_example" // string |
+	sourceDeviceId := "sourceDeviceId_example" // string | 
+	apiVersion := "apiVersion_example" // string | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -704,8 +704,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sourceDeviceId** | **string** |  |
-**apiVersion** | **string** |  |
+**sourceDeviceId** | **string** |  | 
+**apiVersion** | **string** |  | 
 
 ### Other Parameters
 
@@ -754,8 +754,8 @@ import (
 )
 
 func main() {
-	sourceDeviceId := "sourceDeviceId_example" // string |
-	apiVersion := "apiVersion_example" // string |
+	sourceDeviceId := "sourceDeviceId_example" // string | 
+	apiVersion := "apiVersion_example" // string | 
 	updateAccountRequest := *openapiclient.NewUpdateAccountRequest("License_example") // UpdateAccountRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -776,8 +776,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sourceDeviceId** | **string** |  |
-**apiVersion** | **string** |  |
+**sourceDeviceId** | **string** |  | 
+**apiVersion** | **string** |  | 
 
 ### Other Parameters
 
@@ -788,7 +788,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **updateAccountRequest** | [**UpdateAccountRequest**](UpdateAccountRequest.md) |  |
+ **updateAccountRequest** | [**UpdateAccountRequest**](UpdateAccountRequest.md) |  | 
 
 ### Return type
 
@@ -827,9 +827,9 @@ import (
 )
 
 func main() {
-	sourceDeviceId := "sourceDeviceId_example" // string |
-	apiVersion := "apiVersion_example" // string |
-	boundDeviceId := "boundDeviceId_example" // string |
+	sourceDeviceId := "sourceDeviceId_example" // string | 
+	apiVersion := "apiVersion_example" // string | 
+	boundDeviceId := "boundDeviceId_example" // string | 
 	updateBoundDeviceRequest := *openapiclient.NewUpdateBoundDeviceRequest() // UpdateBoundDeviceRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -850,9 +850,9 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sourceDeviceId** | **string** |  |
-**apiVersion** | **string** |  |
-**boundDeviceId** | **string** |  |
+**sourceDeviceId** | **string** |  | 
+**apiVersion** | **string** |  | 
+**boundDeviceId** | **string** |  | 
 
 ### Other Parameters
 
@@ -864,7 +864,7 @@ Name | Type | Description  | Notes
 
 
 
- **updateBoundDeviceRequest** | [**UpdateBoundDeviceRequest**](UpdateBoundDeviceRequest.md) |  |
+ **updateBoundDeviceRequest** | [**UpdateBoundDeviceRequest**](UpdateBoundDeviceRequest.md) |  | 
 
 ### Return type
 
@@ -903,9 +903,9 @@ import (
 )
 
 func main() {
-	sourceDeviceId := "sourceDeviceId_example" // string |
-	apiVersion := "apiVersion_example" // string |
-	receiptTokenUpdate := *openapiclient.NewReceiptTokenUpdate("Token_example") // ReceiptTokenUpdate |
+	sourceDeviceId := "sourceDeviceId_example" // string | 
+	apiVersion := "apiVersion_example" // string | 
+	receiptTokenUpdate := *openapiclient.NewReceiptTokenUpdate("Token_example") // ReceiptTokenUpdate | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -923,8 +923,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sourceDeviceId** | **string** |  |
-**apiVersion** | **string** |  |
+**sourceDeviceId** | **string** |  | 
+**apiVersion** | **string** |  | 
 
 ### Other Parameters
 
@@ -935,7 +935,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **receiptTokenUpdate** | [**ReceiptTokenUpdate**](ReceiptTokenUpdate.md) |  |
+ **receiptTokenUpdate** | [**ReceiptTokenUpdate**](ReceiptTokenUpdate.md) |  | 
 
 ### Return type
 
@@ -974,8 +974,8 @@ import (
 )
 
 func main() {
-	apiVersion := "apiVersion_example" // string |
-	sourceDeviceId := "sourceDeviceId_example" // string |
+	apiVersion := "apiVersion_example" // string | 
+	sourceDeviceId := "sourceDeviceId_example" // string | 
 	updateSourceDeviceRequest := *openapiclient.NewUpdateSourceDeviceRequest() // UpdateSourceDeviceRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -996,8 +996,8 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**apiVersion** | **string** |  |
-**sourceDeviceId** | **string** |  |
+**apiVersion** | **string** |  | 
+**sourceDeviceId** | **string** |  | 
 
 ### Other Parameters
 
@@ -1008,7 +1008,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **updateSourceDeviceRequest** | [**UpdateSourceDeviceRequest**](UpdateSourceDeviceRequest.md) |  |
+ **updateSourceDeviceRequest** | [**UpdateSourceDeviceRequest**](UpdateSourceDeviceRequest.md) |  | 
 
 ### Return type
 

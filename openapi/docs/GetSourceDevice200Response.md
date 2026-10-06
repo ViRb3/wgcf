@@ -4,39 +4,39 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Created** | Pointer to **time.Time** |  | [optional]
-**Enabled** | Pointer to **bool** |  | [optional]
-**FcmToken** | Pointer to **string** |  | [optional]
-**Id** | **string** |  |
-**InstallId** | Pointer to **string** |  | [optional]
-**Key** | Pointer to **string** |  | [optional]
-**Locale** | Pointer to **string** |  | [optional]
-**Model** | Pointer to **string** |  | [optional]
-**Manufacturer** | Pointer to **string** |  | [optional]
-**Name** | Pointer to **string** |  | [optional]
-**OsVersion** | Pointer to **string** |  | [optional]
-**Place** | Pointer to **int32** |  | [optional]
-**SerialNumber** | Pointer to **string** |  | [optional]
-**DeviceId** | Pointer to **string** |  | [optional]
-**Tos** | Pointer to **time.Time** |  | [optional]
-**Type** | Pointer to **string** |  | [optional]
-**Updated** | Pointer to **time.Time** |  | [optional]
-**WaitlistEnabled** | Pointer to **bool** |  | [optional]
-**WarpEnabled** | Pointer to **bool** |  | [optional]
-**Account** | [**Account**](Account.md) |  |
-**Config** | Pointer to [**Config**](Config.md) |  | [optional]
-**Policy** | Pointer to [**Policy**](Policy.md) |  | [optional]
-**OverrideCodes** | Pointer to [**OverrideCodes**](OverrideCodes.md) |  | [optional]
-**AlternateNetworks** | Pointer to [**[]AlternateNetwork**](AlternateNetwork.md) |  | [optional]
-**DexTests** | Pointer to [**[]DexTest**](DexTest.md) |  | [optional]
-**KeyType** | **string** |  |
-**TunnelType** | **string** |  |
+**Created** | Pointer to **time.Time** |  | [optional] 
+**Enabled** | Pointer to **bool** |  | [optional] 
+**FcmToken** | Pointer to **string** |  | [optional] 
+**Id** | **string** |  | 
+**InstallId** | Pointer to **string** |  | [optional] 
+**Key** | Pointer to **string** |  | [optional] 
+**Locale** | Pointer to **string** |  | [optional] 
+**Model** | Pointer to **string** |  | [optional] 
+**Manufacturer** | Pointer to **string** |  | [optional] 
+**Name** | Pointer to **string** |  | [optional] 
+**OsVersion** | Pointer to **string** |  | [optional] 
+**Place** | Pointer to **int32** |  | [optional] 
+**SerialNumber** | Pointer to **string** |  | [optional] 
+**DeviceId** | Pointer to **string** |  | [optional] 
+**Tos** | Pointer to **time.Time** |  | [optional] 
+**Type** | Pointer to **string** |  | [optional] 
+**Updated** | Pointer to **time.Time** |  | [optional] 
+**WaitlistEnabled** | Pointer to **bool** |  | [optional] 
+**WarpEnabled** | Pointer to **bool** |  | [optional] 
+**Account** | [**Account**](Account.md) |  | 
+**Config** | Pointer to [**Config**](Config.md) |  | [optional] 
+**Policy** | Pointer to [**Policy**](Policy.md) |  | [optional] 
+**OverrideCodes** | Pointer to [**OverrideCodes**](OverrideCodes.md) |  | [optional] 
+**AlternateNetworks** | Pointer to [**[]AlternateNetwork**](AlternateNetwork.md) |  | [optional] 
+**DexTests** | Pointer to [**[]DexTest**](DexTest.md) |  | [optional] 
+**KeyType** | Pointer to **string** |  | [optional] 
+**TunnelType** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
 ### NewGetSourceDevice200Response
 
-`func NewGetSourceDevice200Response(id string, account Account, keyType string, tunnelType string, ) *GetSourceDevice200Response`
+`func NewGetSourceDevice200Response(id string, account Account, ) *GetSourceDevice200Response`
 
 NewGetSourceDevice200Response instantiates a new GetSourceDevice200Response object
 This constructor will assign default values to properties that have it defined,
@@ -685,6 +685,11 @@ and a boolean to check if the value has been set.
 
 SetKeyType sets KeyType field to given value.
 
+### HasKeyType
+
+`func (o *GetSourceDevice200Response) HasKeyType() bool`
+
+HasKeyType returns a boolean if a field has been set.
 
 ### GetTunnelType
 
@@ -705,6 +710,11 @@ and a boolean to check if the value has been set.
 
 SetTunnelType sets TunnelType field to given value.
 
+### HasTunnelType
+
+`func (o *GetSourceDevice200Response) HasTunnelType() bool`
+
+HasTunnelType returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

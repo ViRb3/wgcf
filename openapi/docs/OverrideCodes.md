@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DisableForTime** | Pointer to [**DisableForTime**](DisableForTime.md) |  | [optional]
+**DisableForTime** | Pointer to [**DisableForTime**](DisableForTime.md) |  | [optional] 
 
 ## Methods
 

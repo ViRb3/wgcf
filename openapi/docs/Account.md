@@ -4,21 +4,21 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AccountType** | **string** |  |
-**Created** | Pointer to **time.Time** |  | [optional]
-**Id** | **string** |  |
-**License** | Pointer to **string** |  | [optional]
-**PlusExpiresAt** | Pointer to **time.Time** |  | [optional]
-**Managed** | Pointer to **string** |  | [optional]
-**PremiumData** | Pointer to **int64** |  | [optional]
-**Quota** | Pointer to **int64** |  | [optional]
-**ReferralCount** | Pointer to **int32** |  | [optional]
-**ReferralRenewalCountdown** | Pointer to **int32** |  | [optional]
-**Role** | Pointer to **string** |  | [optional]
-**Ttl** | Pointer to **time.Time** |  | [optional]
-**Updated** | Pointer to **time.Time** |  | [optional]
-**Usage** | Pointer to **int64** |  | [optional]
-**WarpPlus** | Pointer to **bool** |  | [optional]
+**AccountType** | **string** |  | 
+**Created** | Pointer to **time.Time** |  | [optional] 
+**Id** | **string** |  | 
+**License** | Pointer to **string** |  | [optional] 
+**PlusExpiresAt** | Pointer to **time.Time** |  | [optional] 
+**Managed** | Pointer to **string** |  | [optional] 
+**PremiumData** | Pointer to **int64** |  | [optional] 
+**Quota** | Pointer to **int64** |  | [optional] 
+**ReferralCount** | Pointer to **int32** |  | [optional] 
+**ReferralRenewalCountdown** | Pointer to **int32** |  | [optional] 
+**Role** | Pointer to **string** |  | [optional] 
+**Ttl** | Pointer to **time.Time** |  | [optional] 
+**Updated** | Pointer to **time.Time** |  | [optional] 
+**Usage** | Pointer to **int64** |  | [optional] 
+**WarpPlus** | Pointer to **bool** |  | [optional] 
 
 ## Methods
 

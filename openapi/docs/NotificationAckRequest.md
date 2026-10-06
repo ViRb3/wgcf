@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FcmMessageId** | **NullableString** |  |
-**Success** | **bool** |  |
-**Error** | Pointer to **NullableString** |  | [optional]
-**NotificationId** | Pointer to **NullableString** |  | [optional]
+**FcmMessageId** | **NullableString** |  | 
+**Success** | **bool** |  | 
+**Error** | Pointer to **NullableString** |  | [optional] 
+**NotificationId** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
 

@@ -4,25 +4,25 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Created** | Pointer to **time.Time** |  | [optional]
-**Enabled** | Pointer to **bool** |  | [optional]
-**FcmToken** | Pointer to **string** |  | [optional]
-**Id** | **string** |  |
-**InstallId** | Pointer to **string** |  | [optional]
-**Key** | Pointer to **string** |  | [optional]
-**Locale** | Pointer to **string** |  | [optional]
-**Model** | Pointer to **string** |  | [optional]
-**Manufacturer** | Pointer to **string** |  | [optional]
-**Name** | Pointer to **string** |  | [optional]
-**OsVersion** | Pointer to **string** |  | [optional]
-**Place** | Pointer to **int32** |  | [optional]
-**SerialNumber** | Pointer to **string** |  | [optional]
-**DeviceId** | Pointer to **string** |  | [optional]
-**Tos** | Pointer to **time.Time** |  | [optional]
-**Type** | Pointer to **string** |  | [optional]
-**Updated** | Pointer to **time.Time** |  | [optional]
-**WaitlistEnabled** | Pointer to **bool** |  | [optional]
-**WarpEnabled** | Pointer to **bool** |  | [optional]
+**Created** | Pointer to **time.Time** |  | [optional] 
+**Enabled** | Pointer to **bool** |  | [optional] 
+**FcmToken** | Pointer to **string** |  | [optional] 
+**Id** | **string** |  | 
+**InstallId** | Pointer to **string** |  | [optional] 
+**Key** | Pointer to **string** |  | [optional] 
+**Locale** | Pointer to **string** |  | [optional] 
+**Model** | Pointer to **string** |  | [optional] 
+**Manufacturer** | Pointer to **string** |  | [optional] 
+**Name** | Pointer to **string** |  | [optional] 
+**OsVersion** | Pointer to **string** |  | [optional] 
+**Place** | Pointer to **int32** |  | [optional] 
+**SerialNumber** | Pointer to **string** |  | [optional] 
+**DeviceId** | Pointer to **string** |  | [optional] 
+**Tos** | Pointer to **time.Time** |  | [optional] 
+**Type** | Pointer to **string** |  | [optional] 
+**Updated** | Pointer to **time.Time** |  | [optional] 
+**WaitlistEnabled** | Pointer to **bool** |  | [optional] 
+**WarpEnabled** | Pointer to **bool** |  | [optional] 
 
 ## Methods
 

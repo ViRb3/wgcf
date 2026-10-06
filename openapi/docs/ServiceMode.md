@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Mode** | Pointer to [**AppMode**](AppMode.md) |  | [optional]
-**Port** | Pointer to **int32** |  | [optional]
+**Mode** | Pointer to [**AppMode**](AppMode.md) |  | [optional] 
+**Port** | Pointer to **int32** |  | [optional] 
 
 ## Methods
 

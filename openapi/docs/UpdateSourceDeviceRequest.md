@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Key** | Pointer to **string** |  | [optional]
-**KeyType** | Pointer to **string** |  | [optional]
-**TunnelType** | Pointer to **string** |  | [optional]
-**FcmToken** | Pointer to **string** |  | [optional]
-**Name** | Pointer to **string** |  | [optional]
-**OsVersion** | Pointer to **string** |  | [optional]
-**Manufacturer** | Pointer to **string** |  | [optional]
-**Model** | Pointer to **string** |  | [optional]
-**DeviceId** | Pointer to **string** |  | [optional]
+**Key** | Pointer to **string** |  | [optional] 
+**KeyType** | Pointer to **string** |  | [optional] 
+**TunnelType** | Pointer to **string** |  | [optional] 
+**FcmToken** | Pointer to **string** |  | [optional] 
+**Name** | Pointer to **string** |  | [optional] 
+**OsVersion** | Pointer to **string** |  | [optional] 
+**Manufacturer** | Pointer to **string** |  | [optional] 
+**Model** | Pointer to **string** |  | [optional] 
+**DeviceId** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
