@@ -49,8 +49,6 @@ docs/UpdateAccountRequest.md
 docs/UpdateBoundDeviceRequest.md
 docs/UpdateSourceDeviceRequest.md
 git_push.sh
-go.mod
-go.sum
 model_account.go
 model_alternate_network.go
 model_app_mode.go

@@ -36,7 +36,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/ViRb3/wgcf/v2/openapi"
 )
 
 func main() {
@@ -107,7 +107,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/ViRb3/wgcf/v2/openapi"
 )
 
 func main() {
@@ -181,7 +181,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/ViRb3/wgcf/v2/openapi"
 )
 
 func main() {
@@ -250,7 +250,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/ViRb3/wgcf/v2/openapi"
 )
 
 func main() {
@@ -321,7 +321,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/ViRb3/wgcf/v2/openapi"
 )
 
 func main() {
@@ -392,7 +392,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/ViRb3/wgcf/v2/openapi"
 )
 
 func main() {
@@ -460,7 +460,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/ViRb3/wgcf/v2/openapi"
 )
 
 func main() {
@@ -534,7 +534,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/ViRb3/wgcf/v2/openapi"
 )
 
 func main() {
@@ -607,7 +607,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/ViRb3/wgcf/v2/openapi"
 )
 
 func main() {
@@ -679,7 +679,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/ViRb3/wgcf/v2/openapi"
 )
 
 func main() {
@@ -750,7 +750,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/ViRb3/wgcf/v2/openapi"
 )
 
 func main() {
@@ -823,7 +823,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/ViRb3/wgcf/v2/openapi"
 )
 
 func main() {
@@ -899,7 +899,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/ViRb3/wgcf/v2/openapi"
 )
 
 func main() {
@@ -970,7 +970,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+	openapiclient "github.com/ViRb3/wgcf/v2/openapi"
 )
 
 func main() {

@@ -3,7 +3,6 @@ module github.com/ViRb3/wgcf/v2
 go 1.26.0
 
 require (
-	github.com/ViRb3/wgcf/v2/openapi v0.0.0-00010101000000-000000000000
 	github.com/cockroachdb/errors v1.14.0
 	github.com/dustin/go-humanize v1.1.0
 	github.com/manifoldco/promptui v0.9.0
@@ -39,5 +38,3 @@ require (
 	golang.org/x/sys v0.48.0 // indirect
 	golang.org/x/text v0.42.0 // indirect
 )
-
-replace github.com/ViRb3/wgcf/v2/openapi => ./openapi
