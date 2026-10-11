@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.1](https://github.com/ViRb3/wgcf/compare/v2.3.0...v2.3.1) (2026-10-11)
+
+
+### Bug Fixes
+
+* make SourceDevice key_type and tunnel_type optional ([3ae65b0](https://github.com/ViRb3/wgcf/commit/3ae65b0505094adc1106792bb8d273bf509f0257))
+
 ## [2.3.0](https://github.com/ViRb3/wgcf/compare/v2.2.32...v2.3.0) (2026-09-18)
 
 
