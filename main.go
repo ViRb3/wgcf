@@ -1,4 +1,4 @@
-//go:generate openapi-generator generate -i openapi-spec.yml -g go -o openapi --additional-properties=disallowAdditionalPropertiesIfNotPresent=false
+//go:generate openapi-generator generate -i openapi-spec.yml -g go -o openapi --git-host github.com --git-user-id ViRb3 --git-repo-id wgcf/v2/openapi --additional-properties=disallowAdditionalPropertiesIfNotPresent=false
 
 package main
 
