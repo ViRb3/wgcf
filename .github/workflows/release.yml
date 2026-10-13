@@ -63,7 +63,7 @@ jobs:
             type=semver,pattern={{version}},value=${{ needs.release-please.outputs.tag_name }}
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v4.2.0
+        uses: docker/setup-qemu-action@v4.4.0
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v4.4.1
