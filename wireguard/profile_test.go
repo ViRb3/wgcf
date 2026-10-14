@@ -23,6 +23,7 @@ Endpoint = 5
 		Address2:   "3",
 		PublicKey:  "4",
 		Endpoint:   "5",
+		MTU:        1280,
 	})
 	if err != nil {
 		t.Error(err)
@@ -53,6 +54,7 @@ PersistentKeepalive = 25
 		PublicKey:  "4",
 		Endpoint:   "5",
 		Keepalive:  25,
+		MTU:        1280,
 	})
 	if err != nil {
 		t.Fatal(err)
