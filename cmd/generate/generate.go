@@ -14,6 +14,8 @@ import (
 
 var profileFile string
 var keepalive int
+var mtu int
+var noMTU bool
 var shortMsg = "Generates a WireGuard profile from the current Cloudflare Warp account"
 
 const maxKeepalive = 65535
@@ -31,6 +33,9 @@ func init() {
 	Cmd.PersistentFlags().StringVarP(&profileFile, "profile", "p", "wgcf-profile.conf", "WireGuard profile file")
 	Cmd.PersistentFlags().IntVarP(&keepalive, "keepalive", "k", 0, "Persistent keepalive interval in seconds (default 25)")
 	Cmd.PersistentFlags().Lookup("keepalive").NoOptDefVal = "25"
+	Cmd.PersistentFlags().IntVarP(&mtu, "mtu", "m", 1280, "WireGuard interface MTU")
+	Cmd.PersistentFlags().BoolVar(&noMTU, "no-mtu", false, "Omit MTU from the generated profile")
+	Cmd.MarkFlagsMutuallyExclusive("mtu", "no-mtu")
 }
 
 func generateProfile() error {
@@ -38,8 +43,17 @@ func generateProfile() error {
 		return err
 	}
 
+	if err := validateMTU(mtu); err != nil {
+		return err
+	}
+
 	if err := EnsureConfigValidAccount(); err != nil {
 		return errors.WithStack(err)
+	}
+
+	profileMTU := mtu
+	if noMTU {
+		profileMTU = 0
 	}
 
 	ctx := CreateContext()
@@ -64,6 +78,7 @@ func generateProfile() error {
 		PublicKey:  peer.PublicKey,
 		Endpoint:   endpoint,
 		Keepalive:  keepalive,
+		MTU:        profileMTU,
 	})
 	if err != nil {
 		return errors.WithStack(err)
@@ -79,6 +94,13 @@ func generateProfile() error {
 func validateKeepalive(interval int) error {
 	if interval < 0 || interval > maxKeepalive {
 		return errors.Errorf("persistent keepalive interval must be between 0 and %d seconds, got %d", maxKeepalive, interval)
+	}
+	return nil
+}
+
+func validateMTU(mtuValue int) error {
+	if mtuValue <= 0 {
+		return errors.Errorf("mtu value must be greater than 0, got %d", mtuValue)
 	}
 	return nil
 }

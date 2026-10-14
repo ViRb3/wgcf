@@ -12,7 +12,9 @@ var profileTemplate = `[Interface]
 PrivateKey = {{ .PrivateKey }}
 Address = {{ .Address1 }}/32, {{ .Address2 }}/128
 DNS = 1.1.1.1, 1.0.0.1, 2606:4700:4700::1111, 2606:4700:4700::1001
-MTU = 1280
+{{- if .MTU }}
+MTU = {{ .MTU }}
+{{- end }}
 [Peer]
 PublicKey = {{ .PublicKey }}
 AllowedIPs = 0.0.0.0/0, ::/0
@@ -33,6 +35,7 @@ type ProfileData struct {
 	PublicKey  string
 	Endpoint   string
 	Keepalive  int
+	MTU        int
 }
 
 func NewProfile(data *ProfileData) (*Profile, error) {
