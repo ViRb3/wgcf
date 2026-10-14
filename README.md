@@ -35,8 +35,7 @@ The WireGuard profile will be saved under `wgcf-profile.conf`. For more informat
 
 To send periodic packets that keep NAT mappings alive, use the optional keepalive flag:
 ```bash
-wgcf generate --keepalive       # defaults to 25 seconds
-wgcf generate --keepalive=60    # uses the specified interval
+wgcf generate --keepalive 25    # uses the specified interval
 ```
 This adds `PersistentKeepalive` to the profile's `[Peer]` section. The setting is omitted by default.
 
