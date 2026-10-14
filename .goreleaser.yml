@@ -3,7 +3,7 @@ builds:
   - env:
       - CGO_ENABLED=0
     ldflags:
-      - -s -w
+      - -s -w -X github.com/ViRb3/wgcf/v2/cmd.version=v{{.Version}}
     flags:
       - -trimpath
     goos:

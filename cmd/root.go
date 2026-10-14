@@ -15,11 +15,13 @@ import (
 	"github.com/spf13/viper"
 )
 
+var version = "dev"
 var cfgFile string
 
 var RootCmd = &cobra.Command{
-	Use:   "wgcf",
-	Short: "WireGuard Cloudflare Warp utility",
+	Version: version,
+	Use:     "wgcf",
+	Short:   "WireGuard Cloudflare Warp utility",
 	Long: FormatMessage("", `
 wgcf is a utility for Cloudflare Warp that allows you to create and
 manage accounts, assign license keys, and generate WireGuard profiles.
@@ -37,6 +39,7 @@ func Execute() error {
 
 func init() {
 	cobra.OnInitialize(initConfig)
+	RootCmd.SetVersionTemplate("{{.Version}}\n")
 	RootCmd.PersistentFlags().StringVar(&cfgFile, "config", "wgcf-account.toml", "Configuration file")
 	RootCmd.AddCommand(register.Cmd)
 	RootCmd.AddCommand(update.Cmd)
