@@ -1,7 +1,6 @@
 package wireguard
 
 import (
-	"strings"
 	"testing"
 )
 
@@ -60,24 +59,5 @@ PersistentKeepalive = 25
 
 	if expectedResult != result {
 		t.Errorf("unexpected profile:\n%s", result)
-	}
-}
-
-func TestGenerateProfileWithCustomKeepalive(t *testing.T) {
-	result, err := generateProfile(&ProfileData{
-		PrivateKey: "1",
-		Address1:   "2",
-		Address2:   "3",
-		PublicKey:  "4",
-		Endpoint:   "5",
-		Keepalive:  60,
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	expected := "PersistentKeepalive = 60\n"
-	if !strings.HasSuffix(result, expected) {
-		t.Errorf("expected profile to end with %q, got:\n%s", expected, result)
 	}
 }

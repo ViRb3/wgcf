@@ -26,34 +26,58 @@ func TestValidateKeepalive(t *testing.T) {
 }
 
 func TestKeepaliveFlag(t *testing.T) {
-	flags := Cmd.PersistentFlags()
-	flag := flags.Lookup("keepalive")
-
-	defer func() {
-		keepalive = 0
-		flag.Changed = false
-	}()
-
-	keepalive = 0
-	if keepalive != 0 {
-		t.Error()
+	tests := []struct {
+		name    string
+		args    []string
+		want    int
+		wantErr bool
+	}{
+		{name: "omitted", want: 0},
+		{name: "without value", args: []string{"--keepalive"}, wantErr: true},
+		{name: "custom (equal syntax)", args: []string{"--keepalive=60"}, want: 60},
+		{name: "custom (space-separated syntax)", args: []string{"--keepalive", "60"}, want: 60},
+		{name: "short without value", args: []string{"-k"}, wantErr: true},
+		{name: "short custom (equal syntax)", args: []string{"-k=60"}, want: 60},
+		{name: "short custom (space-separated syntax)", args: []string{"-k", "60"}, want: 60},
+		{name: "disabled (equal syntax)", args: []string{"--keepalive=0"}, want: 0},
+		{name: "disabled (space-separated syntax)", args: []string{"--keepalive", "0"}, want: 0},
+		{name: "invalid value (equal syntax)", args: []string{"--keepalive=invalid"}, wantErr: true},
+		{name: "invalid value (space-separated syntax)", args: []string{"--keepalive", "invalid"}, wantErr: true},
 	}
 
-	err := flags.Parse([]string{"--keepalive"})
-	if err != nil {
-		t.Error(err)
-	}
-	if keepalive != 25 {
-		t.Error()
-	}
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			resetFlag(t, "keepalive")
 
-	keepalive = 0
+			err := Cmd.ParseFlags(test.args)
+			if (err != nil) != test.wantErr {
+				t.Fatalf("ParseFlags(%q) error = %v, wantErr %v", test.args, err, test.wantErr)
+			}
+			if test.wantErr {
+				return
+			}
+			if keepalive != test.want {
+				t.Errorf("keepalive = %d, want %d", keepalive, test.want)
+			}
+		})
+	}
+}
+
+func resetFlag(t *testing.T, name string) {
+	t.Helper()
+	flag := Cmd.PersistentFlags().Lookup(name)
+	if flag == nil {
+		t.Fatalf("flag %q not found", name)
+	}
+	value, changed := flag.Value.String(), flag.Changed
+	t.Cleanup(func() {
+		if err := flag.Value.Set(value); err != nil {
+			t.Errorf("restore flag %q: %v", name, err)
+		}
+		flag.Changed = changed
+	})
+	if err := flag.Value.Set(flag.DefValue); err != nil {
+		t.Fatalf("reset flag %q: %v", name, err)
+	}
 	flag.Changed = false
-	err = flags.Parse([]string{"--keepalive=60"})
-	if err != nil {
-		t.Error(err)
-	}
-	if keepalive != 60 {
-		t.Error()
-	}
 }
