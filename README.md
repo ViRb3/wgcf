@@ -19,6 +19,16 @@ You can find pre-compiled binaries on the [releases page](https://github.com/ViR
 ## Usage
 Run `wgcf` in a terminal without any arguments to display the help screen. All commands and parameters are documented.
 
+### Check version
+
+To display the current wgcf version, run:
+
+```bash
+wgcf --version
+```
+
+The output contains only the version string, matching the GitHub release tag (e.g., `v2.3.1`). Development builds report `dev` unless a version is specified at build time.
+
 ### Register new account
 Run the following command in a terminal:
 ```bash
