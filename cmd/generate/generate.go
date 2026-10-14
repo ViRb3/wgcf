@@ -18,7 +18,10 @@ var mtu int
 var noMTU bool
 var shortMsg = "Generates a WireGuard profile from the current Cloudflare Warp account"
 
-const maxKeepalive = 65535
+const (
+	maxKeepalive = 65535
+	defaultMTU   = 1280
+)
 
 var Cmd = &cobra.Command{
 	Use:   "generate",
@@ -33,7 +36,7 @@ func init() {
 	Cmd.PersistentFlags().StringVarP(&profileFile, "profile", "p", "wgcf-profile.conf", "WireGuard profile file")
 	Cmd.PersistentFlags().IntVarP(&keepalive, "keepalive", "k", 0, "Persistent keepalive interval in seconds (default 25)")
 	Cmd.PersistentFlags().Lookup("keepalive").NoOptDefVal = "25"
-	Cmd.PersistentFlags().IntVarP(&mtu, "mtu", "m", 1280, "WireGuard interface MTU")
+	Cmd.PersistentFlags().IntVarP(&mtu, "mtu", "m", defaultMTU, "WireGuard interface MTU")
 	Cmd.PersistentFlags().BoolVar(&noMTU, "no-mtu", false, "Omit MTU from the generated profile")
 	Cmd.MarkFlagsMutuallyExclusive("mtu", "no-mtu")
 }
