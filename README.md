@@ -40,6 +40,17 @@ wgcf generate --keepalive=60    # uses the specified interval
 ```
 This adds `PersistentKeepalive` to the profile's `[Peer]` section. The setting is omitted by default.
 
+#### DNS servers
+
+By default, wgcf generates profiles using Cloudflare's public DNS servers. You can specify custom IPv4 or IPv6 DNS servers or omit the DNS setting entirely:
+
+```bash
+wgcf generate --dns 8.8.8.8,8.8.4.4          # uses custom DNS servers
+wgcf generate --dns 8.8.8.8 --dns 1.1.1.1    # specifies DNS servers separately
+wgcf generate --no-dns                       # omits the DNS setting
+```
+
+The `--dns` flag accepts comma-separated IP addresses or can be specified multiple times. Custom DNS servers replace the defaults. The `--dns` and `--no-dns` flags are mutually exclusive.
 #### Maximum transmission unit (MTU)
 To ensure maximum compatibility, the generated profile will have a MTU of 1280, just like the official Android app. If you are experiencing performance issues, you may be able to improve your speed by increasing this value. For more information, please check [#40](https://github.com/ViRb3/wgcf/issues/40).
 
