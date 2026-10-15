@@ -53,7 +53,7 @@ func TestValidateDns(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			err := validateDns(test.servers)
+			err := validateDNS(test.servers)
 			if (err != nil) != test.wantErr {
 				t.Fatalf("validateDns(%q) error = %v, wantErr %v", test.servers, err, test.wantErr)
 			}
@@ -137,8 +137,8 @@ func TestDNSFlags(t *testing.T) {
 			if !slices.Equal(dnsServers, test.wantDNS) {
 				t.Errorf("dnsServers = %q, want %q", dnsServers, test.wantDNS)
 			}
-			if noDns != test.wantNoDNS {
-				t.Errorf("noDns = %t, want %t", noDns, test.wantNoDNS)
+			if noDNS != test.wantNoDNS {
+				t.Errorf("noDNS = %t, want %t", noDNS, test.wantNoDNS)
 			}
 		})
 	}
@@ -152,7 +152,7 @@ func resetDNSFlags(t *testing.T) {
 
 	oldValue := dnsFlag.Value
 	oldDNS := slices.Clone(dnsServers)
-	oldNoDNS := noDns
+	oldNoDNS := noDNS
 	oldDNSChanged := dnsFlag.Changed
 	oldNoDNSChanged := noDNSFlag.Changed
 
@@ -161,7 +161,7 @@ func resetDNSFlags(t *testing.T) {
 		dnsFlag.Changed = oldDNSChanged
 		noDNSFlag.Changed = oldNoDNSChanged
 		dnsServers = oldDNS
-		noDns = oldNoDNS
+		noDNS = oldNoDNS
 	})
 
 	flags := pflag.NewFlagSet("test", pflag.ContinueOnError)
@@ -169,6 +169,6 @@ func resetDNSFlags(t *testing.T) {
 
 	dnsFlag.Value = flags.Lookup("dns").Value
 	dnsFlag.Changed = false
-	noDns = false
+	noDNS = false
 	noDNSFlag.Changed = false
 }
