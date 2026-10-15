@@ -17,7 +17,7 @@ import (
 var profileFile string
 var keepalive int
 var dnsServers []string
-var noDns bool
+var noDNS bool
 var shortMsg = "Generates a WireGuard profile from the current Cloudflare Warp account"
 
 const maxKeepalive = 65535
@@ -43,12 +43,12 @@ func init() {
 	Cmd.PersistentFlags().IntVarP(&keepalive, "keepalive", "k", 0, "Persistent keepalive interval in seconds (default 25)")
 	Cmd.PersistentFlags().Lookup("keepalive").NoOptDefVal = "25"
 	Cmd.PersistentFlags().StringSliceVarP(&dnsServers, "dns", "d", defaultDNS, "DNS server IP addresses (comma-separated or repeatable)")
-	Cmd.PersistentFlags().BoolVar(&noDns, "no-dns", false, "Omit the DNS field from the generated profile")
+	Cmd.PersistentFlags().BoolVar(&noDNS, "no-dns", false, "Omit the DNS field from the generated profile")
 	Cmd.MarkFlagsMutuallyExclusive("dns", "no-dns")
 }
 
 func generateProfile() error {
-	if err := validateDns(dnsServers); err != nil {
+	if err := validateDNS(dnsServers); err != nil {
 		return err
 	}
 
@@ -60,9 +60,9 @@ func generateProfile() error {
 		return errors.WithStack(err)
 	}
 
-	var profileDns string
-	if !noDns {
-		profileDns = strings.Join(dnsServers, ", ")
+	var profileDNS string
+	if !noDNS {
+		profileDNS = strings.Join(dnsServers, ", ")
 	}
 
 	ctx := CreateContext()
@@ -87,7 +87,7 @@ func generateProfile() error {
 		PublicKey:  peer.PublicKey,
 		Endpoint:   endpoint,
 		Keepalive:  keepalive,
-		DNS:        profileDns,
+		DNS:        profileDNS,
 	})
 	if err != nil {
 		return errors.WithStack(err)
@@ -107,7 +107,7 @@ func validateKeepalive(interval int) error {
 	return nil
 }
 
-func validateDns(servers []string) error {
+func validateDNS(servers []string) error {
 	if len(servers) == 0 {
 		return errors.Errorf("at least one DNS server must be specified")
 	}
