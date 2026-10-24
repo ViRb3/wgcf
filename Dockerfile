@@ -5,12 +5,13 @@ COPY . .
 
 RUN apk add --no-cache git && \
     go mod download && \
-    CGO_ENABLED=0 go build -ldflags="-s -w" -o "wgcf"
+    CGO_ENABLED=0 go build -trimpath -ldflags="-s -w" -o "wgcf"
 
-FROM alpine:3.24.2
+FROM scratch
 
 WORKDIR /
 
+COPY --from=builder "/etc/ssl/cert.pem" "/etc/ssl/cert.pem"
 COPY --from=builder "/src/wgcf" "/"
 
 ENTRYPOINT ["/wgcf"]
