@@ -5,7 +5,7 @@ COPY . .
 
 RUN apk add --no-cache git && \
     go mod download && \
-    CGO_ENABLED=0 go build -ldflags="-s -w" -o "wgcf"
+    CGO_ENABLED=0 go build -trimpath -ldflags="-s -w" -o "wgcf"
 
 FROM scratch
 
